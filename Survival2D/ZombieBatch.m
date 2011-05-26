@@ -8,100 +8,123 @@
 
 #import "ZombieBatch.h"
 #import "chipmunk.h"
+#import "GameScene.h"
 
 @implementation ZombieBatch
 @synthesize zombieTexture;
 @synthesize smgr;
 
 - (id)initWithSpaceManager:(SpaceManagerCocos2d *)spacemgr{
-    self.zombieTexture = [[CCTextureCache sharedTextureCache] addImage: @"PlayerSheet.png"];
+    self.zombieTexture = [[CCTextureCache sharedTextureCache] addImage: @"Zombie.png"];
     self = [super initWithTexture:zombieTexture capacity:MAXZOMBIES];
     if(self){
-        
         self.smgr = spacemgr;
         
-        currentZombie = 0;
-        playerPosition = ccp(240.0f, 160.0f);
+        for(int x = 0; x < MAXZOMBIES; x++){
+            CCSprite *zombieSprite = [[CCSprite alloc] initWithTexture:zombieTexture];
+            [zombieSprite setOpacity: 0];
+            
+            Zombie newZombie;
+            newZombie.health = 0;
+            newZombie.alive = NO;
+            newZombie.speed = 0.0f;
+            newZombie.zombieSprite = zombieSprite;
+            newZombie.zombieShape = NULL;
+            zombies[x] = newZombie;
+        }
         
+        playerPosition = ccp(512.0f, 512.0f);
         [self schedule:@selector(updateZombies) interval:1.0f/60.0f];
     }
     return self;
 }
 
-- (void)updateZombies{
-    for(int x = 0; x < currentZombie; x++){
-        
-        cpShape *zombieShape = zombies[x].zombieShape;
-        cpBody *shapeBody = zombieShape->body;
-        
-        CGPoint zombiePosition = CGPointMake(shapeBody->p.x, shapeBody->p.y);
-        float angleTowardsPlayer = atan2f(zombiePosition.y - playerPosition.y, playerPosition.x - zombiePosition.x);
-        CGPoint force = CGPointMake(zombies[x].speed * cosf(angleTowardsPlayer), -zombies[x].speed * sinf(angleTowardsPlayer));
-        
-        //cpBodyResetForces(shapeBody);
-        //cpBodyApplyForce(shapeBody, cpv(force.x, force.y), cpv(0.0f, 0.0f));
-        shapeBody->v = cpv(force.x, force.y);
-        
-        [self zombieSetPosition:zombiePosition index:x];
-        [self zombieSetRotation:90.0f + CC_RADIANS_TO_DEGREES(angleTowardsPlayer) index:x];
+- (int)nextOpenZombieSlot{
+    for(int x = 0; x < MAXZOMBIES; x++){
+        if(zombies[x].alive == NO){
+            return x;
+        }
     }
+    return 0;
 }
 
-/*typedef struct cpSegmentQueryInfo {
- struct cpShape *shape; // shape that was hit, NULL if no collision
- cpFloat t; // Distance along query segment, will always be in the range [0, 1].
- cpVect n; // normal of hit surface
- } cpSegmentQueryInfo;*/
-
-float distance(CGPoint point1,CGPoint point2){
-    CGFloat dx = point2.x - point1.x;
-    CGFloat dy = point2.y - point1.y;
-    return sqrt(dx*dx + dy*dy);
-};
-
-- (void)detectHitsWithShot:(CGPoint)start end:(CGPoint)end{
-/*    int collisionIndices[20];
-    int collisionIndex = 0;
-    for(int x = 0; x < currentZombie; x++){
-        cpSegmentQueryInfo info;
-        cpShapeSegmentQuery(zombies[x].zombieShape, cpv(start.x, start.y), cpv(end.x, end.y), &info);
-        if(info.shape != NULL){
-            collisionIndices[collisionIndex] = x;
-            collisionIndex++;
+- (int)numberZombiesAlive{
+    int number = 0;
+    for(int x = 0; x < MAXZOMBIES; x++){
+        if(zombies[x].alive){
+            number++;
         }
     }
-    
-    if(collisionIndex > 0){
-        cpShape *farthestShapeAway;
-        float lastFarthest = 0;
-        
-        for(int x = 0; x < collisionIndex; x++){
-            float dist = distance(start, zombies[collisionIndices[x]].position);
-            if(dist > lastFarthest){
-                lastFarthest = dist;
-                farthestShapeAway = zombies[collisionIndices[x]].zombieShape;
+    return number;
+}
+
+- (void)destroyZombie:(int)index{
+    [zombies[index].zombieSprite stopAllActions];
+    [zombies[index].zombieSprite setOpacity: 0];
+    [smgr removeAndFreeShape: zombies[index].zombieShape];
+    zombies[index].zombieShape = NULL;
+    zombies[index].alive = NO;
+    [self removeChild:zombies[index].zombieSprite cleanup:NO];
+}
+
+- (void)updateZombies{
+    for(int x = 0; x < MAXZOMBIES; x++){
+        if(zombies[x].alive){
+            cpShape *zombieShape = zombies[x].zombieShape;
+            cpBody *shapeBody = zombieShape->body;
+            
+            CGPoint zombiePosition = CGPointMake(shapeBody->p.x, shapeBody->p.y);
+            float angleTowardsPlayer = atan2f(zombiePosition.y - playerPosition.y, playerPosition.x - zombiePosition.x);
+            CGPoint force = CGPointMake(zombies[x].speed * cosf(angleTowardsPlayer), -zombies[x].speed * sinf(angleTowardsPlayer));
+            
+            shapeBody->v = cpv(force.x, force.y);
+            
+            [self zombieSetPosition:zombiePosition index:x];
+            [self zombieSetRotation:90.0f + CC_RADIANS_TO_DEGREES(angleTowardsPlayer) index:x];
+            
+            if(!CGRectContainsPoint(CGRectMake(playerPosition.x - 248.0f, playerPosition.y - 168.0f, 480.0f, 320.0f), zombiePosition)){
+                cpBodySleep(shapeBody);
+            }else{
+                cpBodyActivate(shapeBody);
             }
         }
-        
-        
-    }*/
+    }
 }
 
 - (void)addNewZombieAt:(CGPoint)newZomb{
-    CCSprite *zombieSprite = [[CCSprite alloc] initWithTexture:zombieTexture rect:CGRectMake(0.0f, 0.0f, 64.0f, 64.0f)];
     
-    Zombie newZombie;
-    newZombie.health = 100;
-    newZombie.speed = 15.0f;
-    newZombie.zombieSprite = zombieSprite;
-    newZombie.zombieShape = [smgr addCircleAt:newZomb mass:1.0f radius:16.0f];
-    zombies[currentZombie] = newZombie;
+    int numberAlive = [self numberZombiesAlive];
+    printf("\nNumber of Zombies Alive: %i", numberAlive);
     
-    [self zombieSetPosition:newZomb index:currentZombie];
-    [self zombieSetRotation:0.0f index:currentZombie];
-    [self addChild: zombieSprite];
-    [zombieSprite release];
-    currentZombie++;
+    if(numberAlive <= MAXZOMBIES){
+        int x = [self nextOpenZombieSlot];
+        [self addChild: zombies[x].zombieSprite];
+        zombies[x].health = 100;
+        zombies[x].alive = YES;
+        zombies[x].speed = 45.0f;
+        zombies[x].zombieShape = [smgr addCircleAt:newZomb mass:1.0f radius:12.0f];
+        zombies[x].zombieShape->collision_type = 0;
+        [zombies[x].zombieSprite setOpacity: 255];
+        
+        [self zombieSetPosition:newZomb index:x];
+        [self zombieSetRotation:0.0f index:x];
+    }
+    
+}
+
+- (int)whichZombie:(cpShape *)zombieShape{
+    int whichZombie = -1;
+    for(int x = 0; x < MAXZOMBIES; x++){
+        if(zombies[x].zombieShape == zombieShape){
+            whichZombie = x;
+        }
+    }
+    
+    if(whichZombie == -1){
+        NSLog(@"NO ZOMBIE CONNECTION.");return -1;
+    }else{
+        return whichZombie;
+    }
 }
 
 - (void)zombieSetPosition:(CGPoint)pos index:(int)index{
@@ -116,8 +139,70 @@ float distance(CGPoint point1,CGPoint point2){
     [zombieSprite setRotation: rot];
 }
 
+- (void)zombieTakeDamage:(int)damage index:(int)index{
+    zombies[index].health -= damage;
+    if(zombies[index].health <= 0){
+        [self destroyZombie: index];
+        [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
+        [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
+        [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
+        [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
+        [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
+
+    }
+}
+
 - (void)setPlayerPosition:(CGPoint)pp{
     playerPosition = pp;
 }
+
+/* cpSegmentQueryInfo info;
+ cpShape *firstHitShape = cpSpaceSegmentQueryFirst([smgr space], start, end, CP_ALL_LAYERS, CP_NO_GROUP, &info);
+ 
+ if(firstHitShape != NULL){
+ cpVect hitPoint = cpSegmentQueryHitPoint(start, end, info);
+ float otherRotation = atan2f(start.y - end.y, start.x - end.x);
+ 
+ if(firstHitShape->collision_type == -1){        // Hit Wall
+ 
+ }else if(firstHitShape->collision_type == 0){   // Hit Zombie
+ int whichZombie = -1;
+ for(int x = 0; x < currentZombie; x++){
+ if(zombies[x].zombieShape == firstHitShape){
+ whichZombie = x;
+ }
+ }
+ 
+ if(whichZombie == -1){
+ NSLog(@"NO ZOMBIE CONNECTION.");return;
+ }else{
+ [self zombieTakeDamage:damage index:whichZombie];
+ //cpBodyApplyImpulse(zombies[whichZombie].zombieShape->body, cpv(200.0f * cosf(M_PI + otherRotation), 200.0f * sinf(M_PI + otherRotation)), cpv(0,0));
+ }
+ 
+ CGFloat dx = hitPoint.x - start.x;
+ CGFloat dy = hitPoint.y - start.y;
+ 
+ float distancePlusABit = sqrt(dx*dx + dy*dy) + 16.0f;
+ CGPoint splatterPos = ccpAdd(start, ccp(distancePlusABit * cosf(M_PI + otherRotation), distancePlusABit * sinf(M_PI + otherRotation)));
+ 
+ CGPoint zombiePoint = zombies[whichZombie].zombieShape->body->p;
+ float splatterRot = 90.0f - CC_RADIANS_TO_DEGREES(atan2f(splatterPos.y - zombiePoint.y, splatterPos.x - zombiePoint.x));
+ 
+ [(GameScene *)parent_ addNewBloodSplatterAt: splatterPos withRotation:splatterRot withDistance:distancePlusABit];
+ }
+ 
+ 
+ CGFloat dx = hitPoint.x - start.x;
+ CGFloat dy = hitPoint.y - start.y;
+ 
+ float distanceMinusABit = sqrt(dx*dx + dy*dy) - 48.0f;
+ CGPoint toPosition = ccpAdd(start, ccp(distanceMinusABit * cosf(M_PI + otherRotation), distanceMinusABit * sinf(M_PI + otherRotation)));
+ 
+ [(GameScene *)parent_ addNewBulletPathAt:start toPosition:toPosition];
+ }else{
+ NSLog(@"Doesn't make any sense, not hitting any shapes.");return;
+ }
+ */
 
 @end

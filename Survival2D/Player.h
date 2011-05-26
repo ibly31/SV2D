@@ -19,19 +19,28 @@
     
     Weapon *weapon;
     CCSprite *muzzleFlash;
+    
+    CCSprite *laser;
         
     int health;
     int armor;
     float speed;
     
+    float currentRecoil;
+    
     BOOL shooting;
     BOOL reloading;
+    
+    int numberOfZombiesTouchingPlayer;
 }
 
 @property (nonatomic, retain) CCSprite *playerSprite;
 @property (nonatomic, retain) Weapon *weapon;
 @property (nonatomic, retain) CCSprite *muzzleFlash;
+@property (nonatomic, retain) CCSprite *laser;
 @property (nonatomic, retain) SpaceManagerCocos2d *smgr;
+
+@property BOOL shooting;
 
 - (id)initWithSpaceManager:(SpaceManagerCocos2d *)spacemgr;
 
@@ -39,6 +48,11 @@
 - (void)shoot;
 - (void)stopShooting;
 - (void)reload;
+
+- (BOOL)handleCollision:(CollisionMoment)moment arbiter:(cpArbiter*)arb space:(cpSpace*)space;
+- (void)processZombieHits;
+
+- (void)lowerRecoil;
 
 - (void)updateHealth;
 - (void)updateAmmo;

@@ -15,6 +15,9 @@
     int maxAmmo;
     int currentMagazine;
     int magazineCount;
+    int damage;
+    int shots;
+    int penetration;
     float reloadTime;
     float delay;
     float recoil;
@@ -34,6 +37,9 @@
 - (int)getCurrentMagazine;
 - (void)setCurrentMagazine:(int)cm;
 - (int)getMagazineCount;
+- (int)getDamage;
+- (int)getShots;
+- (int)getPenetration;
 - (float)getReloadTime;
 - (float)getDelay;
 - (float)getRecoil;

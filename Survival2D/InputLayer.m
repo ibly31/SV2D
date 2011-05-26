@@ -53,8 +53,13 @@
 			if(angle < 0)
 				angle = 360 + angle;
 			[player setRotation: angle];
-			[player startShooting];
+            
+            if(![player shooting]){
+                [player setShooting: YES];
+                [player schedule:@selector(startShooting) interval:1.0f];
+            }
 		}else{
+            [player unschedule: @selector(startShooting)];
 			[player stopShooting];
 		}
 	}
@@ -89,6 +94,7 @@
         if(distance > 96 && location.y < 160){
             vel = ccp(0,0);
         }else{
+            [[(GameScene *)parent_ player] unschedule: @selector(startShooting)];
             [[(GameScene *)parent_ player] stopShooting];
         }
 	}

@@ -9,7 +9,7 @@
 #import "cocos2d.h"
 #import "SpaceManagerCocos2d.h"
 
-#define MAXZOMBIES 3000
+#define MAXZOMBIES 1000
 
 typedef struct Zombie{
     CGPoint position;
@@ -20,11 +20,11 @@ typedef struct Zombie{
     CCSprite *zombieSprite;
     
     cpShape *zombieShape;
+    BOOL alive;
 }Zombie;
 
 @interface ZombieBatch : CCSpriteBatchNode {
     Zombie zombies[MAXZOMBIES];
-    int currentZombie;
     
     CCTexture2D *zombieTexture;
     SpaceManagerCocos2d *smgr;
@@ -37,14 +37,20 @@ typedef struct Zombie{
 
 - (id)initWithSpaceManager:(SpaceManagerCocos2d *)spacemgr;
 
+- (int)numberZombiesAlive;
+
 - (void)addNewZombieAt:(CGPoint)newZomb;
 - (void)updateZombies;
 
+- (int)nextOpenZombieSlot;
+- (void)destroyZombie:(int)index;
+
 - (void)zombieSetPosition:(CGPoint)pos index:(int)index;
 - (void)zombieSetRotation:(float)rot index:(int)index;
-
-- (void)detectHitsWithShot:(CGPoint)start end:(CGPoint)end;
+- (void)zombieTakeDamage:(int)damage index:(int)index;
 
 - (void)setPlayerPosition:(CGPoint)pp;
+
+- (int)whichZombie:(cpShape *)zombieShape;
 
 @end

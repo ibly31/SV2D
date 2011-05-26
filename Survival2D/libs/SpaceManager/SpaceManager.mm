@@ -580,7 +580,7 @@ static void removeCollision(cpSpace *space, void *collision, void *inv_list)
 	//Remember to set these later, if you want different values
 	s->e = .5; 
 	s->u = .5;
-	s->collision_type = 0;
+	s->collision_type = -1;
 	s->data = nil;
 }
 
