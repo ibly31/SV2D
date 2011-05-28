@@ -21,11 +21,13 @@
     CCSprite *muzzleFlash;
     
     CCSprite *laser;
-        
+    
+    CCParticleFire *flameThrower;
+
     int health;
     int armor;
     float speed;
-    
+        
     float currentRecoil;
     
     BOOL shooting;
@@ -40,9 +42,13 @@
 @property (nonatomic, retain) CCSprite *laser;
 @property (nonatomic, retain) SpaceManagerCocos2d *smgr;
 
+@property (nonatomic, retain) CCParticleFire *flameThrower;
+
 @property BOOL shooting;
 
 - (id)initWithSpaceManager:(SpaceManagerCocos2d *)spacemgr;
+
+- (void)laserSetOn:(BOOL)onoff;
 
 - (void)startShooting;
 - (void)shoot;

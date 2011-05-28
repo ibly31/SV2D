@@ -27,7 +27,7 @@
         maxAmmo = [[weaponData objectForKey: @"MaxAmmo"] intValue];
         damage = [[weaponData objectForKey: @"Damage"] intValue];
         penetration = [[weaponData objectForKey: @"Penetration"] intValue];
-        shots = [[weaponData objectForKey: @"Shots"] intValue];
+        weaponType = [[weaponData objectForKey: @"WeaponType"] intValue];
         currentMagazine = maxAmmo;
         magazineCount = 4;
         reloadTime = [[weaponData objectForKey: @"ReloadTime"] floatValue];
@@ -67,11 +67,11 @@
 - (int)getCurrentMagazine{
     return currentMagazine;
 }
+- (int)getWeaponType{
+    return weaponType;
+}
 - (int)getDamage{
     return damage;
-}
-- (int)getShots{
-    return shots;
 }
 - (int)getPenetration{
     return penetration;

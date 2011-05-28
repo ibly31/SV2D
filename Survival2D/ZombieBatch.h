@@ -35,6 +35,8 @@ typedef struct Zombie{
 @property (nonatomic, retain) CCTexture2D *zombieTexture;
 @property (nonatomic, retain) SpaceManagerCocos2d *smgr;
 
+float distance(CGPoint point1,CGPoint point2);
+
 - (id)initWithSpaceManager:(SpaceManagerCocos2d *)spacemgr;
 
 - (int)numberZombiesAlive;
@@ -44,6 +46,9 @@ typedef struct Zombie{
 
 - (int)nextOpenZombieSlot;
 - (void)destroyZombie:(int)index;
+
+- (void)flamePath:(CGPoint)start withRotation:(float)rotation withVariance:(float)variance withDamage:(int)damage;
+- (void)explosionAt:(CGPoint)start withRadius:(float)radius withDamage:(int)damage;
 
 - (void)zombieSetPosition:(CGPoint)pos index:(int)index;
 - (void)zombieSetRotation:(float)rot index:(int)index;

@@ -21,7 +21,7 @@
 		<integer>3</integer>
 		<key>RPM</key>
 		<integer>900</integer>
-		<key>Shots</key>
+		<key>WeaponType</key>
 		<string>1</string>
 	</dict>
 	<dict>
@@ -43,8 +43,52 @@
 		<integer>3</integer>
 		<key>RPM</key>
 		<integer>100</integer>
-		<key>Shots</key>
-		<string>5</string>
+		<key>WeaponType</key>
+		<string>2</string>
+	</dict>
+	<dict>
+		<key>Damage</key>
+		<integer>10</integer>
+		<key>FlashPos</key>
+		<integer>0</integer>
+		<key>MaxAmmo</key>
+		<integer>1000</integer>
+		<key>Name</key>
+		<string>Flamethrower</string>
+		<key>OffsetY</key>
+		<integer>14</integer>
+		<key>Penetration</key>
+		<string>0</string>
+		<key>Recoil</key>
+		<integer>0</integer>
+		<key>ReloadTime</key>
+		<integer>3</integer>
+		<key>RPM</key>
+		<integer>600</integer>
+		<key>WeaponType</key>
+		<string>3</string>
+	</dict>
+	<dict>
+		<key>Damage</key>
+		<integer>150</integer>
+		<key>FlashPos</key>
+		<integer>0</integer>
+		<key>MaxAmmo</key>
+		<integer>5</integer>
+		<key>Name</key>
+		<string>Rocket Launcher</string>
+		<key>OffsetY</key>
+		<integer>14</integer>
+		<key>Penetration</key>
+		<string>0</string>
+		<key>Recoil</key>
+		<integer>0</integer>
+		<key>ReloadTime</key>
+		<integer>3</integer>
+		<key>RPM</key>
+		<integer>50</integer>
+		<key>WeaponType</key>
+		<string>4</string>
 	</dict>
 </array>
 </plist>

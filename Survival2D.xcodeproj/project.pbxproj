@@ -10,6 +10,11 @@
 		77071661138CB4AC00C0BF64 /* Zombie.png in Resources */ = {isa = PBXBuildFile; fileRef = 7707165F138CB4AC00C0BF64 /* Zombie.png */; };
 		77071662138CB4AC00C0BF64 /* Zombie-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77071660138CB4AC00C0BF64 /* Zombie-hd.png */; };
 		77075CB113835997004C9A15 /* ZombieBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 77075CB013835997004C9A15 /* ZombieBatch.m */; };
+		77141E8413908713003B5A64 /* Fire-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77141E8313908713003B5A64 /* Fire-hd.png */; };
+		77141E871390937F003B5A64 /* Fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 77141E861390937F003B5A64 /* Fire.png */; };
+		7750686113915F3A00D07C47 /* RocketBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 7750686013915F3A00D07C47 /* RocketBatch.m */; };
+		77506864139164D500D07C47 /* Rocket-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77506863139164D500D07C47 /* Rocket-hd.png */; };
+		775068661391664400D07C47 /* Rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 775068651391664400D07C47 /* Rocket.png */; };
 		7760A8971380BB5D00D5B52D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7760A8961380BB5D00D5B52D /* QuartzCore.framework */; };
 		7760A8991380BB5D00D5B52D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7760A8981380BB5D00D5B52D /* OpenGLES.framework */; };
 		7760A89B1380BB5D00D5B52D /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7760A89A1380BB5D00D5B52D /* OpenAL.framework */; };
@@ -180,6 +185,12 @@
 		77071660138CB4AC00C0BF64 /* Zombie-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Zombie-hd.png"; path = "Resources/Textures/Retina/Zombie-hd.png"; sourceTree = SOURCE_ROOT; };
 		77075CAF13835997004C9A15 /* ZombieBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZombieBatch.h; sourceTree = "<group>"; };
 		77075CB013835997004C9A15 /* ZombieBatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZombieBatch.m; sourceTree = "<group>"; };
+		77141E8313908713003B5A64 /* Fire-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Fire-hd.png"; sourceTree = "<group>"; };
+		77141E861390937F003B5A64 /* Fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fire.png; sourceTree = "<group>"; };
+		7750685F13915F3A00D07C47 /* RocketBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketBatch.h; sourceTree = "<group>"; };
+		7750686013915F3A00D07C47 /* RocketBatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketBatch.m; sourceTree = "<group>"; };
+		77506863139164D500D07C47 /* Rocket-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rocket-hd.png"; sourceTree = "<group>"; };
+		775068651391664400D07C47 /* Rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rocket.png; sourceTree = "<group>"; };
 		7760A8921380BB5D00D5B52D /* Survival2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Survival2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7760A8961380BB5D00D5B52D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7760A8981380BB5D00D5B52D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -557,8 +568,8 @@
 				7760AA461380BB6000D5B52D /* AppDelegate.m */,
 				7760AA481380BB6000D5B52D /* RootViewController.h */,
 				7760AA491380BB6000D5B52D /* RootViewController.m */,
-				7760A8A71380BB5D00D5B52D /* Resources */,
 				7760AA4E1380BB6000D5B52D /* GameConfig.h */,
+				7760A8A71380BB5D00D5B52D /* Resources */,
 				7760A8BB1380BB5E00D5B52D /* cocos2d */,
 				7760A9AC1380BB5F00D5B52D /* CocosDenshion */,
 				7760A9C41380BB5F00D5B52D /* FontLabel */,
@@ -874,6 +885,8 @@
 				77075CB013835997004C9A15 /* ZombieBatch.m */,
 				77EA00EF138C483B00B69CDC /* BulletBatch.h */,
 				77EA00F0138C483B00B69CDC /* BulletBatch.m */,
+				7750685F13915F3A00D07C47 /* RocketBatch.h */,
+				7750686013915F3A00D07C47 /* RocketBatch.m */,
 			);
 			name = "Game Classes";
 			sourceTree = "<group>";
@@ -881,6 +894,8 @@
 		7760AAC21380C38400D5B52D /* Non-Retina */ = {
 			isa = PBXGroup;
 			children = (
+				775068651391664400D07C47 /* Rocket.png */,
+				77141E861390937F003B5A64 /* Fire.png */,
 				77D22F8D138DEC7400D00543 /* LaserAnimated.png */,
 				7707165F138CB4AC00C0BF64 /* Zombie.png */,
 				776C5A471388854400CE2D6C /* Bloodsplatter.png */,
@@ -900,6 +915,8 @@
 		7760AACA1380C38400D5B52D /* Retina */ = {
 			isa = PBXGroup;
 			children = (
+				77506863139164D500D07C47 /* Rocket-hd.png */,
+				77141E8313908713003B5A64 /* Fire-hd.png */,
 				77D22F8A138DEA7F00D00543 /* LaserAnimated-hd.png */,
 				77071660138CB4AC00C0BF64 /* Zombie-hd.png */,
 				776C5A4A1388855400CE2D6C /* Bloodsplatter-hd.png */,
@@ -1050,6 +1067,10 @@
 				77071662138CB4AC00C0BF64 /* Zombie-hd.png in Resources */,
 				77D22F8B138DEA8000D00543 /* LaserAnimated-hd.png in Resources */,
 				77D22F8E138DEC7400D00543 /* LaserAnimated.png in Resources */,
+				77141E8413908713003B5A64 /* Fire-hd.png in Resources */,
+				77141E871390937F003B5A64 /* Fire.png in Resources */,
+				77506864139164D500D07C47 /* Rocket-hd.png in Resources */,
+				775068661391664400D07C47 /* Rocket.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1193,6 +1214,7 @@
 				77E13D791382046E0033BD15 /* tinyxmlparser.cpp in Sources */,
 				77075CB113835997004C9A15 /* ZombieBatch.m in Sources */,
 				77EA00F1138C483B00B69CDC /* BulletBatch.m in Sources */,
+				7750686113915F3A00D07C47 /* RocketBatch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

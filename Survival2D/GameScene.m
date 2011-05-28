@@ -16,6 +16,7 @@
 @synthesize inputLayer;
 @synthesize zombieBatch;
 @synthesize bulletBatch;
+@synthesize rocketBatch;
 
 @synthesize backgroundColor;
 @synthesize secondBackgroundColor;
@@ -55,6 +56,9 @@
         
         self.bulletBatch = [[BulletBatch alloc] initWithSpaceManager: smgr];
         [self addChild: bulletBatch];
+        
+        self.rocketBatch = [[RocketBatch alloc] initWithSpaceManager: smgr];
+        [self addChild: rocketBatch];
         
         self.zombieBatch = [[ZombieBatch alloc] initWithSpaceManager: smgr];
         [self addChild: zombieBatch];

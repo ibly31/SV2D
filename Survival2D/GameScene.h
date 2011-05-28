@@ -12,6 +12,7 @@
 #import "SpaceManagerCocos2d.h"
 #import "ZombieBatch.h"
 #import "BulletBatch.h"
+#import "RocketBatch.h"
 
 @interface GameScene : CCScene{
     Player *player;
@@ -33,6 +34,7 @@
     
     CCSpriteBatchNode *bloodSplatters;
     BulletBatch *bulletBatch;
+    RocketBatch *rocketBatch;
     
     SpaceManagerCocos2d *smgr;
 }
@@ -41,6 +43,7 @@
 @property (nonatomic, retain) InputLayer *inputLayer;
 @property (nonatomic, retain) ZombieBatch *zombieBatch;
 @property (nonatomic, retain) BulletBatch *bulletBatch;
+@property (nonatomic, retain) RocketBatch *rocketBatch;
 
 @property (nonatomic, retain) CCLayerColor *backgroundColor;
 @property (nonatomic, retain) CCLayerColor *secondBackgroundColor;

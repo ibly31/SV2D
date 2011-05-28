@@ -18,7 +18,7 @@
         self.isTouchEnabled = YES;
         leftAnalogStickLocation = ccp(74.0f, 74.0f);
         rightAnalogStickLocation = ccp(404.0f, 74.0f);
-        
+                
         vel = ccp(0,0);
         [self schedule: @selector(setLoop)];
     }

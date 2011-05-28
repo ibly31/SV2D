@@ -16,11 +16,12 @@
     int currentMagazine;
     int magazineCount;
     int damage;
-    int shots;
     int penetration;
     float reloadTime;
     float delay;
     float recoil;
+    
+    int weaponType; // 1 - regular, 2 - shotgun, 3 - flame, 4 - rochetlinigirie.
     
     int offset;
     int flashPos;
@@ -37,8 +38,8 @@
 - (int)getCurrentMagazine;
 - (void)setCurrentMagazine:(int)cm;
 - (int)getMagazineCount;
+- (int)getWeaponType;
 - (int)getDamage;
-- (int)getShots;
 - (int)getPenetration;
 - (float)getReloadTime;
 - (float)getDelay;

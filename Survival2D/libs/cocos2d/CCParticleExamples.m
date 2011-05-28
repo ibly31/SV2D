@@ -68,8 +68,8 @@
 		angleVar = 20;
 				
 		// life of particles
-		life = 3.5f;
-		lifeVar = 1;
+		life = 3.0f;
+		lifeVar = 1.0f;
 			
 		// emits per frame
 		emissionRate = totalParticles/life;
@@ -97,7 +97,7 @@
 		startSizeVar = 2.0f;
 		endSize = kCCParticleStartSizeEqualToEndSize;
 
-		self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
+		self.texture = [[CCTextureCache sharedTextureCache] addImage: @"Fire.png"];
 
 		// additive
 		self.blendAdditive = NO;
@@ -113,7 +113,7 @@
 @implementation CCParticleFire
 -(id) init
 {
-	return [self initWithTotalParticles:250];
+	return [self initWithTotalParticles:150];
 }
 
 -(id) initWithTotalParticles:(int) p
@@ -134,27 +134,26 @@
 		self.radialAccelVar = 0;
 		
 		// Gravity Mode: speed of particles
-		self.speed = 60;
-		self.speedVar = 20;		
+		self.speed = 400.0f;
+		self.speedVar = 60.0f;
 		
 		// starting angle
 		angle = 90;
-		angleVar = 10;
+		angleVar = 20;
 		
 		// emitter position
 		CGSize winSize = [[CCDirector sharedDirector] winSize];
 		self.position = ccp(winSize.width/2, 60);
-		posVar = ccp(40, 20);
+		posVar = ccp(0, 0);
 		
 		// life of particles
-		life = 3;
-		lifeVar = 0.25f;
-		
+		life = 0.8f;
+		lifeVar = 0.1f;
 			
 		// size, in pixels
-		startSize = 54.0f;
-		startSizeVar = 10.0f;
-		endSize = kCCParticleStartSizeEqualToEndSize;
+		startSize = 25.0f;
+		startSizeVar = 5.0f;
+		endSize = 50.0f;
 
 		// emits per frame
 		emissionRate = totalParticles/life;
@@ -177,7 +176,7 @@
 		endColorVar.b = 0.0f;
 		endColorVar.a = 0.0f;
 		
-		self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
+		self.texture = [[CCTextureCache sharedTextureCache] addImage: @"Fire.png"];
 		
 		// additive
 		self.blendAdditive = YES;

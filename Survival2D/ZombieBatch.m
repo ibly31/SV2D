@@ -39,6 +39,36 @@
     return self;
 }
 
+- (void)flamePath:(CGPoint)start withRotation:(float)rotation withVariance:(float)variance withDamage:(int)damage{
+    rotation = CC_DEGREES_TO_RADIANS(rotation);
+    for(int x = 0; x < MAXZOMBIES; x++){
+        if(zombies[x].alive){
+            CGPoint zombiePos = zombies[x].position;
+            float angleToStart = atan2f(zombiePos.x - start.x, zombiePos.y - start.y);
+            if(angleToStart < 0)
+                angleToStart += 2.0f * M_PI;
+            variance = CC_DEGREES_TO_RADIANS(variance);
+            
+            if(angleToStart > (rotation - variance) && angleToStart < (rotation + variance)){
+                printf("\nHitting Zombie Index: %i, %f", x, CCRANDOM_0_1());
+                [self zombieTakeDamage:damage index: x];
+            }
+        }
+    }
+}
+
+- (void)explosionAt:(CGPoint)start withRadius:(float)radius withDamage:(int)damage{
+    for(int x = 0; x < MAXZOMBIES; x++){
+        if(zombies[x].alive == YES){
+            float dist = distance(start, zombies[x].position);
+            if(dist < radius){
+                [self zombieTakeDamage: ((radius - dist) / radius) * damage index:x];
+            }
+        }
+    }
+    [smgr applyLinearExplosionAt:start radius:radius maxForce:300];
+}
+
 - (int)nextOpenZombieSlot{
     for(int x = 0; x < MAXZOMBIES; x++){
         if(zombies[x].alive == NO){
@@ -83,7 +113,8 @@
             [self zombieSetRotation:90.0f + CC_RADIANS_TO_DEGREES(angleTowardsPlayer) index:x];
             
             if(!CGRectContainsPoint(CGRectMake(playerPosition.x - 248.0f, playerPosition.y - 168.0f, 480.0f, 320.0f), zombiePosition)){
-                cpBodySleep(shapeBody);
+                //cpBodySleep(shapeBody);
+                cpBodyActivate(shapeBody);
             }else{
                 cpBodyActivate(shapeBody);
             }
@@ -143,8 +174,6 @@
     zombies[index].health -= damage;
     if(zombies[index].health <= 0){
         [self destroyZombie: index];
-        [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
-        [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
         [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
         [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
         [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
