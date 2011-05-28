@@ -32,6 +32,7 @@
 
 @synthesize casings;
 @synthesize bloodSplatters;
+@synthesize rocketTrails;
 
 @synthesize smgr;
 
@@ -57,12 +58,15 @@
         self.bulletBatch = [[BulletBatch alloc] initWithSpaceManager: smgr];
         [self addChild: bulletBatch];
         
-        self.rocketBatch = [[RocketBatch alloc] initWithSpaceManager: smgr];
+        self.rocketTrails = [[CCSpriteBatchNode alloc] initWithFile:@"RocketTrail.png" capacity:MAXROCKETS];
+        [self addChild: rocketTrails];
+
+        self.rocketBatch = [[RocketBatch alloc] initWithSpaceManager: smgr trailBatch: rocketTrails];
         [self addChild: rocketBatch];
         
         self.zombieBatch = [[ZombieBatch alloc] initWithSpaceManager: smgr];
         [self addChild: zombieBatch];
-                
+                        
         self.bloodSplatters = [[CCSpriteBatchNode alloc] initWithFile:@"Bloodsplatter.png" capacity: 100];
         [self addChild: bloodSplatters];
         

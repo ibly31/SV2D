@@ -161,6 +161,8 @@
 		7760AAE31380C39C00D5B52D /* WeaponList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7760AAE21380C39C00D5B52D /* WeaponList.plist */; };
 		776C5A481388854400CE2D6C /* Bloodsplatter.png in Resources */ = {isa = PBXBuildFile; fileRef = 776C5A471388854400CE2D6C /* Bloodsplatter.png */; };
 		776C5A4B1388855400CE2D6C /* Bloodsplatter-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 776C5A4A1388855400CE2D6C /* Bloodsplatter-hd.png */; };
+		77C373FE13918A25000D950A /* RocketTrail.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C373FC13918A25000D950A /* RocketTrail.png */; };
+		77C373FF13918A25000D950A /* RocketTrail-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C373FD13918A25000D950A /* RocketTrail-hd.png */; };
 		77CB749713884C23000DFE89 /* Bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 77CB749613884C23000DFE89 /* Bullet.png */; };
 		77CB749A13884C31000DFE89 /* Bullet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77CB749913884C31000DFE89 /* Bullet-hd.png */; };
 		77D22F8B138DEA8000D00543 /* LaserAnimated-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D22F8A138DEA7F00D00543 /* LaserAnimated-hd.png */; };
@@ -477,6 +479,8 @@
 		7760AAE21380C39C00D5B52D /* WeaponList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = WeaponList.plist; path = Resources/Data/WeaponList.plist; sourceTree = SOURCE_ROOT; };
 		776C5A471388854400CE2D6C /* Bloodsplatter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bloodsplatter.png; sourceTree = "<group>"; };
 		776C5A4A1388855400CE2D6C /* Bloodsplatter-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bloodsplatter-hd.png"; sourceTree = "<group>"; };
+		77C373FC13918A25000D950A /* RocketTrail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RocketTrail.png; path = "Resources/Textures/Non-Retina/RocketTrail.png"; sourceTree = SOURCE_ROOT; };
+		77C373FD13918A25000D950A /* RocketTrail-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RocketTrail-hd.png"; sourceTree = "<group>"; };
 		77CB749613884C23000DFE89 /* Bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bullet.png; sourceTree = "<group>"; };
 		77CB749913884C31000DFE89 /* Bullet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bullet-hd.png"; sourceTree = "<group>"; };
 		77D22F8A138DEA7F00D00543 /* LaserAnimated-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaserAnimated-hd.png"; sourceTree = "<group>"; };
@@ -894,6 +898,7 @@
 		7760AAC21380C38400D5B52D /* Non-Retina */ = {
 			isa = PBXGroup;
 			children = (
+				77C373FC13918A25000D950A /* RocketTrail.png */,
 				775068651391664400D07C47 /* Rocket.png */,
 				77141E861390937F003B5A64 /* Fire.png */,
 				77D22F8D138DEC7400D00543 /* LaserAnimated.png */,
@@ -915,6 +920,7 @@
 		7760AACA1380C38400D5B52D /* Retina */ = {
 			isa = PBXGroup;
 			children = (
+				77C373FD13918A25000D950A /* RocketTrail-hd.png */,
 				77506863139164D500D07C47 /* Rocket-hd.png */,
 				77141E8313908713003B5A64 /* Fire-hd.png */,
 				77D22F8A138DEA7F00D00543 /* LaserAnimated-hd.png */,
@@ -1071,6 +1077,8 @@
 				77141E871390937F003B5A64 /* Fire.png in Resources */,
 				77506864139164D500D07C47 /* Rocket-hd.png in Resources */,
 				775068661391664400D07C47 /* Rocket.png in Resources */,
+				77C373FE13918A25000D950A /* RocketTrail.png in Resources */,
+				77C373FF13918A25000D950A /* RocketTrail-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

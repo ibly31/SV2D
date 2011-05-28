@@ -32,6 +32,8 @@
     CCSpriteBatchNode *casings;
     int currentCasingNumber;
     
+    CCSpriteBatchNode *rocketTrails;
+    
     CCSpriteBatchNode *bloodSplatters;
     BulletBatch *bulletBatch;
     RocketBatch *rocketBatch;
@@ -59,6 +61,7 @@
 
 @property (nonatomic, retain) CCSpriteBatchNode *casings;
 @property (nonatomic, retain) CCSpriteBatchNode *bloodSplatters;
+@property (nonatomic, retain) CCSpriteBatchNode *rocketTrails;
 
 @property (nonatomic, retain) SpaceManagerCocos2d *smgr;
 

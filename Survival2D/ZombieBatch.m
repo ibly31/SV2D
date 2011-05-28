@@ -108,6 +108,7 @@
             CGPoint force = CGPointMake(zombies[x].speed * cosf(angleTowardsPlayer), -zombies[x].speed * sinf(angleTowardsPlayer));
             
             shapeBody->v = cpv(force.x, force.y);
+            shapeBody->v = cpv(0,0);
             
             [self zombieSetPosition:zombiePosition index:x];
             [self zombieSetRotation:90.0f + CC_RADIANS_TO_DEGREES(angleTowardsPlayer) index:x];

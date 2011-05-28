@@ -13,23 +13,29 @@
 
 typedef struct Rocket{
     CCSprite *rocketSprite;
+    CCSprite *rocketTrail;
     cpShape *rocketShape;
     int damage;
     float speed;
+    CGPoint origin;
     
     BOOL taken;
-    
 }Rocket;
 
 @interface RocketBatch : CCSpriteBatchNode {
     SpaceManagerCocos2d *smgr;
     
     Rocket rockets[MAXROCKETS];
+    
+    CCSpriteBatchNode *rocketTrails;
 }
 
 @property (nonatomic, retain) SpaceManagerCocos2d *smgr;
+@property (nonatomic, retain) CCSpriteBatchNode *rocketTrails;
 
-- (id)initWithSpaceManager:(SpaceManagerCocos2d *)smanager;
+float distance(CGPoint point1,CGPoint point2);
+
+- (id)initWithSpaceManager:(SpaceManagerCocos2d *)smanager trailBatch:(CCSpriteBatchNode *)trailBatch;
 
 - (void)fireRocketFrom:(CGPoint)start withRotation:(float)rotation withDamage:(int)damage;
 - (BOOL)rocketCollision:(CollisionMoment)moment arbiter:(cpArbiter*)arb space:(cpSpace*)space;

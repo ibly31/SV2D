@@ -12,8 +12,9 @@
 
 @implementation RocketBatch
 @synthesize smgr;
+@synthesize rocketTrails;
 
-- (id)initWithSpaceManager:(SpaceManagerCocos2d *)smanager{
+- (id)initWithSpaceManager:(SpaceManagerCocos2d *)smanager trailBatch:(CCSpriteBatchNode *)trailBatch{
     self = [super initWithFile:@"Rocket.png" capacity:MAXROCKETS];
     if(self){
         self.smgr = smanager;           //  ZOMBIE      ROCKET
@@ -23,6 +24,8 @@
         [smgr addCollisionCallbackBetweenType:2 otherType:3 target:self selector:@selector(ignoreCollision:arbiter:space:)];
         [smgr addCollisionCallbackBetweenType:3 otherType:3 target:self selector:@selector(ignoreCollision:arbiter:space:)];
         
+        rocketTrails = trailBatch;
+                
         for(int x = 0; x < MAXROCKETS; x++){
             rockets[x].taken = NO;
             rockets[x].rocketShape = NULL;
@@ -33,8 +36,14 @@
             rockets[x].rocketSprite = rocketSprite;
             [self addChild: rocketSprite];
             [rocketSprite release];
+            
+            CCSprite *rocketTrail = [[CCSprite alloc] initWithFile: @"RocketTrail.png"];
+            [rocketTrail setOpacity: 0];
+            [rocketTrail setAnchorPoint: ccp(0.5f, 1.0f)];
+            rockets[x].rocketTrail = rocketTrail;
+            [rocketTrails addChild: rocketTrail];
+            [rocketTrail release];
         }
-        
         [self schedule: @selector(updateRockets) interval: 1.0f / 60.0f];
     }
     return self;
@@ -43,7 +52,6 @@
 - (void)updateRockets{
     for(int x = 0; x < MAXROCKETS; x++){
         if(rockets[x].taken){
-            
             cpBodyActivate(rockets[x].rocketShape->body);
             
             rockets[x].speed += 0.1f;
@@ -51,9 +59,14 @@
             
             CGPoint pos = rockets[x].rocketShape->body->p;
             [rockets[x].rocketSprite setPosition: pos];
+            [rockets[x].rocketTrail setPosition: pos];
             
             float rot = rockets[x].rocketShape->body->a;
             [rockets[x].rocketSprite setRotation: 90.0f - CC_RADIANS_TO_DEGREES(rot)];
+            [rockets[x].rocketTrail setRotation: 90.0f - CC_RADIANS_TO_DEGREES(rot)];
+            
+            float distanceTravelled = distance(pos, rockets[x].origin);
+            [rockets[x].rocketTrail setScaleY: distanceTravelled];
         }
     }
 }
@@ -71,6 +84,9 @@
     
     [[(GameScene *)parent_ zombieBatch] explosionAt: rockets[index].rocketShape->body->p withRadius:150.0f withDamage:rockets[index].damage];
     
+    [rockets[index].rocketTrail stopAllActions];
+    [rockets[index].rocketTrail setOpacity: 0];
+    [rockets[index].rocketTrail setScaleY: 1.0f];
     [rockets[index].rocketSprite stopAllActions];
     [rockets[index].rocketSprite setOpacity: 0];
     [rockets[index].rocketSprite setScaleY: 1.0f];
@@ -103,7 +119,10 @@
     rockets[x].speed = 0.1f;
     rockets[x].rocketShape = [smgr addRectAt:start mass:3.0f width:3 height:16 rotation:CC_DEGREES_TO_RADIANS(90.0f - rotation)];
     rockets[x].rocketShape->collision_type = 3;
+    rockets[x].origin = start;
+    [rockets[x].rocketTrail setOpacity: 255];
     [rockets[x].rocketSprite runAction: [CCFadeTo actionWithDuration: 0.075f opacity: 255]];
+    [rockets[x].rocketTrail runAction: [CCFadeTo actionWithDuration: 1.5f opacity: 0]];
     rockets[x].taken = YES;
     
     float rotInRads = CC_DEGREES_TO_RADIANS(90.0f - rotation);
