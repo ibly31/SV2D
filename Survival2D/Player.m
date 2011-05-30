@@ -28,7 +28,7 @@
         [smgr addCollisionCallbackBetweenType:1 otherType:0 target:self selector:@selector(handleCollision:arbiter:space:) moments:COLLISION_BEGIN, COLLISION_SEPARATE, nil];
         
         self.playerSprite = [[CCSprite alloc] initWithFile:@"PlayerSheet.png" rect:CGRectMake(0, 0, 64, 64)];
-        self.weapon = [[Weapon alloc] initWithName:@"Rocket Launcher"];
+        self.weapon = [[Weapon alloc] initWithName:@"Flamethrower"];
         self.muzzleFlash = [[CCSprite alloc] initWithFile:@"MuzzleFlash.png"];
         [muzzleFlash setOpacity: 0];
         [muzzleFlash setAnchorPoint: ccp(0.5f, 0.0f)];
@@ -40,12 +40,12 @@
         [laser setAnchorPoint: ccp(0.5f, 0.0f)];
         [laser setScaleY: 6.25f];
         
-        [self laserSetOn: NO];
+        [self laserSetOn: YES];
         
-        [self addChild: weapon];
-        [self addChild: laser];
-        [self addChild: muzzleFlash];
         [self addChild: playerSprite];
+        [self addChild: laser];
+        [self addChild: weapon];
+        [self addChild: muzzleFlash];
         [self addChild: flameThrower];
                 
         health = 100;
@@ -116,17 +116,19 @@
     if(result == 0){        
         
     }else if(result == 1){
-        
         CGPoint startPos = [weapon convertToWorldSpace: ccp(weapon.contentSize.width / 2, weapon.contentSize.height / 2)];
         CGPoint endPos = [weapon convertToWorldSpace: ccp(weapon.contentSize.width * (CCRANDOM_0_1() * 3 + 2), weapon.contentSize.height / 2)];
         
-        if([weapon getWeaponType] != 3 && [weapon getWeaponType] != 4){
-            [(GameScene *)parent_ addNewBulletCasingsAt:startPos endPos:endPos startRot:[playerSprite rotation]];
+        if([weapon getWeaponType] != 3){
+            if([weapon getWeaponType] != 4){
+                [(GameScene *)parent_ addNewBulletCasingsAt:startPos endPos:endPos startRot:[playerSprite rotation]];
+            }
             
             [muzzleFlash stopAllActions];
             [muzzleFlash setOpacity: 255];
             [muzzleFlash setPosition: [weapon convertToWorldSpace: ccp(weapon.contentSize.width / 2, weapon.contentSize.height - [weapon getFlashPos])]];
-            [muzzleFlash setRotation: [playerSprite rotation] + CCRANDOM_0_1() * 30.0f - 15.0f];
+            [muzzleFlash setRotation: (([weapon getWeaponType] == 4) * 180.0f) + [playerSprite rotation] + CCRANDOM_0_1() * 30.0f - 15.0f];
+            
             if(CCRANDOM_0_1() > 0.5f){
                 [muzzleFlash setScaleX: -1.0f];
             }else{
@@ -151,7 +153,7 @@
             }
         }else if(t == 3){
             [flameThrower setEmissionRate: [flameThrower totalParticles] / [flameThrower life]];
-            [[(GameScene *)parent_ zombieBatch] flamePath: sFrom withRotation: sOffs withVariance: [flameThrower angleVar] withDamage: [weapon getDamage]];
+            [[(GameScene *)parent_ zombieBatch] flamePath: [playerSprite position] withRotation: sOffs withVariance: [flameThrower angleVar] withDamage: [weapon getDamage]];
         }else if(t == 4){
             [[(GameScene *)parent_ rocketBatch] fireRocketFrom: sFrom withRotation:sOffs withDamage:[weapon getDamage]];
         }
@@ -192,7 +194,7 @@
     [playerSprite setPosition: playerShape->body->p];
     [weapon setPosition: playerShape->body->p];
     [laser setPosition: [weapon convertToWorldSpace: ccp(weapon.contentSize.width / 2, weapon.contentSize.height - [weapon getFlashPos])]];
-    [flameThrower setPosition: [weapon convertToWorldSpace: ccp(weapon.contentSize.width / 2, weapon.contentSize.height)]];
+    [flameThrower setPosition: [weapon convertToWorldSpace: ccp(weapon.contentSize.width / 2, weapon.contentSize.height - [weapon getFlashPos])]];
     [[(GameScene *)parent_ zombieBatch] setPlayerPosition: playerShape->body->p];
     [(GameScene *)parent_ updateCameraToCenterOn: playerShape->body->p];
 }

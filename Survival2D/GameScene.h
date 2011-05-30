@@ -38,6 +38,8 @@
     BulletBatch *bulletBatch;
     RocketBatch *rocketBatch;
     
+    CCParticleExplosion *explosionToRemove;
+    
     SpaceManagerCocos2d *smgr;
 }
 
@@ -63,6 +65,8 @@
 @property (nonatomic, retain) CCSpriteBatchNode *bloodSplatters;
 @property (nonatomic, retain) CCSpriteBatchNode *rocketTrails;
 
+@property (nonatomic, retain) CCParticleExplosion *explosionToRemove;
+
 @property (nonatomic, retain) SpaceManagerCocos2d *smgr;
 
 - (void)updateCameraToCenterOn:(CGPoint)centerOn;
@@ -70,6 +74,9 @@
 
 - (void)addNewBloodSplatterAt:(CGPoint)position withRotation:(float)rotation withDistance:(float)distance;
 - (void)removeBloodSplatter;
+
+- (void)startExplosionAt:(CGPoint)start;
+- (void)endExplosion;
 
 - (void)flashDamageIndicator:(int)health;
 

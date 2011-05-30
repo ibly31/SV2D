@@ -34,6 +34,8 @@
 @synthesize bloodSplatters;
 @synthesize rocketTrails;
 
+@synthesize explosionToRemove;
+
 @synthesize smgr;
 
 -(id)init{
@@ -113,9 +115,29 @@
         self.inputLayer = [[InputLayer alloc] init];
         [self addChild: inputLayer];
         
-        [zombieBatch addNewZombieAt: ccp(560, 560)];
+        [zombieBatch addNewZombieAt: ccp(752, 652)];
+        [zombieBatch addNewZombieAt: ccp(752, 652)];
+        [zombieBatch addNewZombieAt: ccp(752, 652)];
     }
 	return self;
+}
+
+- (void)startExplosionAt:(CGPoint)start{
+    if(explosionToRemove != nil){
+        [self endExplosion];
+    }
+    CCParticleExplosion *explosion = [[CCParticleExplosion alloc] init];
+    [explosion setPosition: start];
+    [self addChild: explosion];
+    self.explosionToRemove = explosion;
+    
+    [self schedule:@selector(endExplosion) interval:2.5f];
+}
+
+- (void)endExplosion{
+    [self unschedule: @selector(endExplosion)];
+    [explosionToRemove release];
+    explosionToRemove = nil;
 }
 
 - (void)updateCameraToCenterOn:(CGPoint)centerOn{

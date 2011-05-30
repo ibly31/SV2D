@@ -9,6 +9,7 @@
 #import "ZombieBatch.h"
 #import "chipmunk.h"
 #import "GameScene.h"
+#import "BulletBatch.h"
 
 @implementation ZombieBatch
 @synthesize zombieTexture;
@@ -41,17 +42,19 @@
 
 - (void)flamePath:(CGPoint)start withRotation:(float)rotation withVariance:(float)variance withDamage:(int)damage{
     rotation = CC_DEGREES_TO_RADIANS(rotation);
+    variance = CC_DEGREES_TO_RADIANS(variance);
+    
     for(int x = 0; x < MAXZOMBIES; x++){
         if(zombies[x].alive){
             CGPoint zombiePos = zombies[x].position;
             float angleToStart = atan2f(zombiePos.x - start.x, zombiePos.y - start.y);
             if(angleToStart < 0)
                 angleToStart += 2.0f * M_PI;
-            variance = CC_DEGREES_TO_RADIANS(variance);
             
             if(angleToStart > (rotation - variance) && angleToStart < (rotation + variance)){
-                printf("\nHitting Zombie Index: %i, %f", x, CCRANDOM_0_1());
-                [self zombieTakeDamage:damage index: x];
+                float distanceToZombie = distance(start, zombiePos);
+                if(distanceToZombie < 200)
+                    [self zombieTakeDamage:damage index: x];
             }
         }
     }
@@ -67,6 +70,15 @@
         }
     }
     [smgr applyLinearExplosionAt:start radius:radius maxForce:300];
+    
+    int numberOfShrapnels = (int)(CCRANDOM_0_1() * 10);
+    float initialAngle = (CCRANDOM_0_1() * (360.0f / (float)numberOfShrapnels));
+    
+    for(int x = 0; x < numberOfShrapnels; x++){
+        [[(GameScene *)parent_ bulletBatch] fireBulletFrom:start withRotation:initialAngle + (x * (360.0f / numberOfShrapnels)) withDamage:damage / numberOfShrapnels withPenetration:1];
+    }
+    
+    [(GameScene *)parent_ startExplosionAt: start];
 }
 
 - (int)nextOpenZombieSlot{
@@ -108,14 +120,13 @@
             CGPoint force = CGPointMake(zombies[x].speed * cosf(angleTowardsPlayer), -zombies[x].speed * sinf(angleTowardsPlayer));
             
             shapeBody->v = cpv(force.x, force.y);
-            shapeBody->v = cpv(0,0);
             
             [self zombieSetPosition:zombiePosition index:x];
             [self zombieSetRotation:90.0f + CC_RADIANS_TO_DEGREES(angleTowardsPlayer) index:x];
             
             if(!CGRectContainsPoint(CGRectMake(playerPosition.x - 248.0f, playerPosition.y - 168.0f, 480.0f, 320.0f), zombiePosition)){
-                //cpBodySleep(shapeBody);
-                cpBodyActivate(shapeBody);
+                cpBodySleep(shapeBody);
+                //cpBodyActivate(shapeBody);
             }else{
                 cpBodyActivate(shapeBody);
             }

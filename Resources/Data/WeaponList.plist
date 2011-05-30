@@ -6,7 +6,7 @@
 		<key>Damage</key>
 		<integer>50</integer>
 		<key>FlashPos</key>
-		<integer>4</integer>
+		<integer>2</integer>
 		<key>MaxAmmo</key>
 		<integer>500</integer>
 		<key>Name</key>
@@ -34,7 +34,7 @@
 		<key>Name</key>
 		<string>Shotgun</string>
 		<key>OffsetY</key>
-		<integer>14</integer>
+		<integer>16</integer>
 		<key>Penetration</key>
 		<string>2</string>
 		<key>Recoil</key>
@@ -48,15 +48,15 @@
 	</dict>
 	<dict>
 		<key>Damage</key>
-		<integer>10</integer>
+		<integer>20</integer>
 		<key>FlashPos</key>
-		<integer>0</integer>
+		<integer>-5</integer>
 		<key>MaxAmmo</key>
 		<integer>1000</integer>
 		<key>Name</key>
 		<string>Flamethrower</string>
 		<key>OffsetY</key>
-		<integer>14</integer>
+		<integer>16</integer>
 		<key>Penetration</key>
 		<string>0</string>
 		<key>Recoil</key>
@@ -72,7 +72,7 @@
 		<key>Damage</key>
 		<integer>150</integer>
 		<key>FlashPos</key>
-		<integer>0</integer>
+		<integer>42</integer>
 		<key>MaxAmmo</key>
 		<integer>5</integer>
 		<key>Name</key>

@@ -150,7 +150,14 @@
         rocketDamage = rockets[whichRocket].damage;
     }
     
-    [[(GameScene *)parent_ zombieBatch] explosionAt:cpArbiterGetPoint(arb, 0) withRadius:300 withDamage:rocketDamage];
+    int whichZombie = [[(GameScene *)parent_ zombieBatch] whichZombie: a];
+    if(whichZombie != -1){
+        [[(GameScene *)parent_ zombieBatch] zombieTakeDamage:100 index:whichZombie];
+    }else{
+        NSLog(@" ");
+    }
+    
+    [[(GameScene *)parent_ zombieBatch] explosionAt:cpArbiterGetPoint(arb, 0) withRadius:100 withDamage:rocketDamage];
     [self destroyRocket: whichRocket];
     
     return NO;

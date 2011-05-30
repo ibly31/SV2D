@@ -18,7 +18,7 @@
     int weaponNumber = [[WeaponList instance] getNumberForWeapon: w_name];
     CGRect textureRect = CGRectMake((weaponNumber % 32) * 8, (int)(weaponNumber / 32), 8, 48);
     
-    self = [super initWithFile:@"WeaponSpritesheet.png" rect:textureRect];
+    self = [super initWithFile:@"Weaponsheet.png" rect:textureRect];
     if(self){
         offset = [[weaponData objectForKey: @"OffsetY"] intValue];
         [self setAnchorPoint: ccp(0.5f - (8 / self.contentSize.width), 0.5f - (offset / self.contentSize.height))];

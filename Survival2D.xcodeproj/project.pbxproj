@@ -15,6 +15,8 @@
 		7750686113915F3A00D07C47 /* RocketBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 7750686013915F3A00D07C47 /* RocketBatch.m */; };
 		77506864139164D500D07C47 /* Rocket-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77506863139164D500D07C47 /* Rocket-hd.png */; };
 		775068661391664400D07C47 /* Rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 775068651391664400D07C47 /* Rocket.png */; };
+		775BDDE41391B2ED006516A0 /* Weaponsheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 775BDDE31391B2ED006516A0 /* Weaponsheet-hd.png */; };
+		775BDDE61391B3B4006516A0 /* Weaponsheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 775BDDE51391B3B4006516A0 /* Weaponsheet.png */; };
 		7760A8971380BB5D00D5B52D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7760A8961380BB5D00D5B52D /* QuartzCore.framework */; };
 		7760A8991380BB5D00D5B52D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7760A8981380BB5D00D5B52D /* OpenGLES.framework */; };
 		7760A89B1380BB5D00D5B52D /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7760A89A1380BB5D00D5B52D /* OpenAL.framework */; };
@@ -150,14 +152,12 @@
 		7760AAD61380C38400D5B52D /* PlayerSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760AAC61380C38400D5B52D /* PlayerSheet.png */; };
 		7760AAD71380C38400D5B52D /* Reloading.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760AAC71380C38400D5B52D /* Reloading.png */; };
 		7760AAD81380C38400D5B52D /* Shell.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760AAC81380C38400D5B52D /* Shell.png */; };
-		7760AAD91380C38400D5B52D /* WeaponSpritesheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760AAC91380C38400D5B52D /* WeaponSpritesheet.png */; };
 		7760AADA1380C38400D5B52D /* Analog-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760AACB1380C38400D5B52D /* Analog-hd.png */; };
 		7760AADC1380C38400D5B52D /* Font-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760AACD1380C38400D5B52D /* Font-hd.png */; };
 		7760AADD1380C38400D5B52D /* MuzzleFlash-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760AACE1380C38400D5B52D /* MuzzleFlash-hd.png */; };
 		7760AADE1380C38400D5B52D /* PlayerSheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760AACF1380C38400D5B52D /* PlayerSheet-hd.png */; };
 		7760AADF1380C38400D5B52D /* Reloading-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760AAD01380C38400D5B52D /* Reloading-hd.png */; };
 		7760AAE01380C38400D5B52D /* Shell-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760AAD11380C38400D5B52D /* Shell-hd.png */; };
-		7760AAE11380C38400D5B52D /* WeaponSpritesheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760AAD21380C38400D5B52D /* WeaponSpritesheet-hd.png */; };
 		7760AAE31380C39C00D5B52D /* WeaponList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7760AAE21380C39C00D5B52D /* WeaponList.plist */; };
 		776C5A481388854400CE2D6C /* Bloodsplatter.png in Resources */ = {isa = PBXBuildFile; fileRef = 776C5A471388854400CE2D6C /* Bloodsplatter.png */; };
 		776C5A4B1388855400CE2D6C /* Bloodsplatter-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 776C5A4A1388855400CE2D6C /* Bloodsplatter-hd.png */; };
@@ -193,6 +193,8 @@
 		7750686013915F3A00D07C47 /* RocketBatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketBatch.m; sourceTree = "<group>"; };
 		77506863139164D500D07C47 /* Rocket-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rocket-hd.png"; sourceTree = "<group>"; };
 		775068651391664400D07C47 /* Rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rocket.png; sourceTree = "<group>"; };
+		775BDDE31391B2ED006516A0 /* Weaponsheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Weaponsheet-hd.png"; sourceTree = "<group>"; };
+		775BDDE51391B3B4006516A0 /* Weaponsheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Weaponsheet.png; sourceTree = "<group>"; };
 		7760A8921380BB5D00D5B52D /* Survival2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Survival2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7760A8961380BB5D00D5B52D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7760A8981380BB5D00D5B52D /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -468,14 +470,12 @@
 		7760AAC61380C38400D5B52D /* PlayerSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlayerSheet.png; sourceTree = "<group>"; };
 		7760AAC71380C38400D5B52D /* Reloading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reloading.png; sourceTree = "<group>"; };
 		7760AAC81380C38400D5B52D /* Shell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shell.png; sourceTree = "<group>"; };
-		7760AAC91380C38400D5B52D /* WeaponSpritesheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeaponSpritesheet.png; sourceTree = "<group>"; };
 		7760AACB1380C38400D5B52D /* Analog-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Analog-hd.png"; sourceTree = "<group>"; };
 		7760AACD1380C38400D5B52D /* Font-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Font-hd.png"; sourceTree = "<group>"; };
 		7760AACE1380C38400D5B52D /* MuzzleFlash-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MuzzleFlash-hd.png"; sourceTree = "<group>"; };
 		7760AACF1380C38400D5B52D /* PlayerSheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlayerSheet-hd.png"; sourceTree = "<group>"; };
 		7760AAD01380C38400D5B52D /* Reloading-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reloading-hd.png"; sourceTree = "<group>"; };
 		7760AAD11380C38400D5B52D /* Shell-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shell-hd.png"; sourceTree = "<group>"; };
-		7760AAD21380C38400D5B52D /* WeaponSpritesheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WeaponSpritesheet-hd.png"; sourceTree = "<group>"; };
 		7760AAE21380C39C00D5B52D /* WeaponList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = WeaponList.plist; path = Resources/Data/WeaponList.plist; sourceTree = SOURCE_ROOT; };
 		776C5A471388854400CE2D6C /* Bloodsplatter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bloodsplatter.png; sourceTree = "<group>"; };
 		776C5A4A1388855400CE2D6C /* Bloodsplatter-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bloodsplatter-hd.png"; sourceTree = "<group>"; };
@@ -898,6 +898,7 @@
 		7760AAC21380C38400D5B52D /* Non-Retina */ = {
 			isa = PBXGroup;
 			children = (
+				775BDDE51391B3B4006516A0 /* Weaponsheet.png */,
 				77C373FC13918A25000D950A /* RocketTrail.png */,
 				775068651391664400D07C47 /* Rocket.png */,
 				77141E861390937F003B5A64 /* Fire.png */,
@@ -911,7 +912,6 @@
 				7760AAC61380C38400D5B52D /* PlayerSheet.png */,
 				7760AAC71380C38400D5B52D /* Reloading.png */,
 				7760AAC81380C38400D5B52D /* Shell.png */,
-				7760AAC91380C38400D5B52D /* WeaponSpritesheet.png */,
 			);
 			name = "Non-Retina";
 			path = "Resources/Textures/Non-Retina";
@@ -933,7 +933,7 @@
 				7760AACF1380C38400D5B52D /* PlayerSheet-hd.png */,
 				7760AAD01380C38400D5B52D /* Reloading-hd.png */,
 				7760AAD11380C38400D5B52D /* Shell-hd.png */,
-				7760AAD21380C38400D5B52D /* WeaponSpritesheet-hd.png */,
+				775BDDE31391B2ED006516A0 /* Weaponsheet-hd.png */,
 			);
 			name = Retina;
 			path = Resources/Textures/Retina;
@@ -1056,14 +1056,12 @@
 				7760AAD61380C38400D5B52D /* PlayerSheet.png in Resources */,
 				7760AAD71380C38400D5B52D /* Reloading.png in Resources */,
 				7760AAD81380C38400D5B52D /* Shell.png in Resources */,
-				7760AAD91380C38400D5B52D /* WeaponSpritesheet.png in Resources */,
 				7760AADA1380C38400D5B52D /* Analog-hd.png in Resources */,
 				7760AADC1380C38400D5B52D /* Font-hd.png in Resources */,
 				7760AADD1380C38400D5B52D /* MuzzleFlash-hd.png in Resources */,
 				7760AADE1380C38400D5B52D /* PlayerSheet-hd.png in Resources */,
 				7760AADF1380C38400D5B52D /* Reloading-hd.png in Resources */,
 				7760AAE01380C38400D5B52D /* Shell-hd.png in Resources */,
-				7760AAE11380C38400D5B52D /* WeaponSpritesheet-hd.png in Resources */,
 				7760AAE31380C39C00D5B52D /* WeaponList.plist in Resources */,
 				77CB749713884C23000DFE89 /* Bullet.png in Resources */,
 				77CB749A13884C31000DFE89 /* Bullet-hd.png in Resources */,
@@ -1079,6 +1077,8 @@
 				775068661391664400D07C47 /* Rocket.png in Resources */,
 				77C373FE13918A25000D950A /* RocketTrail.png in Resources */,
 				77C373FF13918A25000D950A /* RocketTrail-hd.png in Resources */,
+				775BDDE41391B2ED006516A0 /* Weaponsheet-hd.png in Resources */,
+				775BDDE61391B3B4006516A0 /* Weaponsheet.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
