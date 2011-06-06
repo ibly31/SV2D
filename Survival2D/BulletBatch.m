@@ -10,6 +10,8 @@
 #import "ZombieBatch.h"
 #import "GameScene.h"
 
+#define BULLETSPEED 500
+
 @implementation BulletBatch
 @synthesize smgr;
 
@@ -103,7 +105,7 @@
     bullets[x].taken = YES;
     
     float rotInRads = CC_DEGREES_TO_RADIANS(90.0f - rotation);
-    bullets[x].bulletShape->body->v = ccp(500.0f * cosf(rotInRads), 500.0f * sinf(rotInRads));
+    bullets[x].bulletShape->body->v = ccp(BULLETSPEED * cosf(rotInRads), BULLETSPEED * sinf(rotInRads));
 
     [self updateBullets];
 }
@@ -135,6 +137,7 @@
     }
     
     bullets[whichBullet].penetration--;
+    bullets[whichBullet].damage /= 2;
     if(bullets[whichBullet].penetration == 0){
         [self destroyBullet: whichBullet];
     }

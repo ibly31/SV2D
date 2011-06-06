@@ -102,7 +102,7 @@ cpSpaceAlloc(void)
 
 #define DEFAULT_DIM_SIZE 100.0f
 #define DEFAULT_COUNT 1000
-#define DEFAULT_ITERATIONS 10
+#define DEFAULT_ITERATIONS 1
 #define DEFAULT_ELASTIC_ITERATIONS 0
 
 cpCollisionHandler defaultHandler = {0, 0, alwaysCollide, alwaysCollide, nothing, nothing, NULL};

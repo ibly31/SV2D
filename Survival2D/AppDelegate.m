@@ -86,7 +86,7 @@
 	[director setDeviceOrientation:kCCDeviceOrientationLandscapeLeft];
 #endif
 	
-	[director setAnimationInterval: 1.0f/40.0f];
+	[director setAnimationInterval: 1/60];
 	[director setDisplayFPS:YES];
 	
 	

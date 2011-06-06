@@ -4,19 +4,19 @@
 <array>
 	<dict>
 		<key>Damage</key>
-		<integer>50</integer>
+		<integer>34</integer>
 		<key>FlashPos</key>
-		<integer>2</integer>
+		<integer>6</integer>
 		<key>MaxAmmo</key>
-		<integer>500</integer>
+		<integer>30</integer>
 		<key>Name</key>
 		<string>Assault Rifle</string>
 		<key>OffsetY</key>
-		<integer>11</integer>
+		<integer>14</integer>
 		<key>Penetration</key>
 		<string>2</string>
 		<key>Recoil</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>ReloadTime</key>
 		<integer>3</integer>
 		<key>RPM</key>
@@ -28,7 +28,7 @@
 		<key>Damage</key>
 		<integer>20</integer>
 		<key>FlashPos</key>
-		<integer>0</integer>
+		<integer>6</integer>
 		<key>MaxAmmo</key>
 		<integer>10</integer>
 		<key>Name</key>
@@ -48,9 +48,31 @@
 	</dict>
 	<dict>
 		<key>Damage</key>
+		<integer>25</integer>
+		<key>FlashPos</key>
+		<integer>13</integer>
+		<key>MaxAmmo</key>
+		<integer>50</integer>
+		<key>Name</key>
+		<string>SMG</string>
+		<key>OffsetY</key>
+		<integer>10</integer>
+		<key>Penetration</key>
+		<string>1</string>
+		<key>Recoil</key>
+		<integer>1</integer>
+		<key>ReloadTime</key>
+		<integer>2</integer>
+		<key>RPM</key>
+		<integer>1300</integer>
+		<key>WeaponType</key>
+		<string>1</string>
+	</dict>
+	<dict>
+		<key>Damage</key>
 		<integer>20</integer>
 		<key>FlashPos</key>
-		<integer>-5</integer>
+		<integer>0</integer>
 		<key>MaxAmmo</key>
 		<integer>1000</integer>
 		<key>Name</key>
@@ -89,6 +111,28 @@
 		<integer>50</integer>
 		<key>WeaponType</key>
 		<string>4</string>
+	</dict>
+	<dict>
+		<key>Damage</key>
+		<integer>300</integer>
+		<key>FlashPos</key>
+		<integer>0</integer>
+		<key>MaxAmmo</key>
+		<integer>10</integer>
+		<key>Name</key>
+		<string>Sniper Rifle</string>
+		<key>OffsetY</key>
+		<integer>22</integer>
+		<key>Penetration</key>
+		<string>0</string>
+		<key>Recoil</key>
+		<integer>3</integer>
+		<key>ReloadTime</key>
+		<integer>4</integer>
+		<key>RPM</key>
+		<integer>50</integer>
+		<key>WeaponType</key>
+		<string>1</string>
 	</dict>
 </array>
 </plist>

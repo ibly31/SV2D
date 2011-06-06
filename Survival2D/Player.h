@@ -17,6 +17,7 @@
     
     SpaceManagerCocos2d *smgr;
     
+    int currentWeapon;
     Weapon *weapon;
     CCSprite *muzzleFlash;
     
@@ -53,7 +54,10 @@
 - (void)startShooting;
 - (void)shoot;
 - (void)stopShooting;
+- (void)scheduleToReload;
 - (void)reload;
+
+- (void)switchWeapons;
 
 - (BOOL)handleCollision:(CollisionMoment)moment arbiter:(cpArbiter*)arb space:(cpSpace*)space;
 - (void)processZombieHits;

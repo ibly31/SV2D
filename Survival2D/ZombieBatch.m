@@ -69,7 +69,6 @@
             }
         }
     }
-    [smgr applyLinearExplosionAt:start radius:radius maxForce:300];
     
     int numberOfShrapnels = (int)(CCRANDOM_0_1() * 10);
     float initialAngle = (CCRANDOM_0_1() * (360.0f / (float)numberOfShrapnels));
@@ -124,35 +123,35 @@
             [self zombieSetPosition:zombiePosition index:x];
             [self zombieSetRotation:90.0f + CC_RADIANS_TO_DEGREES(angleTowardsPlayer) index:x];
             
+            cpBodyActivate(shapeBody);/*
             if(!CGRectContainsPoint(CGRectMake(playerPosition.x - 248.0f, playerPosition.y - 168.0f, 480.0f, 320.0f), zombiePosition)){
                 cpBodySleep(shapeBody);
-                //cpBodyActivate(shapeBody);
             }else{
                 cpBodyActivate(shapeBody);
-            }
+            }*/
         }
     }
 }
 
 - (void)addNewZombieAt:(CGPoint)newZomb{
-    
     int numberAlive = [self numberZombiesAlive];
-    printf("\nNumber of Zombies Alive: %i", numberAlive);
-    
-    if(numberAlive <= MAXZOMBIES){
-        int x = [self nextOpenZombieSlot];
-        [self addChild: zombies[x].zombieSprite];
-        zombies[x].health = 100;
-        zombies[x].alive = YES;
-        zombies[x].speed = 45.0f;
-        zombies[x].zombieShape = [smgr addCircleAt:newZomb mass:1.0f radius:12.0f];
-        zombies[x].zombieShape->collision_type = 0;
-        [zombies[x].zombieSprite setOpacity: 255];
+    if(numberAlive < MAXZOMBIES){
+        printf("\nNumber of Zombies Alive: %i", numberAlive);
         
-        [self zombieSetPosition:newZomb index:x];
-        [self zombieSetRotation:0.0f index:x];
+        if(numberAlive <= MAXZOMBIES){
+            int x = [self nextOpenZombieSlot];
+            [self addChild: zombies[x].zombieSprite];
+            zombies[x].health = 100;
+            zombies[x].alive = YES;
+            zombies[x].speed = 45.0f;
+            zombies[x].zombieShape = [smgr addCircleAt:newZomb mass:1.0f radius:16.0f];
+            zombies[x].zombieShape->collision_type = 0;
+            [zombies[x].zombieSprite setOpacity: 255];
+            
+            [self zombieSetPosition:newZomb index:x];
+            [self zombieSetRotation:0.0f index:x];
+        }
     }
-    
 }
 
 - (int)whichZombie:(cpShape *)zombieShape{
@@ -183,13 +182,16 @@
 }
 
 - (void)zombieTakeDamage:(int)damage index:(int)index{
+    float rot = (CCRANDOM_0_1() * (2 * M_PI));
+    CGPoint splatPos = CGPointMake(zombies[index].position.x + 8 * cosf(rot), zombies[index].position.y + 8 * sinf(rot));
+    [(GameScene *)parent_ addNewBloodSplatterAt:splatPos withRotation: 90.0f - CC_RADIANS_TO_DEGREES(rot)];
+    
     zombies[index].health -= damage;
     if(zombies[index].health <= 0){
         [self destroyZombie: index];
         [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
         [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
         [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
-
     }
 }
 

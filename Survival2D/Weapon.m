@@ -16,7 +16,7 @@
     
     NSDictionary *weaponData = [[WeaponList instance] getDataForWeapon: w_name];
     int weaponNumber = [[WeaponList instance] getNumberForWeapon: w_name];
-    CGRect textureRect = CGRectMake((weaponNumber % 32) * 8, (int)(weaponNumber / 32), 8, 48);
+    CGRect textureRect = CGRectMake((weaponNumber % 8) * 8, (int)(weaponNumber / 8), 8, 48);
     
     self = [super initWithFile:@"Weaponsheet.png" rect:textureRect];
     if(self){

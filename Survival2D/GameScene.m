@@ -9,7 +9,6 @@
 #import "GameScene.h"
 
 #define CASINGOVERWRITE 1000
-#define BULLETSPEED 1000.0f
 
 @implementation GameScene
 @synthesize player;
@@ -18,8 +17,7 @@
 @synthesize bulletBatch;
 @synthesize rocketBatch;
 
-@synthesize backgroundColor;
-@synthesize secondBackgroundColor;
+@synthesize backgroundMap;
 
 @synthesize leftAnalogStick;
 @synthesize rightAnalogStick;
@@ -29,6 +27,8 @@
 @synthesize ammoLabel;
 @synthesize healthLabel;
 @synthesize reloadingSprite;
+@synthesize reloadButton;
+@synthesize switchWeaponButton;
 
 @synthesize casings;
 @synthesize bloodSplatters;
@@ -43,50 +43,57 @@
 	if(self){
         
         self.smgr = [[SpaceManagerCocos2d alloc] init];
-        [smgr addWindowContainmentWithFriction:0.8f elasticity:0.2f size:CGSizeMake(1024.0f, 1024.0f) inset:cpvzero radius: 1];
+        
+        [smgr addRectAt:ccp(-32, 512) mass:STATIC_MASS width:64.0f height:1024.0f rotation:0];
+        [smgr addRectAt:ccp(1056, 512) mass:STATIC_MASS width:64.0f height:1024.0f rotation:0];
+        [smgr addRectAt:ccp(512, -32) mass:STATIC_MASS width:1024.0f height:64.0f rotation:0];
+        [smgr addRectAt:ccp(512, 1056) mass:STATIC_MASS width:1024.0f height:64.0f rotation:0];
+        
         [smgr setGravity: cpv(0.0f, 0.0f)];
         [smgr start: 1.0f/60.0f];
         
-        self.secondBackgroundColor = [[CCLayerColor alloc] initWithColor: ccc4(50, 50, 50, 255) width: 1344 height: 1344];
-        [secondBackgroundColor setPosition: ccp(-240.0f, -160.0f)];
-        [self addChild: secondBackgroundColor];
+        [smgr addCircleAt:ccp(280,462) mass:STATIC_MASS radius:20];
+        [smgr addCircleAt:ccp(730, 462) mass:STATIC_MASS radius:20];
+        [smgr addRectAt:ccp(319,166) mass:STATIC_MASS width:184 height:134 rotation:0];
+        [smgr addRectAt:ccp(730,166) mass:STATIC_MASS width:184 height:134 rotation:0];
         
-        self.backgroundColor = [[CCLayerColor alloc] initWithColor: ccc4(100, 100, 100, 255) width:1024 height:1024];
-        [self addChild: backgroundColor];
+        self.backgroundMap = [[CCSprite alloc] initWithFile: @"ParkingLot.png"];
+        [backgroundMap setPosition: ccp(512,512)];
+        [self addChild: backgroundMap z:-1];
         
         self.casings = [[CCSpriteBatchNode alloc] initWithFile:@"Shell.png" capacity: CASINGOVERWRITE];
-        [self addChild: casings];
+        [self addChild: casings z:0];
         
         self.bulletBatch = [[BulletBatch alloc] initWithSpaceManager: smgr];
-        [self addChild: bulletBatch];
+        [self addChild: bulletBatch z:1];
         
         self.rocketTrails = [[CCSpriteBatchNode alloc] initWithFile:@"RocketTrail.png" capacity:MAXROCKETS];
-        [self addChild: rocketTrails];
+        [self addChild: rocketTrails z:2];
 
         self.rocketBatch = [[RocketBatch alloc] initWithSpaceManager: smgr trailBatch: rocketTrails];
-        [self addChild: rocketBatch];
+        [self addChild: rocketBatch z:3];
+        
+        self.bloodSplatters = [[CCSpriteBatchNode alloc] initWithFile:@"Bloodsplatter.png" capacity: 500];
+        [self addChild: bloodSplatters z:4];
         
         self.zombieBatch = [[ZombieBatch alloc] initWithSpaceManager: smgr];
-        [self addChild: zombieBatch];
-                        
-        self.bloodSplatters = [[CCSpriteBatchNode alloc] initWithFile:@"Bloodsplatter.png" capacity: 100];
-        [self addChild: bloodSplatters];
+        [self addChild: zombieBatch z:5];
         
 		self.player = [[Player alloc] initWithSpaceManager:smgr];
-        [self addChild: player];
+        [self addChild: player z:6];
         
         self.leftAnalogStick = [[CCSprite alloc] initWithFile: @"Analog.png"];
         [leftAnalogStick setPosition: ccp(74.0f, 74.0f)];
-        [self addChild: leftAnalogStick];
+        [self addChild: leftAnalogStick z:8];
         
         self.rightAnalogStick = [[CCSprite alloc] initWithFile: @"Analog.png"];
         [rightAnalogStick setPosition: ccp(404.0f, 74.0f)];
-        [self addChild: rightAnalogStick];
+        [self addChild: rightAnalogStick z:9];
         
         self.ammoLabel = [[[CCLabelAtlas alloc] initWithString:@"0/0" charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
         [ammoLabel setAnchorPoint: ccp(0.0f, 1.0f)];
         [ammoLabel setPosition: ccp(0.0f, 320.0f)];
-        [self addChild: ammoLabel];
+        [self addChild: ammoLabel z:10];
         [player updateAmmo];
         
         if([[CCDirector sharedDirector] contentScaleFactor] > 1){
@@ -98,26 +105,37 @@
         
         [healthLabel setAnchorPoint: ccp(1.0f, 1.0f)];
         [healthLabel setPosition: ccp(480.0f, 360.0f)];
-        [self addChild: healthLabel];
+        [self addChild: healthLabel z:11];
         [player updateHealth];
         
         self.reloadingSprite = [[CCSprite alloc] initWithFile: @"Reloading.png"];
         [reloadingSprite setAnchorPoint: ccp(0.0f, 1.0f)];
         [reloadingSprite setPosition: ccp(0.0f, 320.0f)];
         [reloadingSprite setOpacity: 0];
-        [self addChild: reloadingSprite];
+        [self addChild: reloadingSprite z:12];
+        
+        self.reloadButton = [[CCSprite alloc] initWithFile: @"ReloadButton.png"];
+        [reloadButton setAnchorPoint: ccp(0.5f, 1.0f)];
+        [reloadButton setPosition: ccp(192.0f, 320.0f)];
+        [self addChild: reloadButton z:13];
+        
+        self.switchWeaponButton = [[CCSprite alloc] initWithFile: @"SwitchWeaponButton.png"];
+        [switchWeaponButton setAnchorPoint: ccp(0.5f, 1.0f)];
+        [switchWeaponButton setPosition: ccp(288.0f, 320.0f)];
+        [self addChild: switchWeaponButton z: 14];
         
         self.damageIndicator = [[CCLayerColor alloc] initWithColor: ccc4(155, 0, 0, 50)];
         [damageIndicator setOpacity: 0];
         [damageIndicator setAnchorPoint: ccp(0.5f, 0.5f)];
-        [self addChild: damageIndicator];
+        [self addChild: damageIndicator z:15];
         
         self.inputLayer = [[InputLayer alloc] init];
-        [self addChild: inputLayer];
+        [self addChild: inputLayer z:16];
         
         [zombieBatch addNewZombieAt: ccp(752, 652)];
-        [zombieBatch addNewZombieAt: ccp(752, 652)];
-        [zombieBatch addNewZombieAt: ccp(752, 652)];
+        [zombieBatch addNewZombieAt: ccp(272, 652)];
+        [zombieBatch addNewZombieAt: ccp(272, 372)];
+        [zombieBatch addNewZombieAt: ccp(752, 372)];
     }
 	return self;
 }
@@ -128,7 +146,7 @@
     }
     CCParticleExplosion *explosion = [[CCParticleExplosion alloc] init];
     [explosion setPosition: start];
-    [self addChild: explosion];
+    [self addChild: explosion z:7];
     self.explosionToRemove = explosion;
     
     [self schedule:@selector(endExplosion) interval:2.5f];
@@ -150,6 +168,8 @@
     [rightAnalogStick setPosition: ccpAdd(centerOn, ccp(166.0f, -86.0f))];
     [leftAnalogStick setPosition: ccpAdd(centerOn, ccp(-166.0f, -86.f))];
     [damageIndicator setPosition: ccpAdd(centerOn, ccp(-240.0f, -160.0f))];
+    [reloadButton setPosition: ccpAdd(centerOn, ccp(-48.0f, 160.0f))];
+    [switchWeaponButton setPosition: ccpAdd(centerOn, ccp(48.0f, 160.0f))];
 }
 
 - (void)addNewBulletCasingsAt:(CGPoint)startPos endPos:(CGPoint)endPos startRot:(float)startRot{
@@ -181,12 +201,17 @@ float distance(CGPoint point1,CGPoint point2){
     return sqrt(dx*dx + dy*dy);
 };
 
-- (void)addNewBloodSplatterAt:(CGPoint)position withRotation:(float)rotation withDistance:(float)distance{ 
+- (void)addNewBloodSplatterAt:(CGPoint)position withRotation:(float)rotation{ 
     CCSprite *newSplatter = [[CCSprite alloc] initWithFile: @"Bloodsplatter.png"];
     [newSplatter setPosition: position];
     [newSplatter setAnchorPoint: ccp(0.5f, 0.0f)];
     [newSplatter setRotation: rotation];
-    [newSplatter runAction: [CCSequence actions:[CCFadeTo actionWithDuration:distance / BULLETSPEED opacity:100], [CCFadeTo actionWithDuration:0 opacity:0], [CCCallFunc actionWithTarget:self selector:@selector(removeBloodSplatter)], nil]];
+    [newSplatter setDisplayFrame: [CCSpriteFrame frameWithTexture: [newSplatter texture] rect:CGRectMake(0, 0, 16, 32)]];
+    CCAnimation *splat = [CCAnimation animationWithFrames:nil delay:.05f];
+    for(int x = 0; x < 8; x++){
+        [splat addFrame: [CCSpriteFrame frameWithTexture:[newSplatter texture] rect:CGRectMake(x * 16, 0, 16, 32)]];
+    }
+    [newSplatter runAction: [CCSequence actions:[CCAnimate actionWithAnimation: splat restoreOriginalFrame:NO],[CCFadeTo actionWithDuration:2.5f opacity:0] ,[CCCallFunc actionWithTarget:self selector:@selector(removeBloodSplatter)], nil]];
     [bloodSplatters addChild: newSplatter];
     [newSplatter release];
 }

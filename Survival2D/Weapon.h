@@ -21,7 +21,7 @@
     float delay;
     float recoil;
     
-    int weaponType; // 1 - regular, 2 - shotgun, 3 - flame, 4 - rochetlinigirie.
+    int weaponType; // 1 - regular, 2 - shotgun, 3 - flame, 4 - rocket launcher.
     
     int offset;
     int flashPos;

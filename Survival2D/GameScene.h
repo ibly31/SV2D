@@ -18,8 +18,7 @@
     Player *player;
     CCSprite *leftAnalogStick;
     CCSprite *rightAnalogStick;
-    CCLayerColor *backgroundColor;
-    CCLayerColor *secondBackgroundColor;
+    CCSprite *backgroundMap;
     
     InputLayer *inputLayer;
     ZombieBatch *zombieBatch;
@@ -28,6 +27,8 @@
     CCLabelAtlas *ammoLabel;
     CCLabelAtlas *healthLabel;
     CCSprite *reloadingSprite;
+    CCSprite *reloadButton;
+    CCSprite *switchWeaponButton;
     
     CCSpriteBatchNode *casings;
     int currentCasingNumber;
@@ -49,8 +50,7 @@
 @property (nonatomic, retain) BulletBatch *bulletBatch;
 @property (nonatomic, retain) RocketBatch *rocketBatch;
 
-@property (nonatomic, retain) CCLayerColor *backgroundColor;
-@property (nonatomic, retain) CCLayerColor *secondBackgroundColor;
+@property (nonatomic, retain) CCSprite *backgroundMap;
 
 @property (nonatomic, retain) CCSprite *leftAnalogStick;
 @property (nonatomic, retain) CCSprite *rightAnalogStick;
@@ -60,6 +60,8 @@
 @property (nonatomic, retain) CCLabelAtlas *ammoLabel;
 @property (nonatomic, retain) CCLabelAtlas *healthLabel;
 @property (nonatomic, retain) CCSprite *reloadingSprite;
+@property (nonatomic, retain) CCSprite *reloadButton;
+@property (nonatomic, retain) CCSprite *switchWeaponButton;
 
 @property (nonatomic, retain) CCSpriteBatchNode *casings;
 @property (nonatomic, retain) CCSpriteBatchNode *bloodSplatters;
@@ -72,7 +74,7 @@
 - (void)updateCameraToCenterOn:(CGPoint)centerOn;
 - (void)addNewBulletCasingsAt:(CGPoint)startPos endPos:(CGPoint)endPos startRot:(float)startRot;
 
-- (void)addNewBloodSplatterAt:(CGPoint)position withRotation:(float)rotation withDistance:(float)distance;
+- (void)addNewBloodSplatterAt:(CGPoint)position withRotation:(float)rotation;
 - (void)removeBloodSplatter;
 
 - (void)startExplosionAt:(CGPoint)start;

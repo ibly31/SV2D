@@ -54,7 +54,7 @@
         if(rockets[x].taken){
             cpBodyActivate(rockets[x].rocketShape->body);
             
-            rockets[x].speed += 0.1f;
+            rockets[x].speed += 0.05f;
             rockets[x].rocketShape->body->v = ccp(rockets[x].speed * 500.0f * cosf(rockets[x].rocketShape->body->a), rockets[x].speed * 500.0f * sinf(rockets[x].rocketShape->body->a));
             
             CGPoint pos = rockets[x].rocketShape->body->p;
@@ -116,7 +116,7 @@
 - (void)fireRocketFrom:(CGPoint)start withRotation:(float)rotation withDamage:(int)damage{
     int x = [self nextOpenRocketSlot];
     rockets[x].damage = damage;
-    rockets[x].speed = 0.1f;
+    rockets[x].speed = 0.05f;
     rockets[x].rocketShape = [smgr addRectAt:start mass:3.0f width:3 height:16 rotation:CC_DEGREES_TO_RADIANS(90.0f - rotation)];
     rockets[x].rocketShape->collision_type = 3;
     rockets[x].origin = start;

@@ -13,7 +13,7 @@
 @interface InputLayer : CCLayer {
     CGPoint leftAnalogStickLocation;
     CGPoint rightAnalogStickLocation;
-
+    
     CGPoint vel;
 }
 

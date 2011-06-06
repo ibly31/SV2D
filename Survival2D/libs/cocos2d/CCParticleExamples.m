@@ -113,7 +113,7 @@
 @implementation CCParticleFire
 -(id) init
 {
-	return [self initWithTotalParticles:150];
+	return [self initWithTotalParticles:100];
 }
 
 -(id) initWithTotalParticles:(int) p

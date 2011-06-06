@@ -9,7 +9,7 @@
 #import "cocos2d.h"
 #import "SpaceManagerCocos2d.h"
 
-#define MAXROCKETS 30
+#define MAXROCKETS 10
 
 typedef struct Rocket{
     CCSprite *rocketSprite;

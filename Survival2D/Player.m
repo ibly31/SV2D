@@ -27,8 +27,11 @@
         playerShape->collision_type = 1; //PLAYER_TYPE
         [smgr addCollisionCallbackBetweenType:1 otherType:0 target:self selector:@selector(handleCollision:arbiter:space:) moments:COLLISION_BEGIN, COLLISION_SEPARATE, nil];
         
+        currentWeapon = 0;
+        NSString *weaponTitle = [[NSArray arrayWithObjects:@"Assault Rifle", @"Shotgun", @"SMG", @"Flamethrower", @"Rocket Launcher", @"Sniper Rifle", nil] objectAtIndex: currentWeapon];
+        
         self.playerSprite = [[CCSprite alloc] initWithFile:@"PlayerSheet.png" rect:CGRectMake(0, 0, 64, 64)];
-        self.weapon = [[Weapon alloc] initWithName:@"Flamethrower"];
+        self.weapon = [[Weapon alloc] initWithName:weaponTitle];
         self.muzzleFlash = [[CCSprite alloc] initWithFile:@"MuzzleFlash.png"];
         [muzzleFlash setOpacity: 0];
         [muzzleFlash setAnchorPoint: ccp(0.5f, 0.0f)];
@@ -168,18 +171,40 @@
             [weapon runAction: [CCSequence actions:kickBack, kickForw, nil]];
         }
     }else if(result == 2 && !reloading){
-        reloading = YES;
-        [flameThrower setEmissionRate: 0.0f];
-        CCSprite *rel = [(GameScene *)parent_ reloadingSprite];
-        CCLabelAtlas *amm = [(GameScene *)parent_ ammoLabel];
-        
-        [rel setOpacity: 255];
-        [amm setOpacity: 0];
-        
-        [self schedule:@selector(reload) interval:[weapon getReloadTime]];
+        [self scheduleToReload];
     }
     
     [self updateAmmo];
+}
+
+- (void)switchWeapons{
+    [self removeChild:weapon cleanup:YES];
+    currentWeapon++;
+    if(currentWeapon == 6)
+        currentWeapon = 0;
+    NSString *weaponTitle = [[NSArray arrayWithObjects:@"Assault Rifle", @"Shotgun", @"SMG", @"Flamethrower", @"Rocket Launcher", @"Sniper Rifle", nil] objectAtIndex: currentWeapon];
+    self.weapon = [[Weapon alloc] initWithName: weaponTitle];
+    [self addChild: weapon];
+    [self syncPosition];
+    if([weaponTitle compare: @"Flamethrower"] == NSOrderedSame || [weaponTitle compare: @"Rocket Launcher"] == NSOrderedSame){
+        [self laserSetOn: NO];
+    }else{
+        [self laserSetOn: YES];
+    }
+    [self setRotation: [playerSprite rotation]];
+}
+
+- (void)scheduleToReload{
+    reloading = YES;
+    [flameThrower setEmissionRate: 0.0f];
+    CCSprite *rel = [(GameScene *)parent_ reloadingSprite];
+    CCLabelAtlas *amm = [(GameScene *)parent_ ammoLabel];
+    
+    [rel setOpacity: 255];
+    [amm setOpacity: 0];
+    
+    [self schedule:@selector(reload) interval:[weapon getReloadTime]];
+    
 }
 
 - (void)stopShooting{
@@ -215,6 +240,7 @@
     if(reloading){
         reloading = NO;
         [self unschedule: @selector(reload)];
+        int shotsLeftInOldMagazine = [weapon getCurrentMagazine];
         [weapon setMagazineCount: [weapon getMagazineCount] - 1];
         [weapon setCurrentMagazine: [weapon getMaxAmmo]];
         CCSprite *rel = [(GameScene *)parent_ reloadingSprite];

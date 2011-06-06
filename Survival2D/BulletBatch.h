@@ -9,7 +9,7 @@
 #import "cocos2d.h"
 #import "SpaceManagerCocos2d.h"
 
-#define MAXBULLETS 1000
+#define MAXBULLETS 200
 
 typedef struct Bullet{
     CCSprite *bulletSprite;

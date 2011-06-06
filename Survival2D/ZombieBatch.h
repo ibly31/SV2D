@@ -9,7 +9,7 @@
 #import "cocos2d.h"
 #import "SpaceManagerCocos2d.h"
 
-#define MAXZOMBIES 1000
+#define MAXZOMBIES 100
 
 typedef struct Zombie{
     CGPoint position;

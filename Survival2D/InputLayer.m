@@ -18,7 +18,7 @@
         self.isTouchEnabled = YES;
         leftAnalogStickLocation = ccp(74.0f, 74.0f);
         rightAnalogStickLocation = ccp(404.0f, 74.0f);
-                
+        
         vel = ccp(0,0);
         [self schedule: @selector(setLoop)];
     }
@@ -70,9 +70,14 @@
 	for(int x = 0; x < [touchArray count]; x++){
 		UITouch *touch = [touchArray objectAtIndex: x];
 		CGPoint location = [[CCDirector sharedDirector] convertToGL: [touch locationInView: touch.view]];
-        
-        [self doTouch: location];
-        
+                
+        if(CGRectContainsPoint(CGRectMake(160,296,64,24), location)){
+            [[(GameScene *)parent_ player] scheduleToReload];
+        }else if(CGRectContainsPoint(CGRectMake(256,296,64,24), location)){
+            [[(GameScene *)parent_ player] switchWeapons];
+        }else{
+            [self doTouch: location];
+        }
 	}
 }
 
