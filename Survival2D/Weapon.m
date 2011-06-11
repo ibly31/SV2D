@@ -21,7 +21,7 @@
     self = [super initWithFile:@"Weaponsheet.png" rect:textureRect];
     if(self){
         offset = [[weaponData objectForKey: @"OffsetY"] intValue];
-        [self setAnchorPoint: ccp(0.5f - (8 / self.contentSize.width), 0.5f - (offset / self.contentSize.height))];
+        [self setAnchorPoint: ccp(0.5f - (13 / self.contentSize.width), 0.5f - (offset / self.contentSize.height))];
         
         name = w_name;
         maxAmmo = [[weaponData objectForKey: @"MaxAmmo"] intValue];

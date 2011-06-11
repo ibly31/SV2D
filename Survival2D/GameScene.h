@@ -71,10 +71,12 @@
 
 @property (nonatomic, retain) SpaceManagerCocos2d *smgr;
 
+- (id)initWithMap:(int)map;
+
 - (void)updateCameraToCenterOn:(CGPoint)centerOn;
 - (void)addNewBulletCasingsAt:(CGPoint)startPos endPos:(CGPoint)endPos startRot:(float)startRot;
 
-- (void)addNewBloodSplatterAt:(CGPoint)position withRotation:(float)rotation;
+- (void)addNewBloodSplatterAt:(CGPoint)position withRotation:(float)rotation withColor:(ccColor3B)color;
 - (void)removeBloodSplatter;
 
 - (void)startExplosionAt:(CGPoint)start;

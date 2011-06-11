@@ -30,7 +30,7 @@
         currentWeapon = 0;
         NSString *weaponTitle = [[NSArray arrayWithObjects:@"Assault Rifle", @"Shotgun", @"SMG", @"Flamethrower", @"Rocket Launcher", @"Sniper Rifle", nil] objectAtIndex: currentWeapon];
         
-        self.playerSprite = [[CCSprite alloc] initWithFile:@"PlayerSheet.png" rect:CGRectMake(0, 0, 64, 64)];
+        self.playerSprite = [[CCSprite alloc] initWithFile:@"Playersheet.png" rect:CGRectMake(0, 0, 64, 64)];
         self.weapon = [[Weapon alloc] initWithName:weaponTitle];
         self.muzzleFlash = [[CCSprite alloc] initWithFile:@"MuzzleFlash.png"];
         [muzzleFlash setOpacity: 0];
@@ -203,8 +203,13 @@
     [rel setOpacity: 255];
     [amm setOpacity: 0];
     
+    CCAnimation *reloadAnimation = [CCAnimation animationWithFrames:nil delay:((float)[weapon getReloadTime]) / 16];
+    for(int x = 0; x < 16; x++){
+        CGRect frame = CGRectMake((x % 8) * 64, (x / 8) * 64, 64, 64);
+        [reloadAnimation addFrame:[CCSpriteFrame frameWithTexture:[playerSprite texture] rect:frame]];
+    }
+    [playerSprite runAction: [CCAnimate actionWithAnimation:reloadAnimation restoreOriginalFrame:NO]];
     [self schedule:@selector(reload) interval:[weapon getReloadTime]];
-    
 }
 
 - (void)stopShooting{
@@ -240,7 +245,7 @@
     if(reloading){
         reloading = NO;
         [self unschedule: @selector(reload)];
-        int shotsLeftInOldMagazine = [weapon getCurrentMagazine];
+        //int shotsLeftInOldMagazine = [weapon getCurrentMagazine];
         [weapon setMagazineCount: [weapon getMagazineCount] - 1];
         [weapon setCurrentMagazine: [weapon getMaxAmmo]];
         CCSprite *rel = [(GameScene *)parent_ reloadingSprite];

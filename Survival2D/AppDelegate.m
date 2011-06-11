@@ -10,7 +10,7 @@
 
 #import "AppDelegate.h"
 #import "GameConfig.h"
-#import "GameScene.h"
+#import "MainMenuScene.h"
 #import "RootViewController.h"
 
 @implementation AppDelegate
@@ -103,13 +103,16 @@
 	// You can change anytime.
 	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 
-	
 	// Removes the startup flicker
 	[self removeStartupFlicker];
 	
-    GameScene *gs = [[GameScene alloc] init];
+    MainMenuScene *mms = [[MainMenuScene alloc] init];
+	[[CCDirector sharedDirector] runWithScene: mms];
+    [mms release];
+    
+    /*GameScene *gs = [[GameScene alloc] init];
 	[[CCDirector sharedDirector] runWithScene: gs];
-    [gs release];
+    [gs release];*/
 }
 
 

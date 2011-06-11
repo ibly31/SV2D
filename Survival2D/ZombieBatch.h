@@ -21,6 +21,8 @@ typedef struct Zombie{
     
     cpShape *zombieShape;
     BOOL alive;
+    
+    int zombieType;
 }Zombie;
 
 @interface ZombieBatch : CCSpriteBatchNode {

@@ -40,8 +40,8 @@ enum {
 
 enum {
 	kZoomActionTag = 0xc0c05002,
+    kRotateActionTag = 0xc0c05003,
 };
-
 
 
 #pragma mark -
@@ -232,10 +232,14 @@ enum {
 	if(isEnabled_) {	
 		[super selected];
 		[self stopActionByTag:kZoomActionTag];
+        [self stopActionByTag:kRotateActionTag];
 		originalScale_ = self.scale;
 		CCAction *zoomAction = [CCScaleTo actionWithDuration:0.1f scale:originalScale_ * 1.2f];
 		zoomAction.tag = kZoomActionTag;
 		[self runAction:zoomAction];
+        CCAction *rotateAction = [CCRotateTo actionWithDuration:0.1f angle:5];
+        rotateAction.tag = kRotateActionTag;
+        [self runAction: rotateAction];
 	}
 }
 
@@ -245,9 +249,13 @@ enum {
 	if(isEnabled_) {
 		[super unselected];
 		[self stopActionByTag:kZoomActionTag];
+        [self stopActionByTag:kRotateActionTag];
 		CCAction *zoomAction = [CCScaleTo actionWithDuration:0.1f scale:originalScale_];
 		zoomAction.tag = kZoomActionTag;
 		[self runAction:zoomAction];
+        CCAction *rotateAction = [CCRotateTo actionWithDuration:0.1f angle:0];
+        rotateAction.tag = kRotateActionTag;
+        [self runAction: rotateAction];
 	}
 }
 
@@ -509,6 +517,14 @@ enum {
 -(void) selected
 {
 	[super selected];
+    [self stopActionByTag:kZoomActionTag];
+    [self stopActionByTag:kRotateActionTag];
+    CCAction *zoomAction = [CCScaleTo actionWithDuration:0.1f scale:1.2f];
+    zoomAction.tag = kZoomActionTag;
+    [self runAction:zoomAction];
+    CCAction *rotateAction = [CCRotateTo actionWithDuration:0.1f angle:5];
+    rotateAction.tag = kRotateActionTag;
+    [self runAction: rotateAction];
 
 	if( selectedImage_ ) {
 		[normalImage_ setVisible:NO];
@@ -526,6 +542,15 @@ enum {
 -(void) unselected
 {
 	[super unselected];
+    [self stopActionByTag:kZoomActionTag];
+    [self stopActionByTag:kRotateActionTag];
+    CCAction *zoomAction = [CCScaleTo actionWithDuration:0.1f scale:1.0f];
+    zoomAction.tag = kZoomActionTag;
+    [self runAction:zoomAction];
+    CCAction *rotateAction = [CCRotateTo actionWithDuration:0.1f angle:0];
+    rotateAction.tag = kRotateActionTag;
+    [self runAction: rotateAction];
+    
 	[normalImage_ setVisible:YES];
 	[selectedImage_ setVisible:NO];
 	[disabledImage_ setVisible:NO];

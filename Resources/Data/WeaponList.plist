@@ -12,13 +12,13 @@
 		<key>Name</key>
 		<string>Assault Rifle</string>
 		<key>OffsetY</key>
-		<integer>14</integer>
+		<integer>10</integer>
 		<key>Penetration</key>
 		<string>2</string>
 		<key>Recoil</key>
 		<integer>0</integer>
 		<key>ReloadTime</key>
-		<integer>3</integer>
+		<real>1.5</real>
 		<key>RPM</key>
 		<integer>900</integer>
 		<key>WeaponType</key>
@@ -34,7 +34,7 @@
 		<key>Name</key>
 		<string>Shotgun</string>
 		<key>OffsetY</key>
-		<integer>16</integer>
+		<integer>10</integer>
 		<key>Penetration</key>
 		<string>2</string>
 		<key>Recoil</key>
@@ -56,7 +56,7 @@
 		<key>Name</key>
 		<string>SMG</string>
 		<key>OffsetY</key>
-		<integer>10</integer>
+		<integer>6</integer>
 		<key>Penetration</key>
 		<string>1</string>
 		<key>Recoil</key>
@@ -74,11 +74,11 @@
 		<key>FlashPos</key>
 		<integer>0</integer>
 		<key>MaxAmmo</key>
-		<integer>1000</integer>
+		<integer>300</integer>
 		<key>Name</key>
 		<string>Flamethrower</string>
 		<key>OffsetY</key>
-		<integer>16</integer>
+		<integer>12</integer>
 		<key>Penetration</key>
 		<string>0</string>
 		<key>Recoil</key>
@@ -100,7 +100,7 @@
 		<key>Name</key>
 		<string>Rocket Launcher</string>
 		<key>OffsetY</key>
-		<integer>14</integer>
+		<integer>10</integer>
 		<key>Penetration</key>
 		<string>0</string>
 		<key>Recoil</key>
@@ -114,7 +114,7 @@
 	</dict>
 	<dict>
 		<key>Damage</key>
-		<integer>300</integer>
+		<integer>10000</integer>
 		<key>FlashPos</key>
 		<integer>0</integer>
 		<key>MaxAmmo</key>
@@ -122,7 +122,7 @@
 		<key>Name</key>
 		<string>Sniper Rifle</string>
 		<key>OffsetY</key>
-		<integer>22</integer>
+		<integer>18</integer>
 		<key>Penetration</key>
 		<string>0</string>
 		<key>Recoil</key>

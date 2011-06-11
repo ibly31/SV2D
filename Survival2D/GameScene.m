@@ -38,26 +38,30 @@
 
 @synthesize smgr;
 
--(id)init{
+-(id)initWithMap:(int)map{
     self = [super init];
 	if(self){
         
         self.smgr = [[SpaceManagerCocos2d alloc] init];
         
-        [smgr addRectAt:ccp(-32, 512) mass:STATIC_MASS width:64.0f height:1024.0f rotation:0];
-        [smgr addRectAt:ccp(1056, 512) mass:STATIC_MASS width:64.0f height:1024.0f rotation:0];
-        [smgr addRectAt:ccp(512, -32) mass:STATIC_MASS width:1024.0f height:64.0f rotation:0];
-        [smgr addRectAt:ccp(512, 1056) mass:STATIC_MASS width:1024.0f height:64.0f rotation:0];
+        if(map == 0){
+            [smgr addRectAt:ccp(-32, 512) mass:STATIC_MASS width:64.0f height:1024.0f rotation:0];
+            [smgr addRectAt:ccp(1056, 512) mass:STATIC_MASS width:64.0f height:1024.0f rotation:0];
+            [smgr addRectAt:ccp(512, -32) mass:STATIC_MASS width:1024.0f height:64.0f rotation:0];
+            [smgr addRectAt:ccp(512, 1056) mass:STATIC_MASS width:1024.0f height:64.0f rotation:0];
+            
+            [smgr setGravity: cpv(0.0f, 0.0f)];
+            [smgr start: 1.0f/60.0f];
+            
+            [smgr addCircleAt:ccp(280,462) mass:STATIC_MASS radius:20];
+            [smgr addCircleAt:ccp(730, 462) mass:STATIC_MASS radius:20];
+            [smgr addRectAt:ccp(319,166) mass:STATIC_MASS width:184 height:134 rotation:0];
+            [smgr addRectAt:ccp(730,166) mass:STATIC_MASS width:184 height:134 rotation:0];
+            self.backgroundMap = [[CCSprite alloc] initWithFile: @"ParkingLot.png"];
+        }else{
+            self.backgroundMap = [[CCSprite alloc] initWithFile: @"ParkingLot.png"];
+        }
         
-        [smgr setGravity: cpv(0.0f, 0.0f)];
-        [smgr start: 1.0f/60.0f];
-        
-        [smgr addCircleAt:ccp(280,462) mass:STATIC_MASS radius:20];
-        [smgr addCircleAt:ccp(730, 462) mass:STATIC_MASS radius:20];
-        [smgr addRectAt:ccp(319,166) mass:STATIC_MASS width:184 height:134 rotation:0];
-        [smgr addRectAt:ccp(730,166) mass:STATIC_MASS width:184 height:134 rotation:0];
-        
-        self.backgroundMap = [[CCSprite alloc] initWithFile: @"ParkingLot.png"];
         [backgroundMap setPosition: ccp(512,512)];
         [self addChild: backgroundMap z:-1];
         
@@ -132,10 +136,12 @@
         self.inputLayer = [[InputLayer alloc] init];
         [self addChild: inputLayer z:16];
         
-        [zombieBatch addNewZombieAt: ccp(752, 652)];
+        /*[zombieBatch addNewZombieAt: ccp(752, 652)];
         [zombieBatch addNewZombieAt: ccp(272, 652)];
         [zombieBatch addNewZombieAt: ccp(272, 372)];
-        [zombieBatch addNewZombieAt: ccp(752, 372)];
+        [zombieBatch addNewZombieAt: ccp(752, 372)];*/
+        [zombieBatch addNewZombieAt: ccp(1024, 1024)];
+        
     }
 	return self;
 }
@@ -201,13 +207,15 @@ float distance(CGPoint point1,CGPoint point2){
     return sqrt(dx*dx + dy*dy);
 };
 
-- (void)addNewBloodSplatterAt:(CGPoint)position withRotation:(float)rotation{ 
+- (void)addNewBloodSplatterAt:(CGPoint)position withRotation:(float)rotation withColor:(ccColor3B)color{ 
     CCSprite *newSplatter = [[CCSprite alloc] initWithFile: @"Bloodsplatter.png"];
     [newSplatter setPosition: position];
     [newSplatter setAnchorPoint: ccp(0.5f, 0.0f)];
     [newSplatter setRotation: rotation];
+    [newSplatter setColor: color];
+    [newSplatter setScaleY: CCRANDOM_MINUS1_1() * 0.5f + 1.0f];
     [newSplatter setDisplayFrame: [CCSpriteFrame frameWithTexture: [newSplatter texture] rect:CGRectMake(0, 0, 16, 32)]];
-    CCAnimation *splat = [CCAnimation animationWithFrames:nil delay:.05f];
+    CCAnimation *splat = [CCAnimation animationWithFrames:nil delay:CCRANDOM_0_1() * .015f + .03f];
     for(int x = 0; x < 8; x++){
         [splat addFrame: [CCSpriteFrame frameWithTexture:[newSplatter texture] rect:CGRectMake(x * 16, 0, 16, 32)]];
     }
@@ -227,7 +235,47 @@ float distance(CGPoint point1,CGPoint point2){
 }
 
 - (void)dealloc{
-	
+    [self removeChild:player cleanup:NO];
+    [self removeChild:inputLayer cleanup:NO];
+    [self removeChild:zombieBatch cleanup:NO];
+    [self removeChild:bulletBatch cleanup:NO];
+    [self removeChild:rocketBatch cleanup:NO];
+    [self removeChild:backgroundMap cleanup:NO];
+    [self removeChild:leftAnalogStick cleanup:NO];
+    [self removeChild:rightAnalogStick cleanup:NO];
+    [self removeChild:damageIndicator cleanup:NO];
+    [self removeChild:ammoLabel cleanup:NO];
+    [self removeChild:healthLabel cleanup:NO];
+    [self removeChild:reloadingSprite cleanup:NO];
+    [self removeChild:reloadButton cleanup:NO];
+    [self removeChild:switchWeaponButton cleanup:NO];
+    [self removeChild:casings cleanup:NO];
+    [self removeChild:bloodSplatters cleanup:NO];
+    [self removeChild:rocketTrails cleanup:NO];
+    
+    [player release];
+    [inputLayer release];
+    [zombieBatch release];
+    [bulletBatch release];
+    [rocketBatch release];
+    [backgroundMap release];
+    [leftAnalogStick release];
+    [rightAnalogStick release];
+    [damageIndicator release];
+    [ammoLabel release];
+    [healthLabel release];
+    [reloadingSprite release];
+    [reloadButton release];
+    [switchWeaponButton release];
+    [casings release];
+    [bloodSplatters release];
+    [rocketTrails release];
+    
+    if(explosionToRemove != nil && [[self children] containsObject: explosionToRemove]){
+        [self removeChild:explosionToRemove cleanup:NO];
+        [explosionToRemove release];
+    }
+
 	[super dealloc];
 }
 
