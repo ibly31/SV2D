@@ -31,6 +31,8 @@ typedef struct Zombie{
     CCTexture2D *zombieTexture;
     SpaceManagerCocos2d *smgr;
     
+    BOOL frozen;
+    
     CGPoint playerPosition;
 }
 
@@ -42,6 +44,9 @@ float distance(CGPoint point1,CGPoint point2);
 - (id)initWithSpaceManager:(SpaceManagerCocos2d *)spacemgr;
 
 - (int)numberZombiesAlive;
+
+- (void)freezeZombies;
+- (void)unfreezeZombies;
 
 - (void)addNewZombieAt:(CGPoint)newZomb;
 - (void)updateZombies;

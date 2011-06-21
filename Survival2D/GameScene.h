@@ -13,6 +13,7 @@
 #import "ZombieBatch.h"
 #import "BulletBatch.h"
 #import "RocketBatch.h"
+#import "PowerupBatch.h"
 
 @interface GameScene : CCScene{
     Player *player;
@@ -22,6 +23,7 @@
     
     InputLayer *inputLayer;
     ZombieBatch *zombieBatch;
+    PowerupBatch *powerupBatch;
     CCLayerColor *damageIndicator;
     
     CCLabelAtlas *ammoLabel;
@@ -47,6 +49,7 @@
 @property (nonatomic, retain) Player *player;
 @property (nonatomic, retain) InputLayer *inputLayer;
 @property (nonatomic, retain) ZombieBatch *zombieBatch;
+@property (nonatomic, retain) PowerupBatch *powerupBatch;
 @property (nonatomic, retain) BulletBatch *bulletBatch;
 @property (nonatomic, retain) RocketBatch *rocketBatch;
 

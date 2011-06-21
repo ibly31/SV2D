@@ -10,6 +10,7 @@
 #import "GameScene.h"
 
 @implementation Player
+@synthesize feetSprite;
 @synthesize playerSprite;
 @synthesize weapon;
 @synthesize muzzleFlash;
@@ -30,6 +31,7 @@
         currentWeapon = 0;
         NSString *weaponTitle = [[NSArray arrayWithObjects:@"Assault Rifle", @"Shotgun", @"SMG", @"Flamethrower", @"Rocket Launcher", @"Sniper Rifle", nil] objectAtIndex: currentWeapon];
         
+        self.feetSprite = [[CCSprite alloc] initWithFile:@"Playersheet.png" rect:CGRectMake(0, 448, 64, 64)];
         self.playerSprite = [[CCSprite alloc] initWithFile:@"Playersheet.png" rect:CGRectMake(0, 0, 64, 64)];
         self.weapon = [[Weapon alloc] initWithName:weaponTitle];
         self.muzzleFlash = [[CCSprite alloc] initWithFile:@"MuzzleFlash.png"];
@@ -45,6 +47,7 @@
         
         [self laserSetOn: YES];
         
+        [self addChild: feetSprite];
         [self addChild: playerSprite];
         [self addChild: laser];
         [self addChild: weapon];
@@ -52,10 +55,27 @@
         [self addChild: flameThrower];
                 
         health = 100;
-        armor = 100;
         speed = 40.0f;
         currentRecoil = 0.0f;
         
+        for(int x = 0; x < MAXPUPS; x++){
+            pups[x].type = -1;
+            pups[x].life = 0.0f;
+            pups[x].active = NO;
+        }
+        
+        CCAnimation *walkAnimation = [CCAnimation animationWithFrames:nil delay:3.0f / 32.0f];
+        for(int x = 48; x < 64; x++){
+            CGRect frame = CGRectMake((x % 8) * 64, (x / 8) * 64, 64, 64);
+            [walkAnimation addFrame:[CCSpriteFrame frameWithTexture:[feetSprite texture] rect:frame]];
+        }
+        for(int x = 64; x > 48; x--){
+            CGRect frame = CGRectMake((x % 8) * 64, (x / 8) * 64, 64, 64);
+            [walkAnimation addFrame:[CCSpriteFrame frameWithTexture:[feetSprite texture] rect:frame]];
+        }
+        [feetSprite runAction: [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:walkAnimation restoreOriginalFrame:NO]]];
+        
+        [self scheduleUpdate];
         [self syncPosition];
         [self schedule:@selector(syncPosition) interval:1.0f / 60.0f];
         
@@ -74,7 +94,6 @@
             [laserAnimation addFrame: [CCSpriteFrame frameWithTexture:[laser texture] rect: frame]];
         }
         [laser runAction: [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation: laserAnimation]]];
-
     }else{
         [laser setOpacity: 0];
         [laser stopAllActions];
@@ -126,7 +145,6 @@
             if([weapon getWeaponType] != 4){
                 [(GameScene *)parent_ addNewBulletCasingsAt:startPos endPos:endPos startRot:[playerSprite rotation]];
             }
-            
             [muzzleFlash stopAllActions];
             [muzzleFlash setOpacity: 255];
             [muzzleFlash setPosition: [weapon convertToWorldSpace: ccp(weapon.contentSize.width / 2, weapon.contentSize.height - [weapon getFlashPos])]];
@@ -177,6 +195,97 @@
     [self updateAmmo];
 }
 
+-(void)update:(ccTime)dt{
+    printf("\nPups: ");
+    for(int x = 0; x < MAXPUPS; x++){
+        if(pups[x].active){
+            printf("[%i]", pups[x].type);
+            pups[x].life -= dt;
+            if(pups[x].life < 0){
+                [self undoPup: x];
+            }
+        }else{
+            printf("[ ]");
+        }
+    }
+    printf("\n");
+}
+
+- (void)usePup:(int)ptype{
+    float pupLife;
+    switch(ptype){
+        case PUP_STRAWBERRY:
+            [[(GameScene *)parent_ zombieBatch] freezeZombies];
+            pupLife = 10.0f;
+            break;
+        case PUP_APPLE:
+            pupLife = 10.0f;
+            health += 20.0f;
+            if(health > 100)
+                health = 100;
+            [self updateHealth];
+            break;
+        case PUP_ORANGE:
+            pupLife = 10.0f;
+            break;
+        case PUP_BANANA:
+            speed += 20.0f;
+            pupLife = 10.0f;
+            break;
+        case PUP_GRAPES:
+            pupLife = 10.0f;
+            break;
+        default:
+            pupLife = 0.0f;
+            break;
+    }
+    
+    BOOL worked = NO;
+    for(int x = 0; x < MAXPUPS; x++){
+        if(!pups[x].active){
+            worked = YES;
+            pups[x].type = ptype;
+            pups[x].life = pupLife;
+            pups[x].active = YES;
+            break;
+        }
+    }
+    if(!worked){
+        int currentLowestLife = 0;
+        for(int x = 0; x < MAXPUPS; x++){
+            if(pups[x].life < pups[currentLowestLife].life){
+                currentLowestLife = x;
+            }
+        }
+        [self undoPup: currentLowestLife];
+        pups[currentLowestLife].active = YES;
+        pups[currentLowestLife].type = ptype;
+        pups[currentLowestLife].life = pupLife;
+    }
+}
+
+- (void)undoPup:(int)index{
+    switch(pups[index].type){
+        case PUP_STRAWBERRY:
+            [[(GameScene *)parent_ zombieBatch] unfreezeZombies];
+            break;
+        case PUP_APPLE:
+            break;
+        case PUP_ORANGE:
+            break;
+        case PUP_BANANA:
+            speed -= 20.0f;
+            break;
+        case PUP_GRAPES:
+            break;
+        default:
+            break;
+    }
+    pups[index].active = NO;
+    pups[index].type = -1;
+    pups[index].life = 0.0f;
+}
+
 - (void)switchWeapons{
     [self removeChild:weapon cleanup:YES];
     currentWeapon++;
@@ -191,7 +300,15 @@
     }else{
         [self laserSetOn: YES];
     }
+    [self updateAmmo];
     [self setRotation: [playerSprite rotation]];
+    
+    CCAnimation *switchAnimation = [CCAnimation animationWithFrames:nil delay:0.5f / 16.0f];
+    for(int x = 32; x < 48; x++){
+        CGRect frame = CGRectMake((x % 8) * 64, (x / 8) * 64, 64, 64);
+        [switchAnimation addFrame:[CCSpriteFrame frameWithTexture:[playerSprite texture] rect:frame]];
+    }
+    [playerSprite runAction: [CCAnimate actionWithAnimation:switchAnimation restoreOriginalFrame:NO]];
 }
 
 - (void)scheduleToReload{
@@ -202,9 +319,9 @@
     
     [rel setOpacity: 255];
     [amm setOpacity: 0];
-    
-    CCAnimation *reloadAnimation = [CCAnimation animationWithFrames:nil delay:((float)[weapon getReloadTime]) / 16];
-    for(int x = 0; x < 16; x++){
+        
+    CCAnimation *reloadAnimation = [CCAnimation animationWithFrames:nil delay:1.5f / 32.0f];
+    for(int x = 0; x < 32; x++){
         CGRect frame = CGRectMake((x % 8) * 64, (x / 8) * 64, 64, 64);
         [reloadAnimation addFrame:[CCSpriteFrame frameWithTexture:[playerSprite texture] rect:frame]];
     }
@@ -221,6 +338,7 @@
 }
 
 - (void)syncPosition{
+    [feetSprite setPosition: playerShape->body->p];
     [playerSprite setPosition: playerShape->body->p];
     [weapon setPosition: playerShape->body->p];
     [laser setPosition: [weapon convertToWorldSpace: ccp(weapon.contentSize.width / 2, weapon.contentSize.height - [weapon getFlashPos])]];
@@ -235,6 +353,7 @@
 }
 
 - (void)setRotation:(float)rot{
+    [feetSprite setRotation: rot];
     [laser setRotation: rot];
     [playerSprite setRotation: rot];
     [weapon setRotation: rot];
@@ -259,18 +378,12 @@
 }
 
 - (void)takeDamage:(int)damage{
-    if(health > 0 || armor > 0){
-        if(armor > 0){
-            health -= damage * .25f;
-            armor -= damage * .75f;
+    if(health > 0){
+        health -= damage;
+        if(health > 0){
             [(GameScene *)parent_ flashDamageIndicator:health];
         }else{
-            health -= damage;
-            if(health > 0){
-                [(GameScene *)parent_ flashDamageIndicator:health];
-            }else{
-                health = 0;
-            }
+            
         }
     }
     [self updateHealth];
@@ -278,12 +391,7 @@
 
 - (void)updateHealth{
     CCLabelAtlas *healthLabel = [(GameScene *)parent_ healthLabel];
-    if(armor > 0){
-        [healthLabel setString: [NSString stringWithFormat: @",%i -%i", armor, health]];
-    }else{
-        [healthLabel setString: [NSString stringWithFormat: @"-%i", health]];
-    }
-    
+    [healthLabel setString: [NSString stringWithFormat: @"-%i", health]];
 }
 
 - (void)updateAmmo{

@@ -16,7 +16,7 @@
 @synthesize smgr;
 
 - (id)initWithSpaceManager:(SpaceManagerCocos2d *)spacemgr{
-    self.zombieTexture = [[CCTextureCache sharedTextureCache] addImage: @"Zombiesheet.png"];
+    self.zombieTexture = [[CCTextureCache sharedTextureCache] addImage: @"Foodsheet.png"];
     self = [super initWithTexture:zombieTexture capacity:MAXZOMBIES];
     if(self){
         self.smgr = spacemgr;
@@ -35,6 +35,8 @@
             
             [zombieSprite setDisplayFrame: [CCSpriteFrame frameWithTexture:zombieTexture rect:CGRectMake(0, 0, 32, 32)]];
         }
+        
+        frozen = NO;
         
         playerPosition = ccp(512.0f, 512.0f);
         [self schedule:@selector(updateZombies) interval:1.0f/60.0f];
@@ -60,6 +62,13 @@
             }
         }
     }
+}
+
+- (void)freezeZombies{
+    frozen = YES;
+}
+- (void)unfreezeZombies{
+    frozen = NO;
 }
 
 - (void)explosionAt:(CGPoint)start withRadius:(float)radius withDamage:(int)damage{
@@ -120,18 +129,17 @@
             float angleTowardsPlayer = atan2f(zombiePosition.y - playerPosition.y, playerPosition.x - zombiePosition.x);
             CGPoint force = CGPointMake(zombies[x].speed * cosf(angleTowardsPlayer), -zombies[x].speed * sinf(angleTowardsPlayer));
             
-            shapeBody->v = cpv(force.x, force.y);
+            if(!frozen){
+                shapeBody->v = cpv(force.x, force.y);
+            }else{
+                shapeBody->v = cpv(0,0);
+            }
             
             [self zombieSetPosition:zombiePosition index:x];
             [self zombieSetRotation:0 index:x];
-            //[self zombieSetRotation:90.0f + CC_RADIANS_TO_DEGREES(angleTowardsPlayer) index:x];
             
-            cpBodyActivate(shapeBody);/*
-            if(!CGRectContainsPoint(CGRectMake(playerPosition.x - 248.0f, playerPosition.y - 168.0f, 480.0f, 320.0f), zombiePosition)){
-                cpBodySleep(shapeBody);
-            }else{
-                cpBodyActivate(shapeBody);
-            }*/
+            cpBodyActivate(shapeBody);
+            
         }
     }
 }
@@ -147,7 +155,7 @@
             zombies[x].health = 100;
             zombies[x].alive = YES;
             zombies[x].speed = 45.0f;
-            zombies[x].zombieType = (int)(CCRANDOM_0_1() * 5);
+            zombies[x].zombieType = (int)(CCRANDOM_0_1() * 7);
             zombies[x].zombieShape = [smgr addCircleAt:newZomb mass:1.0f radius:16.0f];
             zombies[x].zombieShape->collision_type = 0;
             [zombies[x].zombieSprite setOpacity: 255];
@@ -191,15 +199,19 @@
     CGPoint splatPos = CGPointMake(zombies[index].position.x + 8 * cosf(rot), zombies[index].position.y + 8 * sinf(rot));
     ccColor3B color;
     if(zombies[index].zombieType == 0){
-        color = ccWHITE;
+        color = ccc3(136, 70, 20);
     }else if(zombies[index].zombieType == 1){
-        color = ccYELLOW;
+        color = ccORANGE;
     }else if(zombies[index].zombieType == 2){
-        color = ccRED;
+        color = ccYELLOW;
     }else if(zombies[index].zombieType == 3){
-        color = ccBLUE;
-    }else if(zombies[index].zombieType == 4){
         color = ccRED;
+    }else if(zombies[index].zombieType == 4){
+        color = ccBLUE;
+    }else if(zombies[index].zombieType == 5){
+        color = ccRED;
+    }else if(zombies[index].zombieType == 6){
+        color = ccWHITE;
     }
     
     [(GameScene *)parent_ addNewBloodSplatterAt:splatPos withRotation: 90.0f - CC_RADIANS_TO_DEGREES(rot) withColor:color];

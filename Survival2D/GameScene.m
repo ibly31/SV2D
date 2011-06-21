@@ -14,6 +14,7 @@
 @synthesize player;
 @synthesize inputLayer;
 @synthesize zombieBatch;
+@synthesize powerupBatch;
 @synthesize bulletBatch;
 @synthesize rocketBatch;
 
@@ -57,9 +58,9 @@
             [smgr addCircleAt:ccp(730, 462) mass:STATIC_MASS radius:20];
             [smgr addRectAt:ccp(319,166) mass:STATIC_MASS width:184 height:134 rotation:0];
             [smgr addRectAt:ccp(730,166) mass:STATIC_MASS width:184 height:134 rotation:0];
-            self.backgroundMap = [[CCSprite alloc] initWithFile: @"ParkingLot.png"];
+            self.backgroundMap = [[CCSprite alloc] initWithFile: @"Map_ParkingLot.png"];
         }else{
-            self.backgroundMap = [[CCSprite alloc] initWithFile: @"ParkingLot.png"];
+            self.backgroundMap = [[CCSprite alloc] initWithFile: @"Map_ParkingLot.png"];
         }
         
         [backgroundMap setPosition: ccp(512,512)];
@@ -84,20 +85,23 @@
         [self addChild: zombieBatch z:5];
         
 		self.player = [[Player alloc] initWithSpaceManager:smgr];
-        [self addChild: player z:6];
+        self.powerupBatch = [[PowerupBatch alloc] initWithSpaceManager: smgr withPlayer: player];
+
+        [self addChild: powerupBatch z:6];
+        [self addChild: player z:7];
         
         self.leftAnalogStick = [[CCSprite alloc] initWithFile: @"Analog.png"];
         [leftAnalogStick setPosition: ccp(74.0f, 74.0f)];
-        [self addChild: leftAnalogStick z:8];
+        [self addChild: leftAnalogStick z:9];
         
         self.rightAnalogStick = [[CCSprite alloc] initWithFile: @"Analog.png"];
         [rightAnalogStick setPosition: ccp(404.0f, 74.0f)];
-        [self addChild: rightAnalogStick z:9];
+        [self addChild: rightAnalogStick z:10];
         
         self.ammoLabel = [[[CCLabelAtlas alloc] initWithString:@"0/0" charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
         [ammoLabel setAnchorPoint: ccp(0.0f, 1.0f)];
         [ammoLabel setPosition: ccp(0.0f, 320.0f)];
-        [self addChild: ammoLabel z:10];
+        [self addChild: ammoLabel z:11];
         [player updateAmmo];
         
         if([[CCDirector sharedDirector] contentScaleFactor] > 1){
@@ -109,37 +113,37 @@
         
         [healthLabel setAnchorPoint: ccp(1.0f, 1.0f)];
         [healthLabel setPosition: ccp(480.0f, 360.0f)];
-        [self addChild: healthLabel z:11];
+        [self addChild: healthLabel z:12];
         [player updateHealth];
         
         self.reloadingSprite = [[CCSprite alloc] initWithFile: @"Reloading.png"];
         [reloadingSprite setAnchorPoint: ccp(0.0f, 1.0f)];
         [reloadingSprite setPosition: ccp(0.0f, 320.0f)];
         [reloadingSprite setOpacity: 0];
-        [self addChild: reloadingSprite z:12];
+        [self addChild: reloadingSprite z:13];
         
         self.reloadButton = [[CCSprite alloc] initWithFile: @"ReloadButton.png"];
         [reloadButton setAnchorPoint: ccp(0.5f, 1.0f)];
         [reloadButton setPosition: ccp(192.0f, 320.0f)];
-        [self addChild: reloadButton z:13];
+        [self addChild: reloadButton z:14];
         
         self.switchWeaponButton = [[CCSprite alloc] initWithFile: @"SwitchWeaponButton.png"];
         [switchWeaponButton setAnchorPoint: ccp(0.5f, 1.0f)];
         [switchWeaponButton setPosition: ccp(288.0f, 320.0f)];
-        [self addChild: switchWeaponButton z: 14];
+        [self addChild: switchWeaponButton z: 15];
         
         self.damageIndicator = [[CCLayerColor alloc] initWithColor: ccc4(155, 0, 0, 50)];
         [damageIndicator setOpacity: 0];
         [damageIndicator setAnchorPoint: ccp(0.5f, 0.5f)];
-        [self addChild: damageIndicator z:15];
+        [self addChild: damageIndicator z:16];
         
         self.inputLayer = [[InputLayer alloc] init];
-        [self addChild: inputLayer z:16];
+        [self addChild: inputLayer z:17];
         
-        /*[zombieBatch addNewZombieAt: ccp(752, 652)];
-        [zombieBatch addNewZombieAt: ccp(272, 652)];
-        [zombieBatch addNewZombieAt: ccp(272, 372)];
-        [zombieBatch addNewZombieAt: ccp(752, 372)];*/
+        [powerupBatch addNewPowerupAt:ccp(470, 470)];
+        [powerupBatch addNewPowerupAt:ccp(512, 470)];
+        [powerupBatch addNewPowerupAt:ccp(470, 512)];
+        
         [zombieBatch addNewZombieAt: ccp(1024, 1024)];
         
     }

@@ -11,7 +11,25 @@
 #import "Weapon.h"
 #import "ZombieBatch.h"
 
+#define MAXPUPS 3
+
+typedef struct Pup{
+    int type;
+    float life;
+    
+    BOOL active;
+}Pup;
+
+enum {
+    PUP_STRAWBERRY = 0,
+    PUP_APPLE,
+    PUP_ORANGE,
+    PUP_BANANA,
+    PUP_GRAPES
+};
+
 @interface Player : CCNode{
+    CCSprite *feetSprite;
     CCSprite *playerSprite;
     cpShape *playerShape;
     
@@ -26,8 +44,9 @@
     CCParticleFire *flameThrower;
 
     int health;
-    int armor;
     float speed;
+    
+    Pup pups[MAXPUPS];
         
     float currentRecoil;
     
@@ -37,6 +56,7 @@
     int numberOfZombiesTouchingPlayer;
 }
 
+@property (nonatomic, retain) CCSprite *feetSprite;
 @property (nonatomic, retain) CCSprite *playerSprite;
 @property (nonatomic, retain) Weapon *weapon;
 @property (nonatomic, retain) CCSprite *muzzleFlash;
@@ -68,6 +88,11 @@
 - (void)updateAmmo;
 
 - (void)takeDamage:(int)damage;
+
+- (void)usePup:(int)ptype;
+- (void)undoPup:(int)index;
+
+- (void)update:(ccTime)dt;
 
 - (void)syncPosition;
 - (void)setVelocity:(CGPoint)vel;

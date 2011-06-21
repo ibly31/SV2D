@@ -237,9 +237,6 @@ enum {
 		CCAction *zoomAction = [CCScaleTo actionWithDuration:0.1f scale:originalScale_ * 1.2f];
 		zoomAction.tag = kZoomActionTag;
 		[self runAction:zoomAction];
-        CCAction *rotateAction = [CCRotateTo actionWithDuration:0.1f angle:5];
-        rotateAction.tag = kRotateActionTag;
-        [self runAction: rotateAction];
 	}
 }
 
@@ -253,9 +250,6 @@ enum {
 		CCAction *zoomAction = [CCScaleTo actionWithDuration:0.1f scale:originalScale_];
 		zoomAction.tag = kZoomActionTag;
 		[self runAction:zoomAction];
-        CCAction *rotateAction = [CCRotateTo actionWithDuration:0.1f angle:0];
-        rotateAction.tag = kRotateActionTag;
-        [self runAction: rotateAction];
 	}
 }
 

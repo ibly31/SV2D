@@ -16,7 +16,7 @@
 		<key>Penetration</key>
 		<string>2</string>
 		<key>Recoil</key>
-		<integer>0</integer>
+		<integer>1</integer>
 		<key>ReloadTime</key>
 		<real>1.5</real>
 		<key>RPM</key>
@@ -26,7 +26,7 @@
 	</dict>
 	<dict>
 		<key>Damage</key>
-		<integer>20</integer>
+		<integer>50</integer>
 		<key>FlashPos</key>
 		<integer>6</integer>
 		<key>MaxAmmo</key>
@@ -40,7 +40,7 @@
 		<key>Recoil</key>
 		<integer>1</integer>
 		<key>ReloadTime</key>
-		<integer>3</integer>
+		<real>1.25</real>
 		<key>RPM</key>
 		<integer>100</integer>
 		<key>WeaponType</key>
@@ -62,7 +62,7 @@
 		<key>Recoil</key>
 		<integer>1</integer>
 		<key>ReloadTime</key>
-		<integer>2</integer>
+		<integer>1</integer>
 		<key>RPM</key>
 		<integer>1300</integer>
 		<key>WeaponType</key>
@@ -106,7 +106,7 @@
 		<key>Recoil</key>
 		<integer>0</integer>
 		<key>ReloadTime</key>
-		<integer>3</integer>
+		<integer>4</integer>
 		<key>RPM</key>
 		<integer>50</integer>
 		<key>WeaponType</key>
