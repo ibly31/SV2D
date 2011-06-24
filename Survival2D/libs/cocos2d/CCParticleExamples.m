@@ -159,9 +159,9 @@
 		emissionRate = totalParticles/life;
 		
 		// color of particles
-		startColor.r = 0.76f;
-		startColor.g = 0.25f;
-		startColor.b = 0.12f;
+		startColor.r = (193.0f / 255.0f);
+		startColor.g = (64.0f / 255.0f);
+		startColor.b = (31.0f / 255.0f);
 		startColor.a = 1.0f;
 		startColorVar.r = 0.0f;
 		startColorVar.g = 0.0f;

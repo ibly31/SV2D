@@ -23,6 +23,8 @@
 @synthesize leftAnalogStick;
 @synthesize rightAnalogStick;
 
+@synthesize powerupHUD;
+
 @synthesize damageIndicator;
 
 @synthesize ammoLabel;
@@ -90,6 +92,9 @@
         [self addChild: powerupBatch z:6];
         [self addChild: player z:7];
         
+        self.powerupHUD = [[PowerupHUD alloc] init];
+        [self addChild: powerupHUD z:8];
+        
         self.leftAnalogStick = [[CCSprite alloc] initWithFile: @"Analog.png"];
         [leftAnalogStick setPosition: ccp(74.0f, 74.0f)];
         [self addChild: leftAnalogStick z:9];
@@ -141,11 +146,11 @@
         [self addChild: inputLayer z:17];
         
         [powerupBatch addNewPowerupAt:ccp(470, 470)];
-        [powerupBatch addNewPowerupAt:ccp(512, 470)];
-        [powerupBatch addNewPowerupAt:ccp(470, 512)];
-        
+        [powerupBatch addNewPowerupAt:ccp(430, 470)];
+        [powerupBatch addNewPowerupAt:ccp(470, 430)];
         [zombieBatch addNewZombieAt: ccp(1024, 1024)];
         
+        timeRunning = 0.0f;
     }
 	return self;
 }
@@ -180,6 +185,7 @@
     [damageIndicator setPosition: ccpAdd(centerOn, ccp(-240.0f, -160.0f))];
     [reloadButton setPosition: ccpAdd(centerOn, ccp(-48.0f, 160.0f))];
     [switchWeaponButton setPosition: ccpAdd(centerOn, ccp(48.0f, 160.0f))];
+    [powerupHUD setPosition: ccpAdd(centerOn, ccp(-232.0f, 32.0f))];
 }
 
 - (void)addNewBulletCasingsAt:(CGPoint)startPos endPos:(CGPoint)endPos startRot:(float)startRot{
@@ -211,7 +217,7 @@ float distance(CGPoint point1,CGPoint point2){
     return sqrt(dx*dx + dy*dy);
 };
 
-- (void)addNewBloodSplatterAt:(CGPoint)position withRotation:(float)rotation withColor:(ccColor3B)color{ 
+- (void)addNewBloodSplatterAt:(CGPoint)position withRotation:(float)rotation withColor:(ccColor3B)color{
     CCSprite *newSplatter = [[CCSprite alloc] initWithFile: @"Bloodsplatter.png"];
     [newSplatter setPosition: position];
     [newSplatter setAnchorPoint: ccp(0.5f, 0.0f)];

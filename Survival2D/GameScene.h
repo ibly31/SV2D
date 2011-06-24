@@ -14,12 +14,14 @@
 #import "BulletBatch.h"
 #import "RocketBatch.h"
 #import "PowerupBatch.h"
+#import "PowerupHUD.h"
 
 @interface GameScene : CCScene{
     Player *player;
     CCSprite *leftAnalogStick;
     CCSprite *rightAnalogStick;
     CCSprite *backgroundMap;
+    PowerupHUD *powerupHUD;
     
     InputLayer *inputLayer;
     ZombieBatch *zombieBatch;
@@ -44,6 +46,8 @@
     CCParticleExplosion *explosionToRemove;
     
     SpaceManagerCocos2d *smgr;
+    
+    float timeRunning;
 }
 
 @property (nonatomic, retain) Player *player;
@@ -57,6 +61,8 @@
 
 @property (nonatomic, retain) CCSprite *leftAnalogStick;
 @property (nonatomic, retain) CCSprite *rightAnalogStick;
+
+@property (nonatomic, retain) PowerupHUD *powerupHUD;
 
 @property (nonatomic, retain) CCLayerColor *damageIndicator;
 

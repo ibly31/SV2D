@@ -117,6 +117,10 @@
     zombies[index].zombieShape = NULL;
     zombies[index].alive = NO;
     [self removeChild:zombies[index].zombieSprite cleanup:NO];
+    
+    [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
+    [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
+    [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
 }
 
 - (void)updateZombies{
@@ -219,63 +223,11 @@
     zombies[index].health -= damage;
     if(zombies[index].health <= 0){
         [self destroyZombie: index];
-        [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
-        [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
-        [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
     }
 }
 
 - (void)setPlayerPosition:(CGPoint)pp{
     playerPosition = pp;
 }
-
-/* cpSegmentQueryInfo info;
- cpShape *firstHitShape = cpSpaceSegmentQueryFirst([smgr space], start, end, CP_ALL_LAYERS, CP_NO_GROUP, &info);
- 
- if(firstHitShape != NULL){
- cpVect hitPoint = cpSegmentQueryHitPoint(start, end, info);
- float otherRotation = atan2f(start.y - end.y, start.x - end.x);
- 
- if(firstHitShape->collision_type == -1){        // Hit Wall
- 
- }else if(firstHitShape->collision_type == 0){   // Hit Zombie
- int whichZombie = -1;
- for(int x = 0; x < currentZombie; x++){
- if(zombies[x].zombieShape == firstHitShape){
- whichZombie = x;
- }
- }
- 
- if(whichZombie == -1){
- NSLog(@"NO ZOMBIE CONNECTION.");return;
- }else{
- [self zombieTakeDamage:damage index:whichZombie];
- //cpBodyApplyImpulse(zombies[whichZombie].zombieShape->body, cpv(200.0f * cosf(M_PI + otherRotation), 200.0f * sinf(M_PI + otherRotation)), cpv(0,0));
- }
- 
- CGFloat dx = hitPoint.x - start.x;
- CGFloat dy = hitPoint.y - start.y;
- 
- float distancePlusABit = sqrt(dx*dx + dy*dy) + 16.0f;
- CGPoint splatterPos = ccpAdd(start, ccp(distancePlusABit * cosf(M_PI + otherRotation), distancePlusABit * sinf(M_PI + otherRotation)));
- 
- CGPoint zombiePoint = zombies[whichZombie].zombieShape->body->p;
- float splatterRot = 90.0f - CC_RADIANS_TO_DEGREES(atan2f(splatterPos.y - zombiePoint.y, splatterPos.x - zombiePoint.x));
- 
- [(GameScene *)parent_ addNewBloodSplatterAt: splatterPos withRotation:splatterRot withDistance:distancePlusABit];
- }
- 
- 
- CGFloat dx = hitPoint.x - start.x;
- CGFloat dy = hitPoint.y - start.y;
- 
- float distanceMinusABit = sqrt(dx*dx + dy*dy) - 48.0f;
- CGPoint toPosition = ccpAdd(start, ccp(distanceMinusABit * cosf(M_PI + otherRotation), distanceMinusABit * sinf(M_PI + otherRotation)));
- 
- [(GameScene *)parent_ addNewBulletPathAt:start toPosition:toPosition];
- }else{
- NSLog(@"Doesn't make any sense, not hitting any shapes.");return;
- }
- */
 
 @end

@@ -17,7 +17,6 @@
 @synthesize laser;
 @synthesize smgr;
 @synthesize shooting;
-
 @synthesize flameThrower;
 
 - (id)initWithSpaceManager:(SpaceManagerCocos2d *)spacemgr{
@@ -57,6 +56,8 @@
         health = 100;
         speed = 40.0f;
         currentRecoil = 0.0f;
+        
+        unlimitedAmmo = NO;
         
         for(int x = 0; x < MAXPUPS; x++){
             pups[x].type = -1;
@@ -128,13 +129,19 @@
 
 - (void)startShooting{
     [self unschedule: @selector(startShooting)];
-    [self schedule:@selector(shoot) interval: [weapon getDelay]];
+    [self schedule:@selector(shoot) interval: [weapon getDelay] / (unlimitedAmmo + 1)];
     shooting = YES;
     [self shoot];
 }
 
 - (void)shoot{
-    int result = [weapon shoot];
+    int result = 0;
+    if(!unlimitedAmmo){
+        result = [weapon shoot];
+    }else{
+        result = 1;
+    }
+    
     if(result == 0){        
         
     }else if(result == 1){
@@ -196,27 +203,22 @@
 }
 
 -(void)update:(ccTime)dt{
-    printf("\nPups: ");
     for(int x = 0; x < MAXPUPS; x++){
         if(pups[x].active){
-            printf("[%i]", pups[x].type);
             pups[x].life -= dt;
             if(pups[x].life < 0){
                 [self undoPup: x];
             }
-        }else{
-            printf("[ ]");
         }
     }
-    printf("\n");
 }
 
-- (void)usePup:(int)ptype{
+- (void)usePup:(int)ptype withPosition:(CGPoint)pos withOpacity:(int)opa{
     float pupLife;
     switch(ptype){
         case PUP_STRAWBERRY:
-            [[(GameScene *)parent_ zombieBatch] freezeZombies];
             pupLife = 10.0f;
+            [[(GameScene *)parent_ zombieBatch] freezeZombies];
             break;
         case PUP_APPLE:
             pupLife = 10.0f;
@@ -226,14 +228,18 @@
             [self updateHealth];
             break;
         case PUP_ORANGE:
-            pupLife = 10.0f;
+            [weapon giveMaxAmmo];
+            [self updateAmmo];
+            pupLife = 0.0f;
             break;
         case PUP_BANANA:
-            speed += 20.0f;
             pupLife = 10.0f;
+            speed += 20.0f;
             break;
         case PUP_GRAPES:
             pupLife = 10.0f;
+            [flameThrower setStartColor: ccc4FFromccc3B(ccc3(135, 206, 250))];
+            unlimitedAmmo = YES;
             break;
         default:
             pupLife = 0.0f;
@@ -247,6 +253,7 @@
             pups[x].type = ptype;
             pups[x].life = pupLife;
             pups[x].active = YES;
+            [[(GameScene *)parent_ powerupHUD] slotPup:pups[x].type withChangedIndex:x withPositionOnScreen:pos withOpacity:opa];
             break;
         }
     }
@@ -261,6 +268,7 @@
         pups[currentLowestLife].active = YES;
         pups[currentLowestLife].type = ptype;
         pups[currentLowestLife].life = pupLife;
+        [[(GameScene *)parent_ powerupHUD] slotPup:pups[currentLowestLife].type withChangedIndex:currentLowestLife withPositionOnScreen:pos withOpacity:opa];
     }
 }
 
@@ -277,6 +285,12 @@
             speed -= 20.0f;
             break;
         case PUP_GRAPES:
+            unlimitedAmmo = NO;
+            if(shooting){
+                [self stopShooting];
+                [self startShooting];
+            }
+            [flameThrower setStartColor: ccc4FFromccc3B(ccc3(193, 64, 31))];
             break;
         default:
             break;
@@ -284,6 +298,7 @@
     pups[index].active = NO;
     pups[index].type = -1;
     pups[index].life = 0.0f;
+    [[(GameScene *)parent_ powerupHUD] unslotPup:-1 withChangedIndex:index];
 }
 
 - (void)switchWeapons{
@@ -364,7 +379,6 @@
     if(reloading){
         reloading = NO;
         [self unschedule: @selector(reload)];
-        //int shotsLeftInOldMagazine = [weapon getCurrentMagazine];
         [weapon setMagazineCount: [weapon getMagazineCount] - 1];
         [weapon setCurrentMagazine: [weapon getMaxAmmo]];
         CCSprite *rel = [(GameScene *)parent_ reloadingSprite];
@@ -385,6 +399,9 @@
         }else{
             
         }
+    }
+    if(health < 0){
+        health = 0;
     }
     [self updateHealth];
 }

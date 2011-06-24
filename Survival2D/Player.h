@@ -53,6 +53,8 @@ enum {
     BOOL shooting;
     BOOL reloading;
     
+    BOOL unlimitedAmmo;
+    
     int numberOfZombiesTouchingPlayer;
 }
 
@@ -89,7 +91,7 @@ enum {
 
 - (void)takeDamage:(int)damage;
 
-- (void)usePup:(int)ptype;
+- (void)usePup:(int)ptype withPosition:(CGPoint)pos withOpacity:(int)opa;
 - (void)undoPup:(int)index;
 
 - (void)update:(ccTime)dt;

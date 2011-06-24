@@ -61,10 +61,6 @@
     powerups[index].taken = NO;
     
     [self addNewPowerupAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
-    [self addNewPowerupAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
-    [self addNewPowerupAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
-    [self addNewPowerupAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
-    [self addNewPowerupAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
 }
 
 - (BOOL)playerCollision:(CollisionMoment)moment arbiter:(cpArbiter*)arb space:(cpSpace*)space{
@@ -73,7 +69,7 @@
         
     for(int x = 0; x < MAXPOWERUPS; x++){
         if(powerups[x].powerupShape == a){
-            [player usePup: powerups[x].type - 7];
+            [player usePup: powerups[x].type - 7 withPosition:powerups[x].powerupShape->body->p withOpacity:[powerups[x].powerupSprite opacity]];
             [self destroyPowerup: x];
             return NO;
         }
@@ -92,21 +88,23 @@
             return x;
         }
     }
-    return 0;
+    return -1;
 }
 
 - (void)addNewPowerupAt:(CGPoint)pos{
     int index = [self nextOpenPowerupSlot];
-    powerups[index].taken = YES;
-    powerups[index].type = (int)(CCRANDOM_0_1() * 5) + 7;
-    powerups[index].life = 10.0f;
-    powerups[index].lifeOrigin = powerups[index].life;
-    powerups[index].powerupShape = [smgr addCircleAt:pos mass:STATIC_MASS radius:16.0f];
-    powerups[index].powerupShape->collision_type = 4;
-    [powerups[index].powerupSprite setDisplayFrame: [CCSpriteFrame frameWithTexture:self.texture rect:CGRectMake(powerups[index].type * 32, 0, 32, 32)]];
-    [powerups[index].powerupSprite setPosition: pos];
-    [powerups[index].powerupSprite setOpacity: 255];
-    [powerups[index].powerupSprite runAction: [CCRepeatForever actionWithAction: [CCSequence actions: [CCScaleTo actionWithDuration: 1.0f scale: 1.2f], [CCScaleTo actionWithDuration: 1.0f scale: 1.0f], nil]]];
+    if(index != -1){
+        powerups[index].taken = YES;
+        powerups[index].type = (int)(CCRANDOM_0_1() * 5) + 7;
+        powerups[index].life = 25.0f;
+        powerups[index].lifeOrigin = powerups[index].life;
+        powerups[index].powerupShape = [smgr addCircleAt:pos mass:STATIC_MASS radius:16.0f];
+        powerups[index].powerupShape->collision_type = 4;
+        [powerups[index].powerupSprite setDisplayFrame: [CCSpriteFrame frameWithTexture:self.texture rect:CGRectMake(powerups[index].type * 32, 0, 32, 32)]];
+        [powerups[index].powerupSprite setPosition: pos];
+        [powerups[index].powerupSprite setOpacity: 255];
+        [powerups[index].powerupSprite runAction: [CCRepeatForever actionWithAction: [CCSequence actions: [CCScaleTo actionWithDuration: 1.0f scale: 1.2f], [CCScaleTo actionWithDuration: 1.0f scale: 1.0f], nil]]];
+    }
 }
 
 @end

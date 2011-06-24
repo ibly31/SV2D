@@ -32,6 +32,7 @@
 - (id)initWithName:(NSString *)w_name;
 
 - (int)shoot;
+- (void)giveMaxAmmo;
 
 - (int)getMaxAmmo;
 - (void)setMagazineCount:(int)mc;

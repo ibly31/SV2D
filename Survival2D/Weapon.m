@@ -52,6 +52,11 @@
     return 0;
 }
 
+- (void)giveMaxAmmo{
+    magazineCount = 4;
+    currentMagazine = maxAmmo;
+}
+
 - (int)getMaxAmmo{
     return maxAmmo;
 }
