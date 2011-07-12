@@ -189,6 +189,10 @@
 		77E13D781382046E0033BD15 /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77E13D731382046E0033BD15 /* tinyxmlerror.cpp */; };
 		77E13D791382046E0033BD15 /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77E13D741382046E0033BD15 /* tinyxmlparser.cpp */; };
 		77EA00F1138C483B00B69CDC /* BulletBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EA00F0138C483B00B69CDC /* BulletBatch.m */; };
+		77EDE28913C94D2D000C5124 /* TutorialScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EDE28813C94D2D000C5124 /* TutorialScene.m */; };
+		77EDE28D13C959E0000C5124 /* TutorialText.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EDE28B13C959E0000C5124 /* TutorialText.png */; };
+		77EDE28E13C959E0000C5124 /* TutorialText-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EDE28C13C959E0000C5124 /* TutorialText-hd.png */; };
+		77EDE29013C96302000C5124 /* Arial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 77EDE28F13C96302000C5124 /* Arial.ttf */; };
 		77EE1D5B139EFC1F00DA6D67 /* ChooseGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EE1D5A139EFC1F00DA6D67 /* ChooseGameScene.m */; };
 		77EFA37813AD7BB700537A3B /* Map_ParkingLot.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EFA37613AD7BB700537A3B /* Map_ParkingLot.png */; };
 		77EFA37913AD7BB700537A3B /* Map_ParkingLot-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EFA37713AD7BB700537A3B /* Map_ParkingLot-hd.png */; };
@@ -534,6 +538,11 @@
 		77E13D741382046E0033BD15 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
 		77EA00EF138C483B00B69CDC /* BulletBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BulletBatch.h; sourceTree = "<group>"; };
 		77EA00F0138C483B00B69CDC /* BulletBatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BulletBatch.m; sourceTree = "<group>"; };
+		77EDE28713C94D2D000C5124 /* TutorialScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TutorialScene.h; sourceTree = "<group>"; };
+		77EDE28813C94D2D000C5124 /* TutorialScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TutorialScene.m; sourceTree = "<group>"; };
+		77EDE28B13C959E0000C5124 /* TutorialText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TutorialText.png; sourceTree = "<group>"; };
+		77EDE28C13C959E0000C5124 /* TutorialText-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TutorialText-hd.png"; path = "Resources/Textures/Retina/GUI/TutorialText-hd.png"; sourceTree = SOURCE_ROOT; };
+		77EDE28F13C96302000C5124 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Arial.ttf; sourceTree = "<group>"; };
 		77EE1D59139EFC1F00DA6D67 /* ChooseGameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseGameScene.h; sourceTree = "<group>"; };
 		77EE1D5A139EFC1F00DA6D67 /* ChooseGameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseGameScene.m; sourceTree = "<group>"; };
 		77EFA37613AD7BB700537A3B /* Map_ParkingLot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Map_ParkingLot.png; sourceTree = "<group>"; };
@@ -602,6 +611,8 @@
 				7760AA5C1380BD4800D5B52D /* Game Classes */,
 				7760AA561380BC1C00D5B52D /* GameScene.h */,
 				7760AA571380BC1C00D5B52D /* GameScene.m */,
+				77EDE28713C94D2D000C5124 /* TutorialScene.h */,
+				77EDE28813C94D2D000C5124 /* TutorialScene.m */,
 				77EE1D59139EFC1F00DA6D67 /* ChooseGameScene.h */,
 				77EE1D5A139EFC1F00DA6D67 /* ChooseGameScene.m */,
 				77F0CC20139C84A10029CD6E /* MainMenuScene.h */,
@@ -625,6 +636,7 @@
 		7760A8A71380BB5D00D5B52D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				77EDE28F13C96302000C5124 /* Arial.ttf */,
 				77F0CC23139C87060029CD6E /* Splatz.ttf */,
 				7760AAE21380C39C00D5B52D /* WeaponList.plist */,
 				7760AAC21380C38400D5B52D /* Non-Retina */,
@@ -1002,6 +1014,7 @@
 		77C12F64139B1D95005BF8A3 /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				77EDE28B13C959E0000C5124 /* TutorialText.png */,
 				776E416313AF06D2002D64F1 /* PowerupBack.png */,
 				77C12F65139B1D95005BF8A3 /* Analog.png */,
 				77C12F66139B1D95005BF8A3 /* Font.png */,
@@ -1030,6 +1043,7 @@
 		77C12F8C139B1DA5005BF8A3 /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				77EDE28C13C959E0000C5124 /* TutorialText-hd.png */,
 				776E416413AF06D2002D64F1 /* PowerupBack-hd.png */,
 				77C12F8D139B1DA5005BF8A3 /* Analog-hd.png */,
 				77C12F8E139B1DA5005BF8A3 /* Font-hd.png */,
@@ -1191,6 +1205,9 @@
 				77EFA37913AD7BB700537A3B /* Map_ParkingLot-hd.png in Resources */,
 				776E416513AF06D2002D64F1 /* PowerupBack.png in Resources */,
 				776E416613AF06D2002D64F1 /* PowerupBack-hd.png in Resources */,
+				77EDE28D13C959E0000C5124 /* TutorialText.png in Resources */,
+				77EDE28E13C959E0000C5124 /* TutorialText-hd.png in Resources */,
+				77EDE29013C96302000C5124 /* Arial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1339,6 +1356,7 @@
 				77EE1D5B139EFC1F00DA6D67 /* ChooseGameScene.m in Sources */,
 				77EFA37C13AD7DCC00537A3B /* PowerupBatch.m in Sources */,
 				776E416A13AF071C002D64F1 /* PowerupHUD.m in Sources */,
+				77EDE28913C94D2D000C5124 /* TutorialScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

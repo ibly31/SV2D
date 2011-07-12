@@ -28,7 +28,6 @@
 #import "Support/CGPointExtension.h"
 #import "CCDirector.h"
 
-
 @implementation CCScene
 -(id) init
 {

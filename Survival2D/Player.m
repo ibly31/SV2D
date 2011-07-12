@@ -221,7 +221,7 @@
             [[(GameScene *)parent_ zombieBatch] freezeZombies];
             break;
         case PUP_APPLE:
-            pupLife = 10.0f;
+            pupLife = 1.0f;
             health += 20.0f;
             if(health > 100)
                 health = 100;
@@ -230,7 +230,7 @@
         case PUP_ORANGE:
             [weapon giveMaxAmmo];
             [self updateAmmo];
-            pupLife = 0.0f;
+            pupLife = 1.0f;
             break;
         case PUP_BANANA:
             pupLife = 10.0f;

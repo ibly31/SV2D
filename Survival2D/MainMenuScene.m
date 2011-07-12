@@ -8,6 +8,7 @@
 
 #import "MainMenuScene.h"
 #import "ChooseGameScene.h"
+#import "TutorialScene.h"
 
 @implementation MainMenuScene
 @synthesize titleLabel;
@@ -47,7 +48,8 @@
 }
 
 - (void)options{
-    
+    CCScene *ts = [TutorialScene scene];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:ts]];
 }
-
+     
 @end

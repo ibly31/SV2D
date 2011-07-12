@@ -109,12 +109,14 @@
         [self addChild: ammoLabel z:11];
         [player updateAmmo];
         
-        if([[CCDirector sharedDirector] contentScaleFactor] > 1){
+        self.healthLabel = [[[CCLabelAtlas alloc] initWithString:@"-100" charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
+        
+        /*if([[CCDirector sharedDirector] contentScaleFactor] > 1){
             self.healthLabel = [[[CCLabelAtlas alloc] initWithString:@"-100" charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
         }else{
             self.healthLabel = [[[CCLabelAtlas alloc] initWithString:@"-100" charMapFile:@"Font-hd.png" itemWidth:32 itemHeight:48 startCharMap:','] retain];
             [healthLabel setScale:0.5f];
-        }
+        }*/
         
         [healthLabel setAnchorPoint: ccp(1.0f, 1.0f)];
         [healthLabel setPosition: ccp(480.0f, 360.0f)];
