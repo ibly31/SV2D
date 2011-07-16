@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		77075CB113835997004C9A15 /* ZombieBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 77075CB013835997004C9A15 /* ZombieBatch.m */; };
+		773BBA4E13D123B300C14F4D /* FlameReload.caf in Resources */ = {isa = PBXBuildFile; fileRef = 773BBA4513D123B300C14F4D /* FlameReload.caf */; };
+		773BBA4F13D123B300C14F4D /* FlameStart.caf in Resources */ = {isa = PBXBuildFile; fileRef = 773BBA4613D123B300C14F4D /* FlameStart.caf */; };
+		773BBA5013D123B300C14F4D /* Reload.caf in Resources */ = {isa = PBXBuildFile; fileRef = 773BBA4713D123B300C14F4D /* Reload.caf */; };
+		773BBA5113D123B300C14F4D /* Rocket.caf in Resources */ = {isa = PBXBuildFile; fileRef = 773BBA4813D123B300C14F4D /* Rocket.caf */; };
+		773BBA5213D123B300C14F4D /* Shot.caf in Resources */ = {isa = PBXBuildFile; fileRef = 773BBA4913D123B300C14F4D /* Shot.caf */; };
+		773BBA5313D123B300C14F4D /* ShotgunPump.caf in Resources */ = {isa = PBXBuildFile; fileRef = 773BBA4A13D123B300C14F4D /* ShotgunPump.caf */; };
+		773BBA5413D123B300C14F4D /* ShotgunShot.caf in Resources */ = {isa = PBXBuildFile; fileRef = 773BBA4B13D123B300C14F4D /* ShotgunShot.caf */; };
+		773BBA5513D123B300C14F4D /* Splat.caf in Resources */ = {isa = PBXBuildFile; fileRef = 773BBA4C13D123B300C14F4D /* Splat.caf */; };
+		773BBA5713D1253700C14F4D /* FlameLoop.caf in Resources */ = {isa = PBXBuildFile; fileRef = 773BBA5613D1253700C14F4D /* FlameLoop.caf */; };
 		7750686113915F3A00D07C47 /* RocketBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 7750686013915F3A00D07C47 /* RocketBatch.m */; };
 		7760A8971380BB5D00D5B52D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7760A8961380BB5D00D5B52D /* QuartzCore.framework */; };
 		7760A8991380BB5D00D5B52D /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7760A8981380BB5D00D5B52D /* OpenGLES.framework */; };
@@ -204,6 +213,15 @@
 /* Begin PBXFileReference section */
 		77075CAF13835997004C9A15 /* ZombieBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZombieBatch.h; sourceTree = "<group>"; };
 		77075CB013835997004C9A15 /* ZombieBatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZombieBatch.m; sourceTree = "<group>"; };
+		773BBA4513D123B300C14F4D /* FlameReload.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FlameReload.caf; path = Resources/Sound/FlameReload.caf; sourceTree = SOURCE_ROOT; };
+		773BBA4613D123B300C14F4D /* FlameStart.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FlameStart.caf; path = Resources/Sound/FlameStart.caf; sourceTree = SOURCE_ROOT; };
+		773BBA4713D123B300C14F4D /* Reload.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reload.caf; path = Resources/Sound/Reload.caf; sourceTree = SOURCE_ROOT; };
+		773BBA4813D123B300C14F4D /* Rocket.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Rocket.caf; path = Resources/Sound/Rocket.caf; sourceTree = SOURCE_ROOT; };
+		773BBA4913D123B300C14F4D /* Shot.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Shot.caf; path = Resources/Sound/Shot.caf; sourceTree = SOURCE_ROOT; };
+		773BBA4A13D123B300C14F4D /* ShotgunPump.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ShotgunPump.caf; path = Resources/Sound/ShotgunPump.caf; sourceTree = SOURCE_ROOT; };
+		773BBA4B13D123B300C14F4D /* ShotgunShot.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = ShotgunShot.caf; path = Resources/Sound/ShotgunShot.caf; sourceTree = SOURCE_ROOT; };
+		773BBA4C13D123B300C14F4D /* Splat.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Splat.caf; path = Resources/Sound/Splat.caf; sourceTree = SOURCE_ROOT; };
+		773BBA5613D1253700C14F4D /* FlameLoop.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FlameLoop.caf; path = Resources/Sound/FlameLoop.caf; sourceTree = SOURCE_ROOT; };
 		7750685F13915F3A00D07C47 /* RocketBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RocketBatch.h; sourceTree = "<group>"; };
 		7750686013915F3A00D07C47 /* RocketBatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RocketBatch.m; sourceTree = "<group>"; };
 		7760A8921380BB5D00D5B52D /* Survival2D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Survival2D.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -573,6 +591,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7739681013CFD31500B123A4 /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				773BBA5613D1253700C14F4D /* FlameLoop.caf */,
+				773BBA4513D123B300C14F4D /* FlameReload.caf */,
+				773BBA4613D123B300C14F4D /* FlameStart.caf */,
+				773BBA4713D123B300C14F4D /* Reload.caf */,
+				773BBA4813D123B300C14F4D /* Rocket.caf */,
+				773BBA4913D123B300C14F4D /* Shot.caf */,
+				773BBA4A13D123B300C14F4D /* ShotgunPump.caf */,
+				773BBA4B13D123B300C14F4D /* ShotgunShot.caf */,
+				773BBA4C13D123B300C14F4D /* Splat.caf */,
+			);
+			name = Sound;
+			sourceTree = "<group>";
+		};
 		7760A8871380BB5D00D5B52D = {
 			isa = PBXGroup;
 			children = (
@@ -636,6 +670,7 @@
 		7760A8A71380BB5D00D5B52D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7739681013CFD31500B123A4 /* Sound */,
 				77EDE28F13C96302000C5124 /* Arial.ttf */,
 				77F0CC23139C87060029CD6E /* Splatz.ttf */,
 				7760AAE21380C39C00D5B52D /* WeaponList.plist */,
@@ -1208,6 +1243,15 @@
 				77EDE28D13C959E0000C5124 /* TutorialText.png in Resources */,
 				77EDE28E13C959E0000C5124 /* TutorialText-hd.png in Resources */,
 				77EDE29013C96302000C5124 /* Arial.ttf in Resources */,
+				773BBA4E13D123B300C14F4D /* FlameReload.caf in Resources */,
+				773BBA4F13D123B300C14F4D /* FlameStart.caf in Resources */,
+				773BBA5013D123B300C14F4D /* Reload.caf in Resources */,
+				773BBA5113D123B300C14F4D /* Rocket.caf in Resources */,
+				773BBA5213D123B300C14F4D /* Shot.caf in Resources */,
+				773BBA5313D123B300C14F4D /* ShotgunPump.caf in Resources */,
+				773BBA5413D123B300C14F4D /* ShotgunShot.caf in Resources */,
+				773BBA5513D123B300C14F4D /* Splat.caf in Resources */,
+				773BBA5713D1253700C14F4D /* FlameLoop.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

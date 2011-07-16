@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<audacityproject projname="Flamereolad_data" version="1.1.0" audacityversion="1.2.5" sel0="0.0000000000" sel1="0.0000000000" vpos="0" h="0.0000000000" zoom="417.6037073488" rate="44100.000000" >
+	<tags title="" artist="" album="" track="-1" year="" genre="-1" comments="" id3v2="1" />
+	<wavetrack name="Pouring Drink-Sound#5F87D8B" channel="0" linked="1" offset="0.49331250" rate="32000.000000" gain="1.000000" pan="0.000000" >
+		<sequence maxsamples="262144" sampleformat="262159" numsamples="61455" >
+			<waveblock start="0" >
+				<simpleblockfile filename='b00059.au' len='61455' min='-0.321106' max='0.343903' rms='0.036893'/>
+			</waveblock>
+		</sequence>
+		<envelope numpoints='0'>
+		</envelope>
+	</wavetrack>
+	<wavetrack name="Pouring Drink-Sound#5F87D8B" channel="1" linked="0" offset="0.49331250" rate="32000.000000" gain="1.000000" pan="0.000000" >
+		<sequence maxsamples="262144" sampleformat="262159" numsamples="61455" >
+			<waveblock start="0" >
+				<simpleblockfile filename='b00060.au' len='61455' min='-0.281525' max='0.274384' rms='0.031268'/>
+			</waveblock>
+		</sequence>
+		<envelope numpoints='0'>
+		</envelope>
+	</wavetrack>
+	<wavetrack name="Reload" channel="0" linked="1" offset="2.29403628" rate="44100.000000" gain="1.000000" pan="0.000000" >
+		<sequence maxsamples="262144" sampleformat="262159" numsamples="31165" >
+			<waveblock start="0" >
+				<simpleblockfile filename='b00041.au' len='31165' min='-0.451691' max='0.506744' rms='0.032617'/>
+			</waveblock>
+		</sequence>
+		<envelope numpoints='0'>
+		</envelope>
+	</wavetrack>
+	<wavetrack name="Reload" channel="1" linked="0" offset="2.29403628" rate="44100.000000" gain="1.000000" pan="0.000000" >
+		<sequence maxsamples="262144" sampleformat="262159" numsamples="31165" >
+			<waveblock start="0" >
+				<simpleblockfile filename='b00042.au' len='31165' min='-0.443451' max='0.506348' rms='0.032432'/>
+			</waveblock>
+		</sequence>
+		<envelope numpoints='0'>
+		</envelope>
+	</wavetrack>
+	<wavetrack name="Reload" channel="0" linked="1" offset="0.00000000" rate="44100.000000" gain="1.000000" pan="0.000000" >
+		<sequence maxsamples="262144" sampleformat="262159" numsamples="13444" >
+			<waveblock start="0" >
+				<simpleblockfile filename='b00061.au' len='13444' min='-0.432648' max='0.384216' rms='0.018566'/>
+			</waveblock>
+		</sequence>
+		<envelope numpoints='0'>
+		</envelope>
+	</wavetrack>
+	<wavetrack name="Reload" channel="1" linked="0" offset="0.00000000" rate="44100.000000" gain="1.000000" pan="0.000000" >
+		<sequence maxsamples="262144" sampleformat="262159" numsamples="13444" >
+			<waveblock start="0" >
+				<simpleblockfile filename='b00062.au' len='13444' min='-0.406250' max='0.398773' rms='0.017561'/>
+			</waveblock>
+		</sequence>
+		<envelope numpoints='0'>
+		</envelope>
+	</wavetrack>
+</audacityproject>

@@ -8,6 +8,7 @@
 
 #import "Player.h"
 #import "GameScene.h"
+#import "SimpleAudioEngine.h"
 
 @implementation Player
 @synthesize feetSprite;
@@ -28,7 +29,7 @@
         [smgr addCollisionCallbackBetweenType:1 otherType:0 target:self selector:@selector(handleCollision:arbiter:space:) moments:COLLISION_BEGIN, COLLISION_SEPARATE, nil];
         
         currentWeapon = 0;
-        NSString *weaponTitle = [[NSArray arrayWithObjects:@"Assault Rifle", @"Shotgun", @"SMG", @"Flamethrower", @"Rocket Launcher", @"Sniper Rifle", nil] objectAtIndex: currentWeapon];
+        NSString *weaponTitle = [[NSArray arrayWithObjects:@"Assault Rifle", @"Shotgun", @"SMG", @"Flamethrower", @"Rocket Launcher", @"Sniper Rifle", @"Minigun", nil] objectAtIndex: currentWeapon];
         
         self.feetSprite = [[CCSprite alloc] initWithFile:@"Playersheet.png" rect:CGRectMake(0, 448, 64, 64)];
         self.playerSprite = [[CCSprite alloc] initWithFile:@"Playersheet.png" rect:CGRectMake(0, 0, 64, 64)];
@@ -175,15 +176,19 @@
         
         if(t == 1){
             [[(GameScene *)parent_ bulletBatch] fireBulletFrom:sFrom withRotation:sOffs withDamage:d withPenetration:p];
+            [[SimpleAudioEngine sharedEngine] playEffect:@"Shot.caf"];
         }else if(t == 2){
             for(int x = -2; x < 2; x++){
                 [[(GameScene *)parent_ bulletBatch] fireBulletFrom:sFrom withRotation:sOffs - (2*x) withDamage:d withPenetration:p];
             }
+            [[SimpleAudioEngine sharedEngine] playEffect:@"ShotgunShot.caf"];
+            [[SimpleAudioEngine sharedEngine] playEffect:@"ShotgunPump.caf"];
         }else if(t == 3){
             [flameThrower setEmissionRate: [flameThrower totalParticles] / [flameThrower life]];
             [[(GameScene *)parent_ zombieBatch] flamePath: [playerSprite position] withRotation: sOffs withVariance: [flameThrower angleVar] withDamage: [weapon getDamage]];
         }else if(t == 4){
             [[(GameScene *)parent_ rocketBatch] fireRocketFrom: sFrom withRotation:sOffs withDamage:[weapon getDamage]];
+            [[SimpleAudioEngine sharedEngine] playEffect:@"Rocket.caf"];
         }
         
         if(t != 3){
@@ -304,9 +309,9 @@
 - (void)switchWeapons{
     [self removeChild:weapon cleanup:YES];
     currentWeapon++;
-    if(currentWeapon == 6)
+    if(currentWeapon == 7)
         currentWeapon = 0;
-    NSString *weaponTitle = [[NSArray arrayWithObjects:@"Assault Rifle", @"Shotgun", @"SMG", @"Flamethrower", @"Rocket Launcher", @"Sniper Rifle", nil] objectAtIndex: currentWeapon];
+    NSString *weaponTitle = [[NSArray arrayWithObjects:@"Assault Rifle", @"Shotgun", @"SMG", @"Flamethrower", @"Rocket Launcher", @"Sniper Rifle", @"Minigun", nil] objectAtIndex: currentWeapon];
     self.weapon = [[Weapon alloc] initWithName: weaponTitle];
     [self addChild: weapon];
     [self syncPosition];
@@ -327,6 +332,7 @@
 }
 
 - (void)scheduleToReload{
+    [[SimpleAudioEngine sharedEngine] playEffect:@"Reload.caf"];
     reloading = YES;
     [flameThrower setEmissionRate: 0.0f];
     CCSprite *rel = [(GameScene *)parent_ reloadingSprite];

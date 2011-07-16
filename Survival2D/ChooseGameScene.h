@@ -8,17 +8,22 @@
 
 #import "cocos2d.h"
 
-@interface ChooseGameScene : CCScene {
+@interface ChooseGameScene : CCLayer {
     CCLabelTTF *titleLabel;
     CCLayerColor *backgroundColor;
+    
+    CCSprite *endArrow;
         
     CCMenu *menu;
 }
+
++ (id)scene;
 
 - (void)parkingLot;
 - (void)otherMap;
 
 @property (nonatomic, retain) CCLabelTTF *titleLabel;
+@property (nonatomic, retain) CCSprite *endArrow;
 @property (nonatomic, retain) CCMenu *menu;
 
 @end

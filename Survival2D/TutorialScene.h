@@ -19,6 +19,9 @@
     CCSprite *enemy;
     CCSprite *powerup;
     
+    CCSprite *rightArrow;
+    CCSprite *endArrow;
+    
     CCSprite *leftAnalogStick;
     CCSprite *rightAnalogStick;
     
@@ -50,6 +53,9 @@
 
 @property (nonatomic, retain) CCSprite *enemy;
 @property (nonatomic, retain) CCSprite *powerup;
+
+@property (nonatomic, retain) CCSprite *rightArrow;
+@property (nonatomic, retain) CCSprite *endArrow;
 
 @property (nonatomic, retain) CCSprite *leftAnalogStick;
 @property (nonatomic, retain) CCSprite *rightAnalogStick;

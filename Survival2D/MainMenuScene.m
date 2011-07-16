@@ -28,7 +28,7 @@
         CCLabelTTF *chooseGame = [[CCLabelTTF alloc] initWithString:@"Play" fontName:@"Splatz.ttf" fontSize:36.0f];
         CCMenuItemLabel *chooseGameLabel = [[CCMenuItemLabel alloc] initWithLabel:chooseGame target:self selector:@selector(chooseGame)];
         
-        CCLabelTTF *options = [[CCLabelTTF alloc] initWithString:@"Options" fontName:@"Splatz.ttf" fontSize:36.0f];
+        CCLabelTTF *options = [[CCLabelTTF alloc] initWithString:@"Tutorial" fontName:@"Splatz.ttf" fontSize:36.0f];
         CCMenuItemLabel *optionsLabel = [[CCMenuItemLabel alloc] initWithLabel:options target:self selector:@selector(options)];
         [optionsLabel setAnchorPoint: ccp(0.5f, 0.5f)];
         [optionsLabel setPosition: ccp(0, -50)];
@@ -42,9 +42,8 @@
 }
 
 - (void)chooseGame{
-    ChooseGameScene *cgs = [[ChooseGameScene alloc] init];
+    CCScene *cgs = [ChooseGameScene scene];
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:cgs]];
-    [cgs release];
 }
 
 - (void)options{

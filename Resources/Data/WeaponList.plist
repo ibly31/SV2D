@@ -15,12 +15,12 @@
 		<integer>10</integer>
 		<key>Penetration</key>
 		<string>2</string>
-		<key>RPM</key>
-		<integer>900</integer>
 		<key>Recoil</key>
 		<integer>1</integer>
 		<key>ReloadTime</key>
 		<real>1.5</real>
+		<key>RPM</key>
+		<integer>900</integer>
 		<key>WeaponType</key>
 		<string>1</string>
 	</dict>
@@ -37,12 +37,12 @@
 		<integer>10</integer>
 		<key>Penetration</key>
 		<string>2</string>
-		<key>RPM</key>
-		<integer>100</integer>
 		<key>Recoil</key>
 		<integer>1</integer>
 		<key>ReloadTime</key>
 		<real>1.25</real>
+		<key>RPM</key>
+		<integer>48</integer>
 		<key>WeaponType</key>
 		<string>2</string>
 	</dict>
@@ -59,12 +59,12 @@
 		<integer>6</integer>
 		<key>Penetration</key>
 		<string>1</string>
-		<key>RPM</key>
-		<integer>1300</integer>
 		<key>Recoil</key>
 		<integer>1</integer>
 		<key>ReloadTime</key>
 		<integer>1</integer>
+		<key>RPM</key>
+		<integer>1300</integer>
 		<key>WeaponType</key>
 		<string>1</string>
 	</dict>
@@ -81,12 +81,12 @@
 		<integer>12</integer>
 		<key>Penetration</key>
 		<string>0</string>
-		<key>RPM</key>
-		<integer>600</integer>
 		<key>Recoil</key>
 		<integer>0</integer>
 		<key>ReloadTime</key>
 		<integer>3</integer>
+		<key>RPM</key>
+		<integer>600</integer>
 		<key>WeaponType</key>
 		<string>3</string>
 	</dict>
@@ -103,12 +103,12 @@
 		<integer>10</integer>
 		<key>Penetration</key>
 		<string>0</string>
-		<key>RPM</key>
-		<integer>50</integer>
 		<key>Recoil</key>
 		<integer>0</integer>
 		<key>ReloadTime</key>
 		<integer>4</integer>
+		<key>RPM</key>
+		<integer>50</integer>
 		<key>WeaponType</key>
 		<string>4</string>
 	</dict>
@@ -125,12 +125,34 @@
 		<integer>18</integer>
 		<key>Penetration</key>
 		<string>0</string>
-		<key>RPM</key>
-		<integer>50</integer>
 		<key>Recoil</key>
 		<integer>3</integer>
 		<key>ReloadTime</key>
 		<integer>4</integer>
+		<key>RPM</key>
+		<integer>50</integer>
+		<key>WeaponType</key>
+		<string>1</string>
+	</dict>
+	<dict>
+		<key>Damage</key>
+		<integer>10</integer>
+		<key>FlashPos</key>
+		<integer>3</integer>
+		<key>MaxAmmo</key>
+		<integer>500</integer>
+		<key>Name</key>
+		<string>Minigun</string>
+		<key>OffsetY</key>
+		<integer>14</integer>
+		<key>Penetration</key>
+		<string>0</string>
+		<key>Recoil</key>
+		<integer>3</integer>
+		<key>ReloadTime</key>
+		<integer>5</integer>
+		<key>RPM</key>
+		<integer>2500</integer>
 		<key>WeaponType</key>
 		<string>1</string>
 	</dict>

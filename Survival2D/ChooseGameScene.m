@@ -11,7 +11,15 @@
 
 @implementation ChooseGameScene
 @synthesize titleLabel;
+@synthesize endArrow;
 @synthesize menu;
+
++(id) scene{
+    CCScene *scene = [CCScene node];
+    ChooseGameScene *layer = [ChooseGameScene node];
+    [scene addChild: layer];
+    return scene;
+}
 
 - (id)init{
     self = [super init];
@@ -35,8 +43,18 @@
         
         self.menu = [CCMenu menuWithItems:parkingLotItem, otherMapItem, nil];
         [self addChild: menu];
+        
+        self.endArrow = [[CCSprite alloc] initWithFile:@"Analog.png" rect:CGRectMake(128, 64, 64, 64)];
+        [endArrow setPosition:ccp(0.0f, 320.0f)];
+        [endArrow setAnchorPoint: ccp(0.0f, 1.0f)];
+        [self addChild: endArrow];
+        
     }
     return self;
+}
+
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    
 }
 
 - (void)parkingLot{

@@ -95,7 +95,7 @@
     int index = [self nextOpenPowerupSlot];
     if(index != -1){
         powerups[index].taken = YES;
-        powerups[index].type = (int)(CCRANDOM_0_1() * 5) + 7;
+        powerups[index].type = (int)(CCRANDOM_0_1() * 6) + 7;
         powerups[index].life = 25.0f;
         powerups[index].lifeOrigin = powerups[index].life;
         powerups[index].powerupShape = [smgr addCircleAt:pos mass:STATIC_MASS radius:16.0f];

@@ -7,6 +7,7 @@
 //
 
 #import "TutorialScene.h"
+#import "MainMenuScene.h"
 
 @implementation TutorialScene
 @synthesize player;
@@ -14,6 +15,8 @@
 @synthesize laser;
 @synthesize enemy;
 @synthesize powerup;
+@synthesize rightArrow;
+@synthesize endArrow;
 @synthesize leftAnalogStick;
 @synthesize rightAnalogStick;
 @synthesize ammoLabel;
@@ -66,12 +69,12 @@
         [powerup setOpacity: 0];
         [self addChild: powerup];
         
-        self.leftAnalogStick = [[CCSprite alloc] initWithFile:@"Analog.png"];
+        self.leftAnalogStick = [[CCSprite alloc] initWithFile:@"Analog.png" rect:CGRectMake(0, 0, 128, 128)];
         [leftAnalogStick setPosition: ccp(74.0f, 74.0f)];
         [leftAnalogStick setOpacity: 0];
         [self addChild: leftAnalogStick];
         
-        rightAnalogStick = [[CCSprite alloc] initWithFile:@"Analog.png"];
+        self.rightAnalogStick = [[CCSprite alloc] initWithFile:@"Analog.png" rect:CGRectMake(0, 0, 128, 128)];
         [rightAnalogStick setPosition: ccp(406.0f, 74.0f)];
         [rightAnalogStick setOpacity: 0];
         [self addChild: rightAnalogStick];
@@ -108,6 +111,16 @@
         [currentText setAnchorPoint:ccp(0.5f, 1.0f)];
         [currentText setPosition: ccp(240.0f, 270.0f)];
         [self addChild: currentText];
+        
+        self.rightArrow = [[CCSprite alloc] initWithFile:@"Analog.png" rect:CGRectMake(128, 0, 64, 64)];
+        [rightArrow setPosition: ccp(476.0f, 170.0f)];
+        [rightArrow setAnchorPoint: ccp(1.0f, 0.5f)];
+        [self addChild: rightArrow];
+        
+        self.endArrow = [[CCSprite alloc] initWithFile:@"Analog.png" rect:CGRectMake(128, 64, 64, 64)];
+        [endArrow setPosition: ccp(240.0f, 4.0f)];
+        [endArrow setAnchorPoint: ccp(0.5f, 0.0f)];
+        [self addChild: endArrow];
         
         NSString *string00 = @"Thanks for playing Food Zombies!\nWelcome to the tutorial.\nBy: Billy Connolly";
         NSString *string01 = @"Playing Food Zombies is simple.\nYour character is in the center\nof the screen. Keep him alive!";
@@ -156,8 +169,12 @@
     if(ableToContinue){
         UITouch *touch = [touches anyObject];
         CGPoint location = [[CCDirector sharedDirector] convertToGL: [touch locationInView: touch.view]];
-        if(location.x > 240){
+        if(location.x > 304){
             [self offsetCurrentSlide: 1];
+        }else if(location.x > 176.0f && location.y < 74.0f){
+            MainMenuScene *mms = [[MainMenuScene alloc] init];
+            [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:mms]];
+            [mms release];
         }
     }
 }

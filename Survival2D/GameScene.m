@@ -7,6 +7,7 @@
 //
 
 #import "GameScene.h"
+#import "SimpleAudioEngine.h"
 
 #define CASINGOVERWRITE 1000
 
@@ -95,11 +96,11 @@
         self.powerupHUD = [[PowerupHUD alloc] init];
         [self addChild: powerupHUD z:8];
         
-        self.leftAnalogStick = [[CCSprite alloc] initWithFile: @"Analog.png"];
+        self.leftAnalogStick = [[CCSprite alloc] initWithFile: @"Analog.png" rect:CGRectMake(0, 0, 128, 128)];
         [leftAnalogStick setPosition: ccp(74.0f, 74.0f)];
         [self addChild: leftAnalogStick z:9];
         
-        self.rightAnalogStick = [[CCSprite alloc] initWithFile: @"Analog.png"];
+        self.rightAnalogStick = [[CCSprite alloc] initWithFile: @"Analog.png" rect:CGRectMake(0, 0, 128, 128)];
         [rightAnalogStick setPosition: ccp(404.0f, 74.0f)];
         [self addChild: rightAnalogStick z:10];
         
@@ -152,6 +153,16 @@
         [powerupBatch addNewPowerupAt:ccp(470, 430)];
         [zombieBatch addNewZombieAt: ccp(1024, 1024)];
         
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"Shot.caf"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"Reload.caf"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"ShotgunShot.caf"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"ShotgunPump.caf"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"FlameStart.caf"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"FlameLoop.caf"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"FlameReload.caf"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"Rocket.caf"];
+        [[SimpleAudioEngine sharedEngine] preloadEffect:@"Splat.caf"];
+
         timeRunning = 0.0f;
     }
 	return self;

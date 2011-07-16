@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<audacityproject projname="Flamethrower_data" version="1.1.0" audacityversion="1.2.5" sel0="0.0000000000" sel1="0.0000000000" vpos="0" h="0.0982435730" zoom="407.1513157895" rate="44100.000000" >
+	<tags title="" artist="" album="" track="-1" year="" genre="-1" comments="" id3v2="1" />
+	<wavetrack name="FlameThrower" channel="2" linked="0" offset="0.00000000" rate="44100.000000" gain="1.000000" pan="0.000000" >
+		<sequence maxsamples="262144" sampleformat="262159" numsamples="98349" >
+			<waveblock start="0" >
+				<simpleblockfile filename='b00015.au' len='98349' min='-0.303795' max='0.298183' rms='0.063820'/>
+			</waveblock>
+		</sequence>
+		<envelope numpoints='0'>
+		</envelope>
+	</wavetrack>
+	<wavetrack name="FlameThrower" channel="2" linked="0" offset="0.00000000" rate="44100.000000" gain="1.000000" pan="0.000000" >
+		<sequence maxsamples="262144" sampleformat="262159" numsamples="146007" >
+			<waveblock start="0" >
+				<simpleblockfile filename='b00026.au' len='146007' min='-0.428559' max='0.348509' rms='0.069318'/>
+			</waveblock>
+		</sequence>
+		<envelope numpoints='2'>
+			<controlpoint t='1.080675272109' val='1.000000000000'/>
+			<controlpoint t='1.080680272109' val='1.000000000000'/>
+		</envelope>
+	</wavetrack>
+</audacityproject>
