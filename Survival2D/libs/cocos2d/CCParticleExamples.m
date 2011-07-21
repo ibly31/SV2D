@@ -138,7 +138,7 @@
 		self.speedVar = 60.0f;
 		
 		// starting angle
-		angle = 90;
+		angle = 80;
 		angleVar = 20;
 		
 		// emitter position
@@ -153,7 +153,7 @@
 		// size, in pixels
 		startSize = 25.0f;
 		startSizeVar = 5.0f;
-		endSize = 50.0f;
+		endSize = 75.0f;
 
 		// emits per frame
 		emissionRate = totalParticles/life;

@@ -10,6 +10,7 @@
 #import "SpaceManagerCocos2d.h"
 #import "Weapon.h"
 #import "ZombieBatch.h"
+#import "SimpleAudioEngine.h"
 
 #define MAXPUPS 3
 
@@ -50,6 +51,9 @@ enum {
         
     float currentRecoil;
     
+    ALuint flameLoopID;
+    ALuint flameStartID;
+    
     BOOL shooting;
     BOOL reloading;
     
@@ -78,6 +82,9 @@ enum {
 - (void)stopShooting;
 - (void)scheduleToReload;
 - (void)reload;
+
+- (void)setFlameStartDone;
+- (void)setFlameStop;
 
 - (void)switchWeapons;
 

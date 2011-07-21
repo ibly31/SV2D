@@ -8,7 +8,6 @@
 
 #import "Player.h"
 #import "GameScene.h"
-#import "SimpleAudioEngine.h"
 
 @implementation Player
 @synthesize feetSprite;
@@ -32,6 +31,7 @@
         NSString *weaponTitle = [[NSArray arrayWithObjects:@"Assault Rifle", @"Shotgun", @"SMG", @"Flamethrower", @"Rocket Launcher", @"Sniper Rifle", @"Minigun", nil] objectAtIndex: currentWeapon];
         
         self.feetSprite = [[CCSprite alloc] initWithFile:@"Playersheet.png" rect:CGRectMake(0, 448, 64, 64)];
+        [feetSprite setScaleY: 1.1f];
         self.playerSprite = [[CCSprite alloc] initWithFile:@"Playersheet.png" rect:CGRectMake(0, 0, 64, 64)];
         self.weapon = [[Weapon alloc] initWithName:weaponTitle];
         self.muzzleFlash = [[CCSprite alloc] initWithFile:@"MuzzleFlash.png"];
@@ -66,12 +66,12 @@
             pups[x].active = NO;
         }
         
-        CCAnimation *walkAnimation = [CCAnimation animationWithFrames:nil delay:3.0f / 32.0f];
+        CCAnimation *walkAnimation = [CCAnimation animationWithFrames:nil delay:2.0f / 32.0f];
         for(int x = 48; x < 64; x++){
             CGRect frame = CGRectMake((x % 8) * 64, (x / 8) * 64, 64, 64);
             [walkAnimation addFrame:[CCSpriteFrame frameWithTexture:[feetSprite texture] rect:frame]];
         }
-        for(int x = 64; x > 48; x--){
+        for(int x = 63; x > 48; x--){
             CGRect frame = CGRectMake((x % 8) * 64, (x / 8) * 64, 64, 64);
             [walkAnimation addFrame:[CCSpriteFrame frameWithTexture:[feetSprite texture] rect:frame]];
         }
@@ -133,6 +133,11 @@
     [self schedule:@selector(shoot) interval: [weapon getDelay] / (unlimitedAmmo + 1)];
     shooting = YES;
     [self shoot];
+    
+    if([weapon getWeaponType] == 3){
+        flameStartID = [[SimpleAudioEngine sharedEngine] playEffect:@"FlameStart.caf"];
+        [self schedule:@selector(setFlameStartDone) interval:1.08f];            
+    }
 }
 
 - (void)shoot{
@@ -186,6 +191,7 @@
         }else if(t == 3){
             [flameThrower setEmissionRate: [flameThrower totalParticles] / [flameThrower life]];
             [[(GameScene *)parent_ zombieBatch] flamePath: [playerSprite position] withRotation: sOffs withVariance: [flameThrower angleVar] withDamage: [weapon getDamage]];
+        
         }else if(t == 4){
             [[(GameScene *)parent_ rocketBatch] fireRocketFrom: sFrom withRotation:sOffs withDamage:[weapon getDamage]];
             [[SimpleAudioEngine sharedEngine] playEffect:@"Rocket.caf"];
@@ -216,6 +222,17 @@
             }
         }
     }
+}
+
+- (void)setFlameStartDone{
+    flameLoopID = [[SimpleAudioEngine sharedEngine] playEffect:@"FlameLoop.caf" loop:YES];
+    [self unschedule:@selector(setFlameStartDone)];
+}
+
+- (void)setFlameStop{
+    [self unschedule:@selector(setFlameStartDone)];
+    [[SimpleAudioEngine sharedEngine] stopEffect:flameStartID];
+    [[SimpleAudioEngine sharedEngine] stopEffect:flameLoopID];
 }
 
 - (void)usePup:(int)ptype withPosition:(CGPoint)pos withOpacity:(int)opa{
@@ -355,6 +372,7 @@
         [self unschedule: @selector(shoot)];
         shooting = NO;
         [flameThrower setEmissionRate: 0.0f];
+        [self setFlameStop];
     }
 }
 
@@ -371,6 +389,11 @@
 - (void)setVelocity:(CGPoint)vel{
     cpBodyActivate(playerShape->body);
     playerShape->body->v = cpv(vel.x * speed, vel.y * speed);
+    if(vel.x != 0.0f && vel.y != 0.0f){
+        [[CCActionManager sharedManager] resumeTarget: feetSprite];
+    }else{
+        [[CCActionManager sharedManager] pauseTarget: feetSprite];
+    }
 }
 
 - (void)setRotation:(float)rot{

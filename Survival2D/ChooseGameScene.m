@@ -7,6 +7,7 @@
 //
 
 #import "ChooseGameScene.h"
+#import "MainMenuScene.h"
 #import "GameScene.h"
 
 @implementation ChooseGameScene
@@ -23,6 +24,7 @@
 
 - (id)init{
     self = [super init];
+    [self setIsTouchEnabled: YES];
     if(self){
         backgroundColor = [[CCLayerColor alloc] initWithColor: ccc4(125, 125, 125, 255)];
         [self addChild: backgroundColor];
@@ -45,16 +47,21 @@
         [self addChild: menu];
         
         self.endArrow = [[CCSprite alloc] initWithFile:@"Analog.png" rect:CGRectMake(128, 64, 64, 64)];
-        [endArrow setPosition:ccp(0.0f, 320.0f)];
-        [endArrow setAnchorPoint: ccp(0.0f, 1.0f)];
+        [endArrow setPosition: ccp(240.0f, 32.0f)];
+        [endArrow setAnchorPoint: ccp(0.5f, 0.5f)];
         [self addChild: endArrow];
-        
     }
     return self;
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    
+    UITouch *touch = [touches anyObject];
+    CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView: touch.view]];
+    if(CGRectContainsPoint(CGRectMake([endArrow position].x - 32.0f, [endArrow position].y - 32.0f, 64.0f, 64.0f), location)){
+        MainMenuScene *mms = [[MainMenuScene alloc] init];
+        [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:mms]];
+        [mms release];
+    }
 }
 
 - (void)parkingLot{

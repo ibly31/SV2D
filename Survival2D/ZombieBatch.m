@@ -10,6 +10,7 @@
 #import "chipmunk.h"
 #import "GameScene.h"
 #import "BulletBatch.h"
+#import "SimpleAudioEngine.h"
 
 @implementation ZombieBatch
 @synthesize zombieTexture;
@@ -111,6 +112,9 @@
 }
 
 - (void)destroyZombie:(int)index{
+    
+    [[SimpleAudioEngine sharedEngine] playEffect:@"Splat.caf"];
+    
     [zombies[index].zombieSprite stopAllActions];
     [zombies[index].zombieSprite setOpacity: 0];
     [smgr removeAndFreeShape: zombies[index].zombieShape];
@@ -118,7 +122,6 @@
     zombies[index].alive = NO;
     [self removeChild:zombies[index].zombieSprite cleanup:NO];
     
-    [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
     [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
     [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
 }
