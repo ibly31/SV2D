@@ -31,7 +31,6 @@
     CCLabelAtlas *ammoLabel;
     CCLabelAtlas *healthLabel;
     CCSprite *reloadingSprite;
-    CCSprite *reloadButton;
     CCSprite *switchWeaponButton;
     
     CCSpriteBatchNode *casings;
@@ -69,7 +68,6 @@
 @property (nonatomic, retain) CCLabelAtlas *ammoLabel;
 @property (nonatomic, retain) CCLabelAtlas *healthLabel;
 @property (nonatomic, retain) CCSprite *reloadingSprite;
-@property (nonatomic, retain) CCSprite *reloadButton;
 @property (nonatomic, retain) CCSprite *switchWeaponButton;
 
 @property (nonatomic, retain) CCSpriteBatchNode *casings;

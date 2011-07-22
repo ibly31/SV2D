@@ -21,7 +21,6 @@
 @synthesize rightAnalogStick;
 @synthesize ammoLabel;
 @synthesize healthLabel;
-@synthesize reloadButton;
 @synthesize powerupHUD;
 @synthesize tutorialText;
 @synthesize currentText;
@@ -69,21 +68,15 @@
         [powerup setOpacity: 0];
         [self addChild: powerup];
         
-        self.leftAnalogStick = [[CCSprite alloc] initWithFile:@"Analog.png" rect:CGRectMake(0, 0, 128, 128)];
+        self.leftAnalogStick = [[CCSprite alloc] initWithFile:@"GuiSheet.png" rect:CGRectMake(0, 0, 128, 128)];
         [leftAnalogStick setPosition: ccp(74.0f, 74.0f)];
         [leftAnalogStick setOpacity: 0];
         [self addChild: leftAnalogStick];
         
-        self.rightAnalogStick = [[CCSprite alloc] initWithFile:@"Analog.png" rect:CGRectMake(0, 0, 128, 128)];
+        self.rightAnalogStick = [[CCSprite alloc] initWithFile:@"GuiSheet.png" rect:CGRectMake(0, 0, 128, 128)];
         [rightAnalogStick setPosition: ccp(406.0f, 74.0f)];
         [rightAnalogStick setOpacity: 0];
         [self addChild: rightAnalogStick];
-         
-        self.reloadButton = [[CCSprite alloc] initWithFile:@"ReloadButton.png"];
-        [reloadButton setPosition: ccp(192.0f, 320.0f)];
-        [reloadButton setAnchorPoint: ccp(0.5f, 1.0f)];
-        [reloadButton setOpacity: 0];
-        [self addChild: reloadButton];
         
         self.powerupHUD = [[PowerupHUD alloc] init];
         [powerupHUD setPosition: ccp(8.0f, 192.0f)];
@@ -112,12 +105,12 @@
         [currentText setPosition: ccp(240.0f, 270.0f)];
         [self addChild: currentText];
         
-        self.rightArrow = [[CCSprite alloc] initWithFile:@"Analog.png" rect:CGRectMake(128, 0, 64, 64)];
+        self.rightArrow = [[CCSprite alloc] initWithFile:@"GuiSheet.png" rect:CGRectMake(128, 0, 64, 64)];
         [rightArrow setPosition: ccp(476.0f, 170.0f)];
         [rightArrow setAnchorPoint: ccp(1.0f, 0.5f)];
         [self addChild: rightArrow];
         
-        self.endArrow = [[CCSprite alloc] initWithFile:@"Analog.png" rect:CGRectMake(128, 64, 64, 64)];
+        self.endArrow = [[CCSprite alloc] initWithFile:@"GuiSheet.png" rect:CGRectMake(128, 64, 64, 64)];
         [endArrow setPosition: ccp(240.0f, 4.0f)];
         [endArrow setAnchorPoint: ccp(0.5f, 0.0f)];
         [self addChild: endArrow];

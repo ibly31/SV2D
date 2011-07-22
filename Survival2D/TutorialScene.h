@@ -28,7 +28,6 @@
     CCLabelAtlas *ammoLabel;
     CCLabelAtlas *healthLabel;
     
-    CCSprite *reloadButton;
     PowerupHUD *powerupHUD;
     CCSprite *tutorialText;
     
@@ -63,7 +62,6 @@
 @property (nonatomic, retain) CCLabelAtlas *ammoLabel;
 @property (nonatomic, retain) CCLabelAtlas *healthLabel;
 
-@property (nonatomic, retain) CCSprite *reloadButton;
 @property (nonatomic, retain) PowerupHUD *powerupHUD;
 @property (nonatomic, retain) CCSprite *tutorialText;
 

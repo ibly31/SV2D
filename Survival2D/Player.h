@@ -60,6 +60,8 @@ enum {
     BOOL unlimitedAmmo;
     
     int numberOfZombiesTouchingPlayer;
+    
+    int ammunitions[7];
 }
 
 @property (nonatomic, retain) CCSprite *feetSprite;

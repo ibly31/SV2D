@@ -155,6 +155,8 @@
 		7794C63913A304F000B9B8C0 /* MapThumbs-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 7794C63713A304F000B9B8C0 /* MapThumbs-hd.png */; };
 		779D62E413A81F8B008CA31F /* Playersheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 779D62E213A81F8B008CA31F /* Playersheet.png */; };
 		779D62E513A81F8B008CA31F /* Playersheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 779D62E313A81F8B008CA31F /* Playersheet-hd.png */; };
+		77A67B9213D91EF800D375EE /* GuiSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A67B9013D91EF800D375EE /* GuiSheet.png */; };
+		77A67B9313D91EF800D375EE /* GuiSheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A67B9113D91EF800D375EE /* GuiSheet-hd.png */; };
 		77C12F70139B1D95005BF8A3 /* Bloodsplatter.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F5C139B1D95005BF8A3 /* Bloodsplatter.png */; };
 		77C12F71139B1D95005BF8A3 /* Bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F5D139B1D95005BF8A3 /* Bullet.png */; };
 		77C12F72139B1D95005BF8A3 /* Fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F5E139B1D95005BF8A3 /* Fire.png */; };
@@ -163,11 +165,8 @@
 		77C12F75139B1D95005BF8A3 /* Rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F61139B1D95005BF8A3 /* Rocket.png */; };
 		77C12F76139B1D95005BF8A3 /* RocketTrail.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F62139B1D95005BF8A3 /* RocketTrail.png */; };
 		77C12F77139B1D95005BF8A3 /* Shell.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F63139B1D95005BF8A3 /* Shell.png */; };
-		77C12F78139B1D95005BF8A3 /* Analog.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F65139B1D95005BF8A3 /* Analog.png */; };
 		77C12F79139B1D95005BF8A3 /* Font.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F66139B1D95005BF8A3 /* Font.png */; };
-		77C12F7A139B1D95005BF8A3 /* ReloadButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F67139B1D95005BF8A3 /* ReloadButton.png */; };
 		77C12F7B139B1D95005BF8A3 /* Reloading.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F68139B1D95005BF8A3 /* Reloading.png */; };
-		77C12F7C139B1D95005BF8A3 /* SwitchWeaponButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F69139B1D95005BF8A3 /* SwitchWeaponButton.png */; };
 		77C12F80139B1D95005BF8A3 /* Weaponsheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F6D139B1D95005BF8A3 /* Weaponsheet.png */; };
 		77C12F97139B1DA5005BF8A3 /* Bloodsplatter-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F84139B1DA5005BF8A3 /* Bloodsplatter-hd.png */; };
 		77C12F98139B1DA5005BF8A3 /* Bullet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F85139B1DA5005BF8A3 /* Bullet-hd.png */; };
@@ -177,11 +176,8 @@
 		77C12F9C139B1DA5005BF8A3 /* Rocket-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F89139B1DA5005BF8A3 /* Rocket-hd.png */; };
 		77C12F9D139B1DA5005BF8A3 /* RocketTrail-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F8A139B1DA5005BF8A3 /* RocketTrail-hd.png */; };
 		77C12F9E139B1DA5005BF8A3 /* Shell-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F8B139B1DA5005BF8A3 /* Shell-hd.png */; };
-		77C12F9F139B1DA5005BF8A3 /* Analog-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F8D139B1DA5005BF8A3 /* Analog-hd.png */; };
 		77C12FA0139B1DA5005BF8A3 /* Font-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F8E139B1DA5005BF8A3 /* Font-hd.png */; };
-		77C12FA1139B1DA5005BF8A3 /* ReloadButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F8F139B1DA5005BF8A3 /* ReloadButton-hd.png */; };
 		77C12FA2139B1DA5005BF8A3 /* Reloading-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F90139B1DA5005BF8A3 /* Reloading-hd.png */; };
-		77C12FA3139B1DA5005BF8A3 /* SwitchWeaponButton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F91139B1DA5005BF8A3 /* SwitchWeaponButton-hd.png */; };
 		77C12FA7139B1DA5005BF8A3 /* Weaponsheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F95139B1DA5005BF8A3 /* Weaponsheet-hd.png */; };
 		77D17C6F13AD47B800B75B83 /* Foodsheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D17C6D13AD47B800B75B83 /* Foodsheet.png */; };
 		77D17C7013AD47B800B75B83 /* Foodsheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D17C6E13AD47B800B75B83 /* Foodsheet-hd.png */; };
@@ -502,6 +498,8 @@
 		7794C63713A304F000B9B8C0 /* MapThumbs-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MapThumbs-hd.png"; path = "Resources/Textures/Retina/MapThumbs-hd.png"; sourceTree = SOURCE_ROOT; };
 		779D62E213A81F8B008CA31F /* Playersheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Playersheet.png; sourceTree = "<group>"; };
 		779D62E313A81F8B008CA31F /* Playersheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Playersheet-hd.png"; path = "Resources/Textures/Retina/Playersheet-hd.png"; sourceTree = SOURCE_ROOT; };
+		77A67B9013D91EF800D375EE /* GuiSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GuiSheet.png; path = "Resources/Textures/Non-Retina/GUI/GuiSheet.png"; sourceTree = SOURCE_ROOT; };
+		77A67B9113D91EF800D375EE /* GuiSheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GuiSheet-hd.png"; sourceTree = "<group>"; };
 		77C12F5C139B1D95005BF8A3 /* Bloodsplatter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bloodsplatter.png; sourceTree = "<group>"; };
 		77C12F5D139B1D95005BF8A3 /* Bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bullet.png; sourceTree = "<group>"; };
 		77C12F5E139B1D95005BF8A3 /* Fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fire.png; sourceTree = "<group>"; };
@@ -510,11 +508,8 @@
 		77C12F61139B1D95005BF8A3 /* Rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rocket.png; sourceTree = "<group>"; };
 		77C12F62139B1D95005BF8A3 /* RocketTrail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RocketTrail.png; sourceTree = "<group>"; };
 		77C12F63139B1D95005BF8A3 /* Shell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shell.png; sourceTree = "<group>"; };
-		77C12F65139B1D95005BF8A3 /* Analog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Analog.png; sourceTree = "<group>"; };
 		77C12F66139B1D95005BF8A3 /* Font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Font.png; sourceTree = "<group>"; };
-		77C12F67139B1D95005BF8A3 /* ReloadButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ReloadButton.png; sourceTree = "<group>"; };
 		77C12F68139B1D95005BF8A3 /* Reloading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reloading.png; sourceTree = "<group>"; };
-		77C12F69139B1D95005BF8A3 /* SwitchWeaponButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchWeaponButton.png; sourceTree = "<group>"; };
 		77C12F6D139B1D95005BF8A3 /* Weaponsheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Weaponsheet.png; sourceTree = "<group>"; };
 		77C12F84139B1DA5005BF8A3 /* Bloodsplatter-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bloodsplatter-hd.png"; sourceTree = "<group>"; };
 		77C12F85139B1DA5005BF8A3 /* Bullet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bullet-hd.png"; sourceTree = "<group>"; };
@@ -524,11 +519,8 @@
 		77C12F89139B1DA5005BF8A3 /* Rocket-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rocket-hd.png"; sourceTree = "<group>"; };
 		77C12F8A139B1DA5005BF8A3 /* RocketTrail-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RocketTrail-hd.png"; sourceTree = "<group>"; };
 		77C12F8B139B1DA5005BF8A3 /* Shell-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Shell-hd.png"; sourceTree = "<group>"; };
-		77C12F8D139B1DA5005BF8A3 /* Analog-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Analog-hd.png"; sourceTree = "<group>"; };
 		77C12F8E139B1DA5005BF8A3 /* Font-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Font-hd.png"; sourceTree = "<group>"; };
-		77C12F8F139B1DA5005BF8A3 /* ReloadButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReloadButton-hd.png"; sourceTree = "<group>"; };
 		77C12F90139B1DA5005BF8A3 /* Reloading-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reloading-hd.png"; sourceTree = "<group>"; };
-		77C12F91139B1DA5005BF8A3 /* SwitchWeaponButton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SwitchWeaponButton-hd.png"; sourceTree = "<group>"; };
 		77C12F95139B1DA5005BF8A3 /* Weaponsheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Weaponsheet-hd.png"; sourceTree = "<group>"; };
 		77D17C6D13AD47B800B75B83 /* Foodsheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Foodsheet.png; sourceTree = "<group>"; };
 		77D17C6E13AD47B800B75B83 /* Foodsheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Foodsheet-hd.png"; path = "Resources/Textures/Retina/Foodsheet-hd.png"; sourceTree = SOURCE_ROOT; };
@@ -643,14 +635,7 @@
 			isa = PBXGroup;
 			children = (
 				7760AA5C1380BD4800D5B52D /* Game Classes */,
-				7760AA561380BC1C00D5B52D /* GameScene.h */,
-				7760AA571380BC1C00D5B52D /* GameScene.m */,
-				77EDE28713C94D2D000C5124 /* TutorialScene.h */,
-				77EDE28813C94D2D000C5124 /* TutorialScene.m */,
-				77EE1D59139EFC1F00DA6D67 /* ChooseGameScene.h */,
-				77EE1D5A139EFC1F00DA6D67 /* ChooseGameScene.m */,
-				77F0CC20139C84A10029CD6E /* MainMenuScene.h */,
-				77F0CC21139C84A10029CD6E /* MainMenuScene.m */,
+				77A67B9513D922D100D375EE /* Scenes */,
 				7760AA451380BB6000D5B52D /* AppDelegate.h */,
 				7760AA461380BB6000D5B52D /* AppDelegate.m */,
 				7760AA481380BB6000D5B52D /* RootViewController.h */,
@@ -1031,6 +1016,21 @@
 			name = Maps;
 			sourceTree = "<group>";
 		};
+		77A67B9513D922D100D375EE /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				7760AA561380BC1C00D5B52D /* GameScene.h */,
+				7760AA571380BC1C00D5B52D /* GameScene.m */,
+				77EDE28713C94D2D000C5124 /* TutorialScene.h */,
+				77EDE28813C94D2D000C5124 /* TutorialScene.m */,
+				77EE1D59139EFC1F00DA6D67 /* ChooseGameScene.h */,
+				77EE1D5A139EFC1F00DA6D67 /* ChooseGameScene.m */,
+				77F0CC20139C84A10029CD6E /* MainMenuScene.h */,
+				77F0CC21139C84A10029CD6E /* MainMenuScene.m */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 		77C12F5B139B1D95005BF8A3 /* Effects */ = {
 			isa = PBXGroup;
 			children = (
@@ -1049,13 +1049,11 @@
 		77C12F64139B1D95005BF8A3 /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				77A67B9013D91EF800D375EE /* GuiSheet.png */,
 				77EDE28B13C959E0000C5124 /* TutorialText.png */,
 				776E416313AF06D2002D64F1 /* PowerupBack.png */,
-				77C12F65139B1D95005BF8A3 /* Analog.png */,
 				77C12F66139B1D95005BF8A3 /* Font.png */,
-				77C12F67139B1D95005BF8A3 /* ReloadButton.png */,
 				77C12F68139B1D95005BF8A3 /* Reloading.png */,
-				77C12F69139B1D95005BF8A3 /* SwitchWeaponButton.png */,
 			);
 			path = GUI;
 			sourceTree = "<group>";
@@ -1078,13 +1076,11 @@
 		77C12F8C139B1DA5005BF8A3 /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				77A67B9113D91EF800D375EE /* GuiSheet-hd.png */,
 				77EDE28C13C959E0000C5124 /* TutorialText-hd.png */,
 				776E416413AF06D2002D64F1 /* PowerupBack-hd.png */,
-				77C12F8D139B1DA5005BF8A3 /* Analog-hd.png */,
 				77C12F8E139B1DA5005BF8A3 /* Font-hd.png */,
-				77C12F8F139B1DA5005BF8A3 /* ReloadButton-hd.png */,
 				77C12F90139B1DA5005BF8A3 /* Reloading-hd.png */,
-				77C12F91139B1DA5005BF8A3 /* SwitchWeaponButton-hd.png */,
 			);
 			path = GUI;
 			sourceTree = "<group>";
@@ -1209,11 +1205,8 @@
 				77C12F75139B1D95005BF8A3 /* Rocket.png in Resources */,
 				77C12F76139B1D95005BF8A3 /* RocketTrail.png in Resources */,
 				77C12F77139B1D95005BF8A3 /* Shell.png in Resources */,
-				77C12F78139B1D95005BF8A3 /* Analog.png in Resources */,
 				77C12F79139B1D95005BF8A3 /* Font.png in Resources */,
-				77C12F7A139B1D95005BF8A3 /* ReloadButton.png in Resources */,
 				77C12F7B139B1D95005BF8A3 /* Reloading.png in Resources */,
-				77C12F7C139B1D95005BF8A3 /* SwitchWeaponButton.png in Resources */,
 				77C12F80139B1D95005BF8A3 /* Weaponsheet.png in Resources */,
 				77C12F97139B1DA5005BF8A3 /* Bloodsplatter-hd.png in Resources */,
 				77C12F98139B1DA5005BF8A3 /* Bullet-hd.png in Resources */,
@@ -1223,11 +1216,8 @@
 				77C12F9C139B1DA5005BF8A3 /* Rocket-hd.png in Resources */,
 				77C12F9D139B1DA5005BF8A3 /* RocketTrail-hd.png in Resources */,
 				77C12F9E139B1DA5005BF8A3 /* Shell-hd.png in Resources */,
-				77C12F9F139B1DA5005BF8A3 /* Analog-hd.png in Resources */,
 				77C12FA0139B1DA5005BF8A3 /* Font-hd.png in Resources */,
-				77C12FA1139B1DA5005BF8A3 /* ReloadButton-hd.png in Resources */,
 				77C12FA2139B1DA5005BF8A3 /* Reloading-hd.png in Resources */,
-				77C12FA3139B1DA5005BF8A3 /* SwitchWeaponButton-hd.png in Resources */,
 				77C12FA7139B1DA5005BF8A3 /* Weaponsheet-hd.png in Resources */,
 				77F0CC24139C87060029CD6E /* Splatz.ttf in Resources */,
 				7794C63813A304F000B9B8C0 /* MapThumbs.png in Resources */,
@@ -1252,6 +1242,8 @@
 				773BBA5413D123B300C14F4D /* ShotgunShot.caf in Resources */,
 				773BBA5513D123B300C14F4D /* Splat.caf in Resources */,
 				773BBA5713D1253700C14F4D /* FlameLoop.caf in Resources */,
+				77A67B9213D91EF800D375EE /* GuiSheet.png in Resources */,
+				77A67B9313D91EF800D375EE /* GuiSheet-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

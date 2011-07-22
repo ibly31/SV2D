@@ -31,7 +31,6 @@
 @synthesize ammoLabel;
 @synthesize healthLabel;
 @synthesize reloadingSprite;
-@synthesize reloadButton;
 @synthesize switchWeaponButton;
 
 @synthesize casings;
@@ -96,11 +95,11 @@
         self.powerupHUD = [[PowerupHUD alloc] init];
         [self addChild: powerupHUD z:8];
         
-        self.leftAnalogStick = [[CCSprite alloc] initWithFile: @"Analog.png" rect:CGRectMake(0, 0, 128, 128)];
+        self.leftAnalogStick = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(0, 0, 128, 128)];
         [leftAnalogStick setPosition: ccp(74.0f, 74.0f)];
         [self addChild: leftAnalogStick z:9];
         
-        self.rightAnalogStick = [[CCSprite alloc] initWithFile: @"Analog.png" rect:CGRectMake(0, 0, 128, 128)];
+        self.rightAnalogStick = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(0, 0, 128, 128)];
         [rightAnalogStick setPosition: ccp(404.0f, 74.0f)];
         [self addChild: rightAnalogStick z:10];
         
@@ -112,30 +111,18 @@
         
         self.healthLabel = [[[CCLabelAtlas alloc] initWithString:@"-100" charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
         
-        /*if([[CCDirector sharedDirector] contentScaleFactor] > 1){
-            self.healthLabel = [[[CCLabelAtlas alloc] initWithString:@"-100" charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
-        }else{
-            self.healthLabel = [[[CCLabelAtlas alloc] initWithString:@"-100" charMapFile:@"Font-hd.png" itemWidth:32 itemHeight:48 startCharMap:','] retain];
-            [healthLabel setScale:0.5f];
-        }*/
-        
         [healthLabel setAnchorPoint: ccp(1.0f, 1.0f)];
         [healthLabel setPosition: ccp(480.0f, 360.0f)];
         [self addChild: healthLabel z:12];
         [player updateHealth];
         
-        self.reloadingSprite = [[CCSprite alloc] initWithFile: @"Reloading.png"];
+        self.reloadingSprite = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(0, 128, 128, 24)];
         [reloadingSprite setAnchorPoint: ccp(0.0f, 1.0f)];
         [reloadingSprite setPosition: ccp(0.0f, 320.0f)];
         [reloadingSprite setOpacity: 0];
         [self addChild: reloadingSprite z:13];
         
-        self.reloadButton = [[CCSprite alloc] initWithFile: @"ReloadButton.png"];
-        [reloadButton setAnchorPoint: ccp(0.5f, 1.0f)];
-        [reloadButton setPosition: ccp(192.0f, 320.0f)];
-        [self addChild: reloadButton z:14];
-        
-        self.switchWeaponButton = [[CCSprite alloc] initWithFile: @"SwitchWeaponButton.png"];
+        self.switchWeaponButton = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(192, 24, 64, 24)];
         [switchWeaponButton setAnchorPoint: ccp(0.5f, 1.0f)];
         [switchWeaponButton setPosition: ccp(288.0f, 320.0f)];
         [self addChild: switchWeaponButton z: 15];
@@ -196,7 +183,6 @@
     [rightAnalogStick setPosition: ccpAdd(centerOn, ccp(166.0f, -86.0f))];
     [leftAnalogStick setPosition: ccpAdd(centerOn, ccp(-166.0f, -86.f))];
     [damageIndicator setPosition: ccpAdd(centerOn, ccp(-240.0f, -160.0f))];
-    [reloadButton setPosition: ccpAdd(centerOn, ccp(-48.0f, 160.0f))];
     [switchWeaponButton setPosition: ccpAdd(centerOn, ccp(48.0f, 160.0f))];
     [powerupHUD setPosition: ccpAdd(centerOn, ccp(-232.0f, 32.0f))];
 }
@@ -270,7 +256,6 @@ float distance(CGPoint point1,CGPoint point2){
     [self removeChild:ammoLabel cleanup:NO];
     [self removeChild:healthLabel cleanup:NO];
     [self removeChild:reloadingSprite cleanup:NO];
-    [self removeChild:reloadButton cleanup:NO];
     [self removeChild:switchWeaponButton cleanup:NO];
     [self removeChild:casings cleanup:NO];
     [self removeChild:bloodSplatters cleanup:NO];
@@ -288,7 +273,6 @@ float distance(CGPoint point1,CGPoint point2){
     [ammoLabel release];
     [healthLabel release];
     [reloadingSprite release];
-    [reloadButton release];
     [switchWeaponButton release];
     [casings release];
     [bloodSplatters release];

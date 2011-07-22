@@ -71,9 +71,7 @@
 		UITouch *touch = [touchArray objectAtIndex: x];
 		CGPoint location = [[CCDirector sharedDirector] convertToGL: [touch locationInView: touch.view]];
                 
-        if(CGRectContainsPoint(CGRectMake(160,296,64,24), location)){
-            [[(GameScene *)parent_ player] scheduleToReload];
-        }else if(CGRectContainsPoint(CGRectMake(256,296,64,24), location)){
+        if(CGRectContainsPoint(CGRectMake(256,296,64,24), location)){
             [[(GameScene *)parent_ player] switchWeapons];
         }else{
             [self doTouch: location];

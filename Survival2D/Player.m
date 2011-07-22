@@ -27,6 +27,14 @@
         playerShape->collision_type = 1; //PLAYER_TYPE
         [smgr addCollisionCallbackBetweenType:1 otherType:0 target:self selector:@selector(handleCollision:arbiter:space:) moments:COLLISION_BEGIN, COLLISION_SEPARATE, nil];
         
+        ammunitions[0] = 120;
+        ammunitions[1] = 40;
+        ammunitions[2] = 200;
+        ammunitions[3] = 600;
+        ammunitions[4] = 20;
+        ammunitions[5] = 40;
+        ammunitions[6] = 400;
+        
         currentWeapon = 0;
         NSString *weaponTitle = [[NSArray arrayWithObjects:@"Assault Rifle", @"Shotgun", @"SMG", @"Flamethrower", @"Rocket Launcher", @"Sniper Rifle", @"Minigun", nil] objectAtIndex: currentWeapon];
         
@@ -143,7 +151,16 @@
 - (void)shoot{
     int result = 0;
     if(!unlimitedAmmo){
-        result = [weapon shoot];
+        if(ammunitions[currentWeapon] - 1 != 0){
+            if(((ammunitions[currentWeapon] - 2) % 30) + 1 == [weapon getMaxAmmo]){
+                result = 2;
+            }else{
+                result = 1;
+                ammunitions[currentWeapon]--;
+            }
+        }else{
+            result = 0;
+        }
     }else{
         result = 1;
     }
@@ -208,6 +225,7 @@
         }
     }else if(result == 2 && !reloading){
         [self scheduleToReload];
+
     }
     
     [self updateAmmo];
@@ -250,7 +268,13 @@
             [self updateHealth];
             break;
         case PUP_ORANGE:
-            [weapon giveMaxAmmo];
+            ammunitions[0] = 120;
+            ammunitions[1] = 40;
+            ammunitions[2] = 200;
+            ammunitions[3] = 600;
+            ammunitions[4] = 20;
+            ammunitions[5] = 40;
+            ammunitions[6] = 400;
             [self updateAmmo];
             pupLife = 1.0f;
             break;
@@ -408,8 +432,9 @@
     if(reloading){
         reloading = NO;
         [self unschedule: @selector(reload)];
-        [weapon setMagazineCount: [weapon getMagazineCount] - 1];
-        [weapon setCurrentMagazine: [weapon getMaxAmmo]];
+        
+        ammunitions[currentWeapon]--;
+        
         CCSprite *rel = [(GameScene *)parent_ reloadingSprite];
         CCLabelAtlas *amm = [(GameScene *)parent_ ammoLabel];
         
@@ -441,8 +466,9 @@
 }
 
 - (void)updateAmmo{
+    int currentMagazine = ((ammunitions[currentWeapon] - 1) % [weapon getMaxAmmo]) + 1;
     CCLabelAtlas *ammoLabel = [(GameScene *)parent_ ammoLabel];
-    [ammoLabel setString: [NSString stringWithFormat: @"%i/%i", [weapon getCurrentMagazine], [weapon getMagazineCount] * [weapon getMaxAmmo]]];
+    [ammoLabel setString: [NSString stringWithFormat: @"%i/%i", currentMagazine, [weapon getMaxAmmo]]];
 }
 
 @end

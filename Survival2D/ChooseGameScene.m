@@ -46,7 +46,7 @@
         self.menu = [CCMenu menuWithItems:parkingLotItem, otherMapItem, nil];
         [self addChild: menu];
         
-        self.endArrow = [[CCSprite alloc] initWithFile:@"Analog.png" rect:CGRectMake(128, 64, 64, 64)];
+        self.endArrow = [[CCSprite alloc] initWithFile:@"GuiSheet.png" rect:CGRectMake(128, 64, 64, 64)];
         [endArrow setPosition: ccp(240.0f, 32.0f)];
         [endArrow setAnchorPoint: ccp(0.5f, 0.5f)];
         [self addChild: endArrow];
