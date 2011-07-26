@@ -7,6 +7,7 @@
 //
 
 #import "PowerupBatch.h"
+#import "GameScene.h"
 
 @implementation PowerupBatch
 @synthesize smgr;

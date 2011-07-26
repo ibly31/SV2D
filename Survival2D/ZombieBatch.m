@@ -11,6 +11,7 @@
 #import "GameScene.h"
 #import "BulletBatch.h"
 #import "SimpleAudioEngine.h"
+#import "AppDelegate.h"
 
 @implementation ZombieBatch
 @synthesize zombieTexture;
@@ -29,6 +30,7 @@
             newZombie.health = 0;
             newZombie.alive = NO;
             newZombie.speed = 0.0f;
+            newZombie.damage = 0;
             newZombie.zombieSprite = zombieSprite;
             newZombie.zombieShape = NULL;
             newZombie.zombieType = 0;
@@ -112,8 +114,9 @@
 }
 
 - (void)destroyZombie:(int)index{
-    
-    [[SimpleAudioEngine sharedEngine] playEffect:@"Splat.caf"];
+    if([(AppDelegate *)[[UIApplication sharedApplication] delegate] soundEffects]){
+        [[SimpleAudioEngine sharedEngine] playEffect:@"Splat.caf"];
+    }
     
     [zombies[index].zombieSprite stopAllActions];
     [zombies[index].zombieSprite setOpacity: 0];
@@ -122,8 +125,15 @@
     zombies[index].alive = NO;
     [self removeChild:zombies[index].zombieSprite cleanup:NO];
     
-    [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
-    [self addNewZombieAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
+    int numZomb = 0;
+    for(int x = 0; x < MAXZOMBIES; x++){
+        if(zombies[x].alive){
+            numZomb++;
+        }
+    }
+    if(numZomb == 0){
+        [(GameScene *)parent_ startNewWave];
+    }
 }
 
 - (void)updateZombies{
@@ -151,7 +161,7 @@
     }
 }
 
-- (void)addNewZombieAt:(CGPoint)newZomb{
+- (void)addNewZombieAt:(CGPoint)newZomb withType:(int)type{
     int numberAlive = [self numberZombiesAlive];
     if(numberAlive < MAXZOMBIES){
         printf("\nNumber of Zombies Alive: %i", numberAlive);
@@ -159,14 +169,53 @@
         if(numberAlive <= MAXZOMBIES){
             int x = [self nextOpenZombieSlot];
             [self addChild: zombies[x].zombieSprite];
-            zombies[x].health = 100;
             zombies[x].alive = YES;
-            zombies[x].speed = 45.0f;
-            zombies[x].zombieType = (int)(CCRANDOM_0_1() * 7);
+            zombies[x].zombieType = type;
             zombies[x].zombieShape = [smgr addCircleAt:newZomb mass:1.0f radius:16.0f];
             zombies[x].zombieShape->collision_type = 0;
             [zombies[x].zombieSprite setOpacity: 255];
             [zombies[x].zombieSprite setDisplayFrame: [CCSpriteFrame frameWithTexture:self.zombieTexture rect:CGRectMake(zombies[x].zombieType * 32, 0, 32, 32)]];
+            
+            switch(type){
+                case 0:
+                    zombies[x].speed = 45.0f;
+                    zombies[x].health = 100;
+                    zombies[x].damage = 2;
+                    break;
+                case 1:
+                    zombies[x].speed = 60.0f;
+                    zombies[x].health = 85;
+                    zombies[x].damage = 1;
+                    break;
+                case 2:
+                    zombies[x].speed = 55.0f;
+                    zombies[x].health = 85;
+                    zombies[x].damage = 1;
+                case 3:
+                    zombies[x].speed = 35.0f;
+                    zombies[x].health = 200;
+                    zombies[x].damage = 2;
+                    break;
+                case 4:
+                    zombies[x].speed = 65.0f;
+                    zombies[x].health = 100;
+                    zombies[x].damage = 1;
+                    break;
+                case 5:
+                    zombies[x].speed = 65.0f;
+                    zombies[x].health = 85;
+                    zombies[x].damage = 2;
+                    break;
+                case 6:
+                    zombies[x].speed = 15.0f;
+                    zombies[x].health = 10000;
+                    zombies[x].damage = 250;
+                    break;
+                default:
+                    NSLog(@"Default'd on Zombie Spawn");
+                    break;
+            }
+            
             
             [self zombieSetPosition:newZomb index:x];
             [self zombieSetRotation:0.0f index:x];

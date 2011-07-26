@@ -165,9 +165,8 @@
         if(location.x > 304){
             [self offsetCurrentSlide: 1];
         }else if(location.x > 176.0f && location.y < 74.0f){
-            MainMenuScene *mms = [[MainMenuScene alloc] init];
+            CCScene *mms = [MainMenuScene scene];
             [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:mms]];
-            [mms release];
         }
     }
 }

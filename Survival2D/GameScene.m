@@ -8,6 +8,7 @@
 
 #import "GameScene.h"
 #import "SimpleAudioEngine.h"
+#import "AppDelegate.h"
 
 #define CASINGOVERWRITE 1000
 
@@ -28,10 +29,15 @@
 
 @synthesize damageIndicator;
 
+@synthesize guiBatch;
 @synthesize ammoLabel;
 @synthesize healthLabel;
 @synthesize reloadingSprite;
 @synthesize switchWeaponButton;
+@synthesize pauseButton;
+
+@synthesize waveIndicator;
+@synthesize waveNumber;
 
 @synthesize casings;
 @synthesize bloodSplatters;
@@ -95,64 +101,193 @@
         self.powerupHUD = [[PowerupHUD alloc] init];
         [self addChild: powerupHUD z:8];
         
+        self.guiBatch = [[CCSpriteBatchNode alloc] initWithFile:@"GuiSheet.png" capacity:10];
+        [self addChild: guiBatch z:9];
+        
         self.leftAnalogStick = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(0, 0, 128, 128)];
         [leftAnalogStick setPosition: ccp(74.0f, 74.0f)];
-        [self addChild: leftAnalogStick z:9];
+        [guiBatch addChild: leftAnalogStick];
         
         self.rightAnalogStick = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(0, 0, 128, 128)];
         [rightAnalogStick setPosition: ccp(404.0f, 74.0f)];
-        [self addChild: rightAnalogStick z:10];
+        [guiBatch addChild: rightAnalogStick];
         
         self.ammoLabel = [[[CCLabelAtlas alloc] initWithString:@"0/0" charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
         [ammoLabel setAnchorPoint: ccp(0.0f, 1.0f)];
         [ammoLabel setPosition: ccp(0.0f, 320.0f)];
-        [self addChild: ammoLabel z:11];
+        [self addChild: ammoLabel z:10];
         [player updateAmmo];
         
         self.healthLabel = [[[CCLabelAtlas alloc] initWithString:@"-100" charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
-        
         [healthLabel setAnchorPoint: ccp(1.0f, 1.0f)];
         [healthLabel setPosition: ccp(480.0f, 360.0f)];
-        [self addChild: healthLabel z:12];
+        [self addChild: healthLabel z:11];
         [player updateHealth];
         
         self.reloadingSprite = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(0, 128, 128, 24)];
         [reloadingSprite setAnchorPoint: ccp(0.0f, 1.0f)];
         [reloadingSprite setPosition: ccp(0.0f, 320.0f)];
         [reloadingSprite setOpacity: 0];
-        [self addChild: reloadingSprite z:13];
+        [guiBatch addChild: reloadingSprite];
         
         self.switchWeaponButton = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(192, 24, 64, 24)];
         [switchWeaponButton setAnchorPoint: ccp(0.5f, 1.0f)];
         [switchWeaponButton setPosition: ccp(288.0f, 320.0f)];
-        [self addChild: switchWeaponButton z: 15];
+        [guiBatch addChild: switchWeaponButton];
+        
+        self.pauseButton = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(192, 0, 64, 24)];
+        [pauseButton setAnchorPoint: ccp(0.5f, 1.0f)];
+        [pauseButton setPosition: ccp(192.0f, 320.0f)];
+        [guiBatch addChild: pauseButton];
+        
+        currentWave = 0;
+        for(int x = 0; x < 7; x++){
+            toSpawns[x] = 0;
+        }
+        
+        [self startNewWave];
+                
+        self.waveIndicator = [[CCSprite alloc] initWithFile:@"GuiSheet.png" rect:CGRectMake(128, 128, 128, 40)];
+        [waveIndicator setOpacity: 0];
+        [waveIndicator setPosition:ccp(240.0f, 240.0f)];
+        [guiBatch addChild: waveIndicator];
+        
+        self.waveNumber = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%i", currentWave] fontName:@"Splatz.ttf" fontSize:22.0f];
+        [waveNumber setColor:ccc3(255, 0, 0)];
+        [waveNumber setAnchorPoint: ccp(1.0f, 0.5f)];
+        [waveNumber setPosition: ccpAdd([waveIndicator position], ccp(60.0f, -3.0f))];
+        [waveNumber setOpacity: 0];
+        [self addChild: waveNumber z: 12];
         
         self.damageIndicator = [[CCLayerColor alloc] initWithColor: ccc4(155, 0, 0, 50)];
         [damageIndicator setOpacity: 0];
         [damageIndicator setAnchorPoint: ccp(0.5f, 0.5f)];
-        [self addChild: damageIndicator z:16];
+        [self addChild: damageIndicator z:13];
         
         self.inputLayer = [[InputLayer alloc] init];
-        [self addChild: inputLayer z:17];
+        [self addChild: inputLayer z:14];
         
-        [powerupBatch addNewPowerupAt:ccp(470, 470)];
-        [powerupBatch addNewPowerupAt:ccp(430, 470)];
-        [powerupBatch addNewPowerupAt:ccp(470, 430)];
-        [zombieBatch addNewZombieAt: ccp(1024, 1024)];
-        
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"Shot.caf"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"Reload.caf"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"ShotgunShot.caf"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"ShotgunPump.caf"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"FlameStart.caf"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"FlameLoop.caf"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"FlameReload.caf"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"Rocket.caf"];
-        [[SimpleAudioEngine sharedEngine] preloadEffect:@"Splat.caf"];
+        if([(AppDelegate *)[[UIApplication sharedApplication] delegate] soundEffects]){
+            [[SimpleAudioEngine sharedEngine] preloadEffect:@"Shot.caf"];
+            [[SimpleAudioEngine sharedEngine] preloadEffect:@"Reload.caf"];
+            [[SimpleAudioEngine sharedEngine] preloadEffect:@"ShotgunShot.caf"];
+            [[SimpleAudioEngine sharedEngine] preloadEffect:@"ShotgunPump.caf"];
+            [[SimpleAudioEngine sharedEngine] preloadEffect:@"FlameStart.caf"];
+            [[SimpleAudioEngine sharedEngine] preloadEffect:@"FlameLoop.caf"];
+            [[SimpleAudioEngine sharedEngine] preloadEffect:@"FlameReload.caf"];
+            [[SimpleAudioEngine sharedEngine] preloadEffect:@"Rocket.caf"];
+            [[SimpleAudioEngine sharedEngine] preloadEffect:@"Splat.caf"];
+        }
 
         timeRunning = 0.0f;
     }
 	return self;
+}
+
+- (void)startNewWave{
+    currentWave++;
+    [waveIndicator setOpacity: 0];
+    [waveIndicator runAction: [CCFadeTo actionWithDuration:0.25f opacity:255]];
+    [waveIndicator runAction: [CCSequence actions: [CCDelayTime actionWithDuration:2.0f], [CCFadeTo actionWithDuration:0.5f opacity:0], nil]];
+
+    [waveNumber setString:[NSString stringWithFormat:@"%i", currentWave]];
+    [waveNumber setOpacity: 0];
+    [waveNumber runAction: [CCFadeTo actionWithDuration:0.25f opacity:255]];
+    [waveNumber runAction: [CCSequence actions: [CCDelayTime actionWithDuration:2.0f], [CCFadeTo actionWithDuration:0.5f opacity:0], nil]];
+    
+    switch(currentWave){
+        case 1:
+            toSpawns[DONUT] =  5;
+            toSpawns[PIZZA] =  2;
+            break;
+        case 2:
+            toSpawns[DONUT] =  10;
+            toSpawns[PIZZA] =  4;
+            break;
+        case 3:
+            toSpawns[DONUT] =  10;
+            toSpawns[PIZZA] =  4;
+            toSpawns[FRIES] =  2;
+            break;
+        case 4:
+            toSpawns[DONUT] =  15;
+            toSpawns[PIZZA] =  7;
+            toSpawns[FRIES] =  6;
+            break;
+        case 5:
+            toSpawns[BURGER] = 12;
+            break;
+        case 6:
+            toSpawns[DONUT] =  15;
+            toSpawns[PIZZA] =  10;
+            toSpawns[FRIES] =  10;
+            break;
+        case 7:
+            toSpawns[DONUT] =  15;
+            toSpawns[PIZZA] =  10;
+            toSpawns[FRIES] =  5;
+            toSpawns[BURGER] = 7;
+            break;
+        case 8:
+            toSpawns[DONUT] =  20;
+            toSpawns[PIZZA] =  10;
+            toSpawns[FRIES] =  10;
+            toSpawns[BURGER] = 10;
+            break;
+        case 9:
+            toSpawns[DONUT] =  20;
+            toSpawns[PIZZA] =  15;
+            toSpawns[FRIES] =  20;
+            toSpawns[BURGER] = 12;
+            break;
+        case 10:
+            toSpawns[BPIE] =   25;
+            toSpawns[RPIE] =   25;
+            break;
+        case 11:
+            toSpawns[BURGER] = 20;
+            toSpawns[BPIE] =   10;
+            toSpawns[RPIE] =   10;
+            break;
+        case 12:
+            toSpawns[DONUT] =  50;
+            toSpawns[PIZZA] =  25;
+            break;
+        case 13:
+            toSpawns[FRIES] =  35;
+            toSpawns[BURGER] = 10;
+            break;
+        case 14:
+            toSpawns[DONUT] =  20;
+            toSpawns[PIZZA] =  10;
+            toSpawns[FRIES] =  10;
+            toSpawns[BURGER] = 10;
+            toSpawns[BPIE] =   10;
+            toSpawns[RPIE] =   10;
+            break;
+        case 15:
+            toSpawns[CAKE] =   1;
+            break;
+        default:
+            NSLog(@"Default'd on startNewWave Switch");
+            break;
+    }
+    
+    [self schedule: @selector(spawnLoop) interval:.01f];
+    
+}
+
+- (void)spawnLoop{
+    BOOL spawnedAZombie = NO;
+    for(int x = 0; x < 7; x++){
+        if(toSpawns[x] != 0){
+            [zombieBatch addNewZombieAt: ccp(768, 768) withType:x];
+            toSpawns[x]--;
+            spawnedAZombie = YES;
+        }
+    }
+    if(!spawnedAZombie)
+        [self unschedule: @selector(spawnLoop)];
 }
 
 - (void)startExplosionAt:(CGPoint)start{
@@ -184,6 +319,9 @@
     [leftAnalogStick setPosition: ccpAdd(centerOn, ccp(-166.0f, -86.f))];
     [damageIndicator setPosition: ccpAdd(centerOn, ccp(-240.0f, -160.0f))];
     [switchWeaponButton setPosition: ccpAdd(centerOn, ccp(48.0f, 160.0f))];
+    [pauseButton setPosition: ccpAdd(centerOn, ccp(-48.0f, 160.0f))];
+    [waveIndicator setPosition: ccpAdd(centerOn, ccp(0.0f, 80.0f))];
+    [waveNumber setPosition: ccpAdd([waveIndicator position], ccp(60.0f, -3.0f))];
     [powerupHUD setPosition: ccpAdd(centerOn, ccp(-232.0f, 32.0f))];
 }
 

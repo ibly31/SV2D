@@ -7,16 +7,23 @@
 //
 
 #import "cocos2d.h"
+#import "SoundEffectButton.h"
 
-@interface MainMenuScene : CCScene {
+@interface MainMenuScene : CCLayer {
     CCLayerColor *backgroundColor;
     CCLabelTTF *titleLabel;
     
     CCMenu *menu;
+    
+    SoundEffectButton *seb;
+    
 }
+
++ (id)scene;
 
 @property (nonatomic, retain) CCLabelTTF *titleLabel;
 @property (nonatomic, retain) CCMenu *menu;
+@property (nonatomic, retain) SoundEffectButton *seb;
 
 - (void)chooseGame;
 - (void)options;

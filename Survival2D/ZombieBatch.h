@@ -17,6 +17,7 @@ typedef struct Zombie{
     
     int health;
     float speed;
+    int damage;
     CCSprite *zombieSprite;
     
     cpShape *zombieShape;
@@ -48,7 +49,7 @@ float distance(CGPoint point1,CGPoint point2);
 - (void)freezeZombies;
 - (void)unfreezeZombies;
 
-- (void)addNewZombieAt:(CGPoint)newZomb;
+- (void)addNewZombieAt:(CGPoint)newZomb withType:(int)type;
 - (void)updateZombies;
 
 - (int)nextOpenZombieSlot;

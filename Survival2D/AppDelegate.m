@@ -42,6 +42,12 @@
 {
 	// Init the window
 	window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"SoundEffects"] == nil){
+        [self setSoundEffects: YES];
+    }
+    
+    soundEffects = [[[NSUserDefaults standardUserDefaults] objectForKey:@"SoundEffects"] boolValue];
 	
 	// Try to use CADisplayLink director
 	// if it fails (SDK < 3.1) use the default director
@@ -106,15 +112,24 @@
 	// Removes the startup flicker
 	[self removeStartupFlicker];
 	
-    MainMenuScene *mms = [[MainMenuScene alloc] init];
+    CCScene *mms = [MainMenuScene scene];
 	[[CCDirector sharedDirector] runWithScene: mms];
-    [mms release];
     
     /*GameScene *gs = [[GameScene alloc] init];
 	[[CCDirector sharedDirector] runWithScene: gs];
     [gs release];*/
 }
 
+- (BOOL)soundEffects{
+    return soundEffects;
+}
+
+- (void)setSoundEffects:(BOOL)se{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:se] forKey:@"SoundEffects"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    soundEffects = se;
+    NSLog(@"Sound Effects: %@", se ? @"YES" : @"NO");
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
 	[[CCDirector sharedDirector] pause];

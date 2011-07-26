@@ -114,7 +114,7 @@
 	</dict>
 	<dict>
 		<key>Damage</key>
-		<integer>10000</integer>
+		<integer>200</integer>
 		<key>FlashPos</key>
 		<integer>0</integer>
 		<key>MaxAmmo</key>
@@ -124,7 +124,7 @@
 		<key>OffsetY</key>
 		<integer>18</integer>
 		<key>Penetration</key>
-		<string>0</string>
+		<string>-1</string>
 		<key>Recoil</key>
 		<integer>3</integer>
 		<key>ReloadTime</key>
@@ -146,7 +146,7 @@
 		<key>OffsetY</key>
 		<integer>14</integer>
 		<key>Penetration</key>
-		<string>0</string>
+		<string>1</string>
 		<key>Recoil</key>
 		<integer>3</integer>
 		<key>ReloadTime</key>

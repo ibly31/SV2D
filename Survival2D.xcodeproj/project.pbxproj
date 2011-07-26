@@ -179,6 +179,7 @@
 		77C12FA0139B1DA5005BF8A3 /* Font-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F8E139B1DA5005BF8A3 /* Font-hd.png */; };
 		77C12FA2139B1DA5005BF8A3 /* Reloading-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F90139B1DA5005BF8A3 /* Reloading-hd.png */; };
 		77C12FA7139B1DA5005BF8A3 /* Weaponsheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F95139B1DA5005BF8A3 /* Weaponsheet-hd.png */; };
+		77C2A5EA13DE6F2400907E16 /* SoundEffectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C2A5E913DE6F2400907E16 /* SoundEffectButton.m */; };
 		77D17C6F13AD47B800B75B83 /* Foodsheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D17C6D13AD47B800B75B83 /* Foodsheet.png */; };
 		77D17C7013AD47B800B75B83 /* Foodsheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D17C6E13AD47B800B75B83 /* Foodsheet-hd.png */; };
 		77E13D63138203980033BD15 /* cpCCNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E13D55138203980033BD15 /* cpCCNode.m */; };
@@ -522,6 +523,8 @@
 		77C12F8E139B1DA5005BF8A3 /* Font-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Font-hd.png"; sourceTree = "<group>"; };
 		77C12F90139B1DA5005BF8A3 /* Reloading-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reloading-hd.png"; sourceTree = "<group>"; };
 		77C12F95139B1DA5005BF8A3 /* Weaponsheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Weaponsheet-hd.png"; sourceTree = "<group>"; };
+		77C2A5E813DE6F2400907E16 /* SoundEffectButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEffectButton.h; sourceTree = "<group>"; };
+		77C2A5E913DE6F2400907E16 /* SoundEffectButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEffectButton.m; sourceTree = "<group>"; };
 		77D17C6D13AD47B800B75B83 /* Foodsheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Foodsheet.png; sourceTree = "<group>"; };
 		77D17C6E13AD47B800B75B83 /* Foodsheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Foodsheet-hd.png"; path = "Resources/Textures/Retina/Foodsheet-hd.png"; sourceTree = SOURCE_ROOT; };
 		77E13D54138203980033BD15 /* cpCCNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cpCCNode.h; sourceTree = "<group>"; };
@@ -966,6 +969,8 @@
 				77EFA37B13AD7DCC00537A3B /* PowerupBatch.m */,
 				776E416813AF071C002D64F1 /* PowerupHUD.h */,
 				776E416913AF071C002D64F1 /* PowerupHUD.m */,
+				77C2A5E813DE6F2400907E16 /* SoundEffectButton.h */,
+				77C2A5E913DE6F2400907E16 /* SoundEffectButton.m */,
 			);
 			name = "Game Classes";
 			sourceTree = "<group>";
@@ -1393,6 +1398,7 @@
 				77EFA37C13AD7DCC00537A3B /* PowerupBatch.m in Sources */,
 				776E416A13AF071C002D64F1 /* PowerupHUD.m in Sources */,
 				77EDE28913C94D2D000C5124 /* TutorialScene.m in Sources */,
+				77C2A5EA13DE6F2400907E16 /* SoundEffectButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

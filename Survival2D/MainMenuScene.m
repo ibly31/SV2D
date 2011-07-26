@@ -13,6 +13,14 @@
 @implementation MainMenuScene
 @synthesize titleLabel;
 @synthesize menu;
+@synthesize seb;
+
++(id) scene{
+    CCScene *scene = [CCScene node];
+    MainMenuScene *layer = [MainMenuScene node];
+    [scene addChild: layer];
+    return scene;
+}
 
 - (id)init{
     self = [super init];
@@ -37,6 +45,10 @@
         [self addChild: menu];
         [chooseGame release];
         [chooseGameLabel release];
+        
+        self.seb = [[SoundEffectButton alloc] initialize];
+        [seb setPosition: ccp(460.0f, 20.0f)];
+        [self addChild: seb];
     }
     return self;
 }

@@ -58,9 +58,8 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [[CCDirector sharedDirector] convertToGL:[touch locationInView: touch.view]];
     if(CGRectContainsPoint(CGRectMake([endArrow position].x - 32.0f, [endArrow position].y - 32.0f, 64.0f, 64.0f), location)){
-        MainMenuScene *mms = [[MainMenuScene alloc] init];
+        CCScene *mms = [MainMenuScene scene];
         [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:mms]];
-        [mms release];
     }
 }
 

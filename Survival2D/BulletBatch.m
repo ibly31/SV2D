@@ -133,13 +133,15 @@
     if(whichZombie != -1){
         [[(GameScene *)parent_ zombieBatch] zombieTakeDamage:bulletDamage index:whichZombie];
     }else{
-        NSLog(@" ");
+        NSLog(@"NO ZOMBIE CONNECTION in BULLETCOLLISION");
     }
     
-    bullets[whichBullet].penetration--;
-    bullets[whichBullet].damage /= 2;
-    if(bullets[whichBullet].penetration == 0){
-        [self destroyBullet: whichBullet];
+    if(bullets[whichBullet].penetration != -1){
+        bullets[whichBullet].penetration--;
+        bullets[whichBullet].damage /= 2;
+        if(bullets[whichBullet].penetration == 0){
+            [self destroyBullet: whichBullet];
+        }
     }
     return NO;
 }

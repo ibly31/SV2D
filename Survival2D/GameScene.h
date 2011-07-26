@@ -16,6 +16,16 @@
 #import "PowerupBatch.h"
 #import "PowerupHUD.h"
 
+enum FOODTYPES{
+    DONUT=0,
+    PIZZA,
+    FRIES,
+    BURGER,
+    BPIE,
+    RPIE,
+    CAKE
+};
+
 @interface GameScene : CCScene{
     Player *player;
     CCSprite *leftAnalogStick;
@@ -28,10 +38,15 @@
     PowerupBatch *powerupBatch;
     CCLayerColor *damageIndicator;
     
+    CCSpriteBatchNode *guiBatch;
     CCLabelAtlas *ammoLabel;
     CCLabelAtlas *healthLabel;
     CCSprite *reloadingSprite;
     CCSprite *switchWeaponButton;
+    CCSprite *pauseButton;
+    
+    CCSprite *waveIndicator;
+    CCLabelTTF *waveNumber;
     
     CCSpriteBatchNode *casings;
     int currentCasingNumber;
@@ -47,8 +62,10 @@
     SpaceManagerCocos2d *smgr;
     
     float timeRunning;
+    int currentWave;
+    
+    int toSpawns[7];
 }
-
 @property (nonatomic, retain) Player *player;
 @property (nonatomic, retain) InputLayer *inputLayer;
 @property (nonatomic, retain) ZombieBatch *zombieBatch;
@@ -65,10 +82,15 @@
 
 @property (nonatomic, retain) CCLayerColor *damageIndicator;
 
+@property (nonatomic, retain) CCSpriteBatchNode *guiBatch;
 @property (nonatomic, retain) CCLabelAtlas *ammoLabel;
 @property (nonatomic, retain) CCLabelAtlas *healthLabel;
 @property (nonatomic, retain) CCSprite *reloadingSprite;
 @property (nonatomic, retain) CCSprite *switchWeaponButton;
+@property (nonatomic, retain) CCSprite *pauseButton;
+
+@property (nonatomic, retain) CCSprite *waveIndicator;
+@property (nonatomic, retain) CCLabelTTF *waveNumber;
 
 @property (nonatomic, retain) CCSpriteBatchNode *casings;
 @property (nonatomic, retain) CCSpriteBatchNode *bloodSplatters;
@@ -79,6 +101,9 @@
 @property (nonatomic, retain) SpaceManagerCocos2d *smgr;
 
 - (id)initWithMap:(int)map;
+
+- (void)startNewWave;
+- (void)spawnLoop;
 
 - (void)updateCameraToCenterOn:(CGPoint)centerOn;
 - (void)addNewBulletCasingsAt:(CGPoint)startPos endPos:(CGPoint)endPos startRot:(float)startRot;

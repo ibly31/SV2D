@@ -13,8 +13,12 @@
 @interface AppDelegate : NSObject <UIApplicationDelegate> {
 	UIWindow			*window;
 	RootViewController	*viewController;
+    BOOL soundEffects;
 }
 
 @property (nonatomic, retain) UIWindow *window;
+
+- (BOOL)soundEffects;
+- (void)setSoundEffects:(BOOL)se;
 
 @end

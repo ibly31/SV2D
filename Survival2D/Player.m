@@ -8,6 +8,7 @@
 
 #import "Player.h"
 #import "GameScene.h"
+#import "AppDelegate.h"
 
 @implementation Player
 @synthesize feetSprite;
@@ -143,8 +144,9 @@
     [self shoot];
     
     if([weapon getWeaponType] == 3){
-        flameStartID = [[SimpleAudioEngine sharedEngine] playEffect:@"FlameStart.caf"];
-        [self schedule:@selector(setFlameStartDone) interval:1.08f];            
+        if([(AppDelegate *)[[UIApplication sharedApplication] delegate] soundEffects])
+            flameStartID = [[SimpleAudioEngine sharedEngine] playEffect:@"FlameStart.caf"];
+        [self schedule:@selector(setFlameStartDone) interval:1.08f];
     }
 }
 
@@ -198,20 +200,24 @@
         
         if(t == 1){
             [[(GameScene *)parent_ bulletBatch] fireBulletFrom:sFrom withRotation:sOffs withDamage:d withPenetration:p];
-            [[SimpleAudioEngine sharedEngine] playEffect:@"Shot.caf"];
+            if([(AppDelegate *)[[UIApplication sharedApplication] delegate] soundEffects])
+                [[SimpleAudioEngine sharedEngine] playEffect:@"Shot.caf"];
         }else if(t == 2){
             for(int x = -2; x < 2; x++){
                 [[(GameScene *)parent_ bulletBatch] fireBulletFrom:sFrom withRotation:sOffs - (2*x) withDamage:d withPenetration:p];
             }
-            [[SimpleAudioEngine sharedEngine] playEffect:@"ShotgunShot.caf"];
-            [[SimpleAudioEngine sharedEngine] playEffect:@"ShotgunPump.caf"];
+            if([(AppDelegate *)[[UIApplication sharedApplication] delegate] soundEffects]){
+                [[SimpleAudioEngine sharedEngine] playEffect:@"ShotgunShot.caf"];
+                [[SimpleAudioEngine sharedEngine] playEffect:@"ShotgunPump.caf"];
+            }
         }else if(t == 3){
             [flameThrower setEmissionRate: [flameThrower totalParticles] / [flameThrower life]];
             [[(GameScene *)parent_ zombieBatch] flamePath: [playerSprite position] withRotation: sOffs withVariance: [flameThrower angleVar] withDamage: [weapon getDamage]];
         
         }else if(t == 4){
             [[(GameScene *)parent_ rocketBatch] fireRocketFrom: sFrom withRotation:sOffs withDamage:[weapon getDamage]];
-            [[SimpleAudioEngine sharedEngine] playEffect:@"Rocket.caf"];
+            if([(AppDelegate *)[[UIApplication sharedApplication] delegate] soundEffects])
+                [[SimpleAudioEngine sharedEngine] playEffect:@"Rocket.caf"];
         }
         
         if(t != 3){
@@ -243,14 +249,17 @@
 }
 
 - (void)setFlameStartDone{
-    flameLoopID = [[SimpleAudioEngine sharedEngine] playEffect:@"FlameLoop.caf" loop:YES];
+    if([(AppDelegate *)[[UIApplication sharedApplication] delegate] soundEffects])
+        flameLoopID = [[SimpleAudioEngine sharedEngine] playEffect:@"FlameLoop.caf" loop:YES];
     [self unschedule:@selector(setFlameStartDone)];
 }
 
 - (void)setFlameStop{
     [self unschedule:@selector(setFlameStartDone)];
-    [[SimpleAudioEngine sharedEngine] stopEffect:flameStartID];
-    [[SimpleAudioEngine sharedEngine] stopEffect:flameLoopID];
+    if([(AppDelegate *)[[UIApplication sharedApplication] delegate] soundEffects]){
+        [[SimpleAudioEngine sharedEngine] stopEffect:flameStartID];
+        [[SimpleAudioEngine sharedEngine] stopEffect:flameLoopID];
+    }
 }
 
 - (void)usePup:(int)ptype withPosition:(CGPoint)pos withOpacity:(int)opa{
@@ -373,7 +382,8 @@
 }
 
 - (void)scheduleToReload{
-    [[SimpleAudioEngine sharedEngine] playEffect:@"Reload.caf"];
+    if([(AppDelegate *)[[UIApplication sharedApplication] delegate] soundEffects])
+        [[SimpleAudioEngine sharedEngine] playEffect:@"Reload.caf"];
     reloading = YES;
     [flameThrower setEmissionRate: 0.0f];
     CCSprite *rel = [(GameScene *)parent_ reloadingSprite];
