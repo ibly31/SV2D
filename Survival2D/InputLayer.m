@@ -9,6 +9,7 @@
 #import "InputLayer.h"
 #import "GameScene.h"
 #import "Player.h"
+#import "PauseMenuScene.h"
 
 @implementation InputLayer
 
@@ -16,8 +17,8 @@
     self = [super init];
     if(self){
         self.isTouchEnabled = YES;
-        leftAnalogStickLocation = ccp(74.0f, 74.0f);
-        rightAnalogStickLocation = ccp(404.0f, 74.0f);
+        leftAnalogStickLocation = ccp(84.0f, 84.0f);
+        rightAnalogStickLocation = ccp(396.0f, 84.0f);
         
         vel = ccp(0,0);
         [self schedule: @selector(setLoop)];
@@ -73,6 +74,9 @@
                 
         if(CGRectContainsPoint(CGRectMake(256,296,64,24), location)){
             [[(GameScene *)parent_ player] switchWeapons];
+        }else if(CGRectContainsPoint(CGRectMake(160,296,64,24), location)){
+            CCScene *pms = [PauseMenuScene scene];
+            [[CCDirector sharedDirector] pushScene: pms];
         }else{
             [self doTouch: location];
         }

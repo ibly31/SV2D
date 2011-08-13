@@ -3,12 +3,25 @@
    version = "1.0">
    <StackStates>
       <StackState
-         stackFrameDescription = "-[BulletBatch updateBullets]:BulletBatch.m">
+         stackFrameDescription = "-[BulletBatch bulletCollision:arbiter:space:]:BulletBatch.m">
+         <expressions>
+            <expression
+               value = "[NSNumber (cpDataPointer)(a)-&gt;data intValue]">
+            </expression>
+         </expressions>
+      </StackState>
+      <StackState
+         stackFrameDescription = "-[ZombieBatch destroyZombie:]:ZombieBatch.m">
          <expressions>
          </expressions>
       </StackState>
       <StackState
          stackFrameDescription = "-[BulletBatch initWithSpaceManager:]:BulletBatch.m">
+         <expressions>
+         </expressions>
+      </StackState>
+      <StackState
+         stackFrameDescription = "-[BulletBatch updateBullets]:BulletBatch.m">
          <expressions>
          </expressions>
       </StackState>

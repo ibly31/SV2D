@@ -148,6 +148,7 @@
 		7760AABC1380BFF900D5B52D /* WeaponList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7760AABB1380BFF900D5B52D /* WeaponList.m */; };
 		7760AABF1380C0ED00D5B52D /* InputLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7760AABE1380C0EC00D5B52D /* InputLayer.m */; };
 		7760AAE31380C39C00D5B52D /* WeaponList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7760AAE21380C39C00D5B52D /* WeaponList.plist */; };
+		7764230313F0DEF2003C5A37 /* Badseed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7764230213F0DEF2003C5A37 /* Badseed.ttf */; };
 		776E416513AF06D2002D64F1 /* PowerupBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 776E416313AF06D2002D64F1 /* PowerupBack.png */; };
 		776E416613AF06D2002D64F1 /* PowerupBack-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 776E416413AF06D2002D64F1 /* PowerupBack-hd.png */; };
 		776E416A13AF071C002D64F1 /* PowerupHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 776E416913AF071C002D64F1 /* PowerupHUD.m */; };
@@ -157,6 +158,7 @@
 		779D62E513A81F8B008CA31F /* Playersheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 779D62E313A81F8B008CA31F /* Playersheet-hd.png */; };
 		77A67B9213D91EF800D375EE /* GuiSheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A67B9013D91EF800D375EE /* GuiSheet.png */; };
 		77A67B9313D91EF800D375EE /* GuiSheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77A67B9113D91EF800D375EE /* GuiSheet-hd.png */; };
+		77AD4E1513F462A900D14C31 /* PauseMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 77AD4E1413F462A900D14C31 /* PauseMenuScene.m */; };
 		77C12F70139B1D95005BF8A3 /* Bloodsplatter.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F5C139B1D95005BF8A3 /* Bloodsplatter.png */; };
 		77C12F71139B1D95005BF8A3 /* Bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F5D139B1D95005BF8A3 /* Bullet.png */; };
 		77C12F72139B1D95005BF8A3 /* Fire.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F5E139B1D95005BF8A3 /* Fire.png */; };
@@ -204,7 +206,6 @@
 		77EFA37913AD7BB700537A3B /* Map_ParkingLot-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EFA37713AD7BB700537A3B /* Map_ParkingLot-hd.png */; };
 		77EFA37C13AD7DCC00537A3B /* PowerupBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EFA37B13AD7DCC00537A3B /* PowerupBatch.m */; };
 		77F0CC22139C84A20029CD6E /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F0CC21139C84A10029CD6E /* MainMenuScene.m */; };
-		77F0CC24139C87060029CD6E /* Splatz.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 77F0CC23139C87060029CD6E /* Splatz.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -491,6 +492,7 @@
 		7760AABD1380C0EC00D5B52D /* InputLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputLayer.h; sourceTree = "<group>"; };
 		7760AABE1380C0EC00D5B52D /* InputLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputLayer.m; sourceTree = "<group>"; };
 		7760AAE21380C39C00D5B52D /* WeaponList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = WeaponList.plist; path = Resources/Data/WeaponList.plist; sourceTree = SOURCE_ROOT; };
+		7764230213F0DEF2003C5A37 /* Badseed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Badseed.ttf; sourceTree = "<group>"; };
 		776E416313AF06D2002D64F1 /* PowerupBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PowerupBack.png; sourceTree = "<group>"; };
 		776E416413AF06D2002D64F1 /* PowerupBack-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PowerupBack-hd.png"; path = "Resources/Textures/Retina/GUI/PowerupBack-hd.png"; sourceTree = SOURCE_ROOT; };
 		776E416813AF071C002D64F1 /* PowerupHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerupHUD.h; sourceTree = "<group>"; };
@@ -501,6 +503,8 @@
 		779D62E313A81F8B008CA31F /* Playersheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Playersheet-hd.png"; path = "Resources/Textures/Retina/Playersheet-hd.png"; sourceTree = SOURCE_ROOT; };
 		77A67B9013D91EF800D375EE /* GuiSheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GuiSheet.png; path = "Resources/Textures/Non-Retina/GUI/GuiSheet.png"; sourceTree = SOURCE_ROOT; };
 		77A67B9113D91EF800D375EE /* GuiSheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GuiSheet-hd.png"; sourceTree = "<group>"; };
+		77AD4E1313F462A900D14C31 /* PauseMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseMenuScene.h; sourceTree = "<group>"; };
+		77AD4E1413F462A900D14C31 /* PauseMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PauseMenuScene.m; sourceTree = "<group>"; };
 		77C12F5C139B1D95005BF8A3 /* Bloodsplatter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bloodsplatter.png; sourceTree = "<group>"; };
 		77C12F5D139B1D95005BF8A3 /* Bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bullet.png; sourceTree = "<group>"; };
 		77C12F5E139B1D95005BF8A3 /* Fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Fire.png; sourceTree = "<group>"; };
@@ -564,7 +568,6 @@
 		77EFA37B13AD7DCC00537A3B /* PowerupBatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerupBatch.m; sourceTree = "<group>"; };
 		77F0CC20139C84A10029CD6E /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
 		77F0CC21139C84A10029CD6E /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
-		77F0CC23139C87060029CD6E /* Splatz.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Splatz.ttf; path = ../../../Downloads/splatz_brk/Splatz.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -660,7 +663,7 @@
 			children = (
 				7739681013CFD31500B123A4 /* Sound */,
 				77EDE28F13C96302000C5124 /* Arial.ttf */,
-				77F0CC23139C87060029CD6E /* Splatz.ttf */,
+				7764230213F0DEF2003C5A37 /* Badseed.ttf */,
 				7760AAE21380C39C00D5B52D /* WeaponList.plist */,
 				7760AAC21380C38400D5B52D /* Non-Retina */,
 				7760AACA1380C38400D5B52D /* Retina */,
@@ -1032,6 +1035,8 @@
 				77EE1D5A139EFC1F00DA6D67 /* ChooseGameScene.m */,
 				77F0CC20139C84A10029CD6E /* MainMenuScene.h */,
 				77F0CC21139C84A10029CD6E /* MainMenuScene.m */,
+				77AD4E1313F462A900D14C31 /* PauseMenuScene.h */,
+				77AD4E1413F462A900D14C31 /* PauseMenuScene.m */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -1224,7 +1229,6 @@
 				77C12FA0139B1DA5005BF8A3 /* Font-hd.png in Resources */,
 				77C12FA2139B1DA5005BF8A3 /* Reloading-hd.png in Resources */,
 				77C12FA7139B1DA5005BF8A3 /* Weaponsheet-hd.png in Resources */,
-				77F0CC24139C87060029CD6E /* Splatz.ttf in Resources */,
 				7794C63813A304F000B9B8C0 /* MapThumbs.png in Resources */,
 				7794C63913A304F000B9B8C0 /* MapThumbs-hd.png in Resources */,
 				779D62E413A81F8B008CA31F /* Playersheet.png in Resources */,
@@ -1249,6 +1253,7 @@
 				773BBA5713D1253700C14F4D /* FlameLoop.caf in Resources */,
 				77A67B9213D91EF800D375EE /* GuiSheet.png in Resources */,
 				77A67B9313D91EF800D375EE /* GuiSheet-hd.png in Resources */,
+				7764230313F0DEF2003C5A37 /* Badseed.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1399,6 +1404,7 @@
 				776E416A13AF071C002D64F1 /* PowerupHUD.m in Sources */,
 				77EDE28913C94D2D000C5124 /* TutorialScene.m in Sources */,
 				77C2A5EA13DE6F2400907E16 /* SoundEffectButton.m in Sources */,
+				77AD4E1513F462A900D14C31 /* PauseMenuScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

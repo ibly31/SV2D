@@ -42,7 +42,7 @@ static void createConstraintNode(void *ptr, void *layer)
 /* Look into position_func off of cpBody for more efficient sync */
 void smgrDefaultEachShape(void *ptr, void* data)
 {
-	cpShape *shape = (cpShape*)ptr;
+	/*cpShape *shape = (cpShape*)ptr;
 	CCNode *node = (CCNode*)shape->data;
 	
 	if(node) 
@@ -50,7 +50,7 @@ void smgrDefaultEachShape(void *ptr, void* data)
 		cpBody *body = shape->body;
 		[node setPosition:body->p];
 		[node setRotation:CC_RADIANS_TO_DEGREES(-body->a)];
-	}
+	}*/
 }
 
 void smgrEachShapeAsChildren(void *ptr, void* data)

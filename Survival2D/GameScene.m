@@ -105,11 +105,11 @@
         [self addChild: guiBatch z:9];
         
         self.leftAnalogStick = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(0, 0, 128, 128)];
-        [leftAnalogStick setPosition: ccp(74.0f, 74.0f)];
+        [leftAnalogStick setPosition: ccp(84.0f, 84.0f)];
         [guiBatch addChild: leftAnalogStick];
         
         self.rightAnalogStick = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(0, 0, 128, 128)];
-        [rightAnalogStick setPosition: ccp(404.0f, 74.0f)];
+        [rightAnalogStick setPosition: ccp(396.0f, 84.0f)];
         [guiBatch addChild: rightAnalogStick];
         
         self.ammoLabel = [[[CCLabelAtlas alloc] initWithString:@"0/0" charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
@@ -124,7 +124,7 @@
         [self addChild: healthLabel z:11];
         [player updateHealth];
         
-        self.reloadingSprite = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(0, 128, 128, 24)];
+        self.reloadingSprite = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(0, 128, 128, 32)];
         [reloadingSprite setAnchorPoint: ccp(0.0f, 1.0f)];
         [reloadingSprite setPosition: ccp(0.0f, 320.0f)];
         [reloadingSprite setOpacity: 0];
@@ -152,10 +152,9 @@
         [waveIndicator setPosition:ccp(240.0f, 240.0f)];
         [guiBatch addChild: waveIndicator];
         
-        self.waveNumber = [[CCLabelTTF alloc] initWithString:[NSString stringWithFormat:@"%i", currentWave] fontName:@"Splatz.ttf" fontSize:22.0f];
-        [waveNumber setColor:ccc3(255, 0, 0)];
-        [waveNumber setAnchorPoint: ccp(1.0f, 0.5f)];
-        [waveNumber setPosition: ccpAdd([waveIndicator position], ccp(60.0f, -3.0f))];
+        self.waveNumber = [[[CCLabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%i", currentWave] charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
+        [waveNumber setAnchorPoint: ccp(0.0f, 0.5f)];
+        [waveNumber setPosition: ccpAdd([waveIndicator position], ccp(15.0f, -3.0f))];
         [waveNumber setOpacity: 0];
         [self addChild: waveNumber z: 12];
         
@@ -273,15 +272,48 @@
             break;
     }
     
-    [self schedule: @selector(spawnLoop) interval:.01f];
+    [self schedule: @selector(spawnLoop) interval:.0f];
     
 }
 
 - (void)spawnLoop{
     BOOL spawnedAZombie = NO;
+    
+    int whichQuadrantNotToSpawnIn = 0;
+    CGPoint playerPosition = [[self.player playerSprite] position];
+    if(playerPosition.x <= 512 && playerPosition.y <= 512){
+        whichQuadrantNotToSpawnIn = 2;
+    }else if(playerPosition.x <= 512 && playerPosition.y > 512){
+        whichQuadrantNotToSpawnIn = 1;
+    }else if(playerPosition.x > 512 && playerPosition.y <= 512){
+        whichQuadrantNotToSpawnIn = 3;
+    }else{
+        whichQuadrantNotToSpawnIn = 0;
+    }
+        
     for(int x = 0; x < 7; x++){
         if(toSpawns[x] != 0){
-            [zombieBatch addNewZombieAt: ccp(768, 768) withType:x];
+            
+            CGPoint finalPosition;
+            while(true){
+                CGPoint tryTest = ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024);
+                
+                if(tryTest.x <= 512 && tryTest.y <= 512 && whichQuadrantNotToSpawnIn != 2){
+                    finalPosition = tryTest;
+                    break;
+                }else if(tryTest.x <= 512 && tryTest.y > 512 && whichQuadrantNotToSpawnIn != 1){
+                    finalPosition = tryTest;
+                    break;
+                }else if(tryTest.x > 512 && tryTest.y <= 512 && whichQuadrantNotToSpawnIn != 3){
+                    finalPosition = tryTest;
+                    break;
+                }else if(whichQuadrantNotToSpawnIn != 0){
+                    finalPosition = tryTest;
+                    break;
+                }
+            }
+            
+            [zombieBatch addNewZombieAt:finalPosition withType:x];
             toSpawns[x]--;
             spawnedAZombie = YES;
         }
@@ -321,7 +353,7 @@
     [switchWeaponButton setPosition: ccpAdd(centerOn, ccp(48.0f, 160.0f))];
     [pauseButton setPosition: ccpAdd(centerOn, ccp(-48.0f, 160.0f))];
     [waveIndicator setPosition: ccpAdd(centerOn, ccp(0.0f, 80.0f))];
-    [waveNumber setPosition: ccpAdd([waveIndicator position], ccp(60.0f, -3.0f))];
+    [waveNumber setPosition: ccpAdd([waveIndicator position], ccp(15.0f, -3.0f))];
     [powerupHUD setPosition: ccpAdd(centerOn, ccp(-232.0f, 32.0f))];
 }
 

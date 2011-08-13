@@ -123,17 +123,28 @@
 }
 
 - (BOOL)handleCollision:(CollisionMoment)moment arbiter:(cpArbiter*)arb space:(cpSpace*)space{
-    if(moment == COLLISION_BEGIN){
-        numberOfZombiesTouchingPlayer++;
+    cpShape *a, *b;
+    cpArbiterGetShapes(arb, &a, &b);
+    
+    if(b->data != nil){
+        int zombieIndex = [(NSNumber *)b->data intValue];
+        int zombieDmg = [[(GameScene *)parent_ zombieBatch] getZombieDamage:zombieIndex]; 
+        if(moment == COLLISION_BEGIN){
+            totalZombieDamage += zombieDmg;
+        }else if(moment == COLLISION_SEPARATE){
+            totalZombieDamage -= zombieDmg;
+        }
     }else if(moment == COLLISION_SEPARATE){
-        numberOfZombiesTouchingPlayer--;
+        totalZombieDamage -= recentZombieDamage;
     }
+    
     return YES;
 }
 
 - (void)processZombieHits{
-    if(numberOfZombiesTouchingPlayer > 0){
-        [self takeDamage: numberOfZombiesTouchingPlayer * 2];
+    if(totalZombieDamage > 0){
+        printf("\nTotalZombieDamage: %i", totalZombieDamage);
+        [self takeDamage: totalZombieDamage];
     }
 }
 
@@ -154,7 +165,7 @@
     int result = 0;
     if(!unlimitedAmmo){
         if(ammunitions[currentWeapon] - 1 != 0){
-            if(((ammunitions[currentWeapon] - 2) % 30) + 1 == [weapon getMaxAmmo]){
+            if(((ammunitions[currentWeapon] - 2) % [weapon getMaxAmmo]) + 1 == [weapon getMaxAmmo]){
                 result = 2;
             }else{
                 result = 1;
@@ -468,6 +479,10 @@
         health = 0;
     }
     [self updateHealth];
+}
+
+- (void)recentZombieDamage:(int)damage{
+    recentZombieDamage = damage;
 }
 
 - (void)updateHealth{

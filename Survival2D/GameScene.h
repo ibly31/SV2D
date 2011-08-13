@@ -46,7 +46,7 @@ enum FOODTYPES{
     CCSprite *pauseButton;
     
     CCSprite *waveIndicator;
-    CCLabelTTF *waveNumber;
+    CCLabelAtlas *waveNumber;
     
     CCSpriteBatchNode *casings;
     int currentCasingNumber;
@@ -90,7 +90,7 @@ enum FOODTYPES{
 @property (nonatomic, retain) CCSprite *pauseButton;
 
 @property (nonatomic, retain) CCSprite *waveIndicator;
-@property (nonatomic, retain) CCLabelTTF *waveNumber;
+@property (nonatomic, retain) CCLabelAtlas *waveNumber;
 
 @property (nonatomic, retain) CCSpriteBatchNode *casings;
 @property (nonatomic, retain) CCSpriteBatchNode *bloodSplatters;

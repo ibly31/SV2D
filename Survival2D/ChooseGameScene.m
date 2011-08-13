@@ -29,7 +29,7 @@
         backgroundColor = [[CCLayerColor alloc] initWithColor: ccc4(125, 125, 125, 255)];
         [self addChild: backgroundColor];
         
-        self.titleLabel = [[CCLabelTTF alloc] initWithString:@"Choose Map" fontName:@"Splatz.ttf" fontSize:50.0f];
+        self.titleLabel = [[CCLabelTTF alloc] initWithString:@"Choose Map" fontName:@"Badseed.ttf" fontSize:50.0f];
         [titleLabel setAnchorPoint: ccp(0.5f, 1.0f)];
         [titleLabel setPosition: ccp(240, 310)];
         [self addChild:titleLabel];

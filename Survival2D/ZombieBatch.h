@@ -62,6 +62,8 @@ float distance(CGPoint point1,CGPoint point2);
 - (void)zombieSetRotation:(float)rot index:(int)index;
 - (void)zombieTakeDamage:(int)damage index:(int)index;
 
+- (int)getZombieDamage:(int)index;
+
 - (void)setPlayerPosition:(CGPoint)pp;
 
 - (int)whichZombie:(cpShape *)zombieShape;

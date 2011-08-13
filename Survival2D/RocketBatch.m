@@ -150,7 +150,7 @@
         rocketDamage = rockets[whichRocket].damage;
     }
     
-    int whichZombie = [[(GameScene *)parent_ zombieBatch] whichZombie: a];
+    int whichZombie = [(NSNumber *)a->data intValue];
     if(whichZombie != -1){
         [[(GameScene *)parent_ zombieBatch] zombieTakeDamage:100 index:whichZombie];
     }else{

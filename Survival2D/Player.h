@@ -44,6 +44,7 @@ enum {
     
     CCParticleFire *flameThrower;
 
+    int recentZombieDamage;
     int health;
     float speed;
     
@@ -59,7 +60,7 @@ enum {
     
     BOOL unlimitedAmmo;
     
-    int numberOfZombiesTouchingPlayer;
+    int totalZombieDamage;
     
     int ammunitions[7];
 }
@@ -99,6 +100,7 @@ enum {
 - (void)updateAmmo;
 
 - (void)takeDamage:(int)damage;
+- (void)recentZombieDamage:(int)damage;
 
 - (void)usePup:(int)ptype withPosition:(CGPoint)pos withOpacity:(int)opa;
 - (void)undoPup:(int)index;

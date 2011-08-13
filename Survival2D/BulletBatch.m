@@ -129,18 +129,20 @@
         bulletDamage = bullets[whichBullet].damage;
     }
     
-    int whichZombie = [[(GameScene *)parent_ zombieBatch] whichZombie: a];
-    if(whichZombie != -1){
-        [[(GameScene *)parent_ zombieBatch] zombieTakeDamage:bulletDamage index:whichZombie];
-    }else{
-        NSLog(@"NO ZOMBIE CONNECTION in BULLETCOLLISION");
-    }
-    
-    if(bullets[whichBullet].penetration != -1){
-        bullets[whichBullet].penetration--;
-        bullets[whichBullet].damage /= 2;
-        if(bullets[whichBullet].penetration == 0){
-            [self destroyBullet: whichBullet];
+    if(a->data != nil){
+        int whichZombie = [(NSNumber *)a->data intValue];
+        if(whichZombie != -1){
+            [[(GameScene *)parent_ zombieBatch] zombieTakeDamage:bulletDamage index:whichZombie];
+        }else{
+            NSLog(@"NO ZOMBIE CONNECTION in BULLETCOLLISION");
+        }
+        
+        if(bullets[whichBullet].penetration != -1){
+            bullets[whichBullet].penetration--;
+            bullets[whichBullet].damage /= 2;
+            if(bullets[whichBullet].penetration == 0){
+                [self destroyBullet: whichBullet];
+            }
         }
     }
     return NO;

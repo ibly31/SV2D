@@ -28,15 +28,15 @@
         backgroundColor = [[CCLayerColor alloc] initWithColor: ccc4(125, 125, 125, 255)];
         [self addChild: backgroundColor];
                 
-        self.titleLabel = [[CCLabelTTF alloc] initWithString:@"Food Zombies" fontName:@"Splatz.ttf" fontSize: 50.0f];
+        self.titleLabel = [[CCLabelTTF alloc] initWithString:@"Food Zombies" fontName:@"Badseed.ttf" fontSize: 50.0f];
         [titleLabel setAnchorPoint: ccp(0.5f, 1.0f)];
         [titleLabel setPosition: ccp(240.0f, 310.0f)];
         [self addChild: titleLabel];
         
-        CCLabelTTF *chooseGame = [[CCLabelTTF alloc] initWithString:@"Play" fontName:@"Splatz.ttf" fontSize:36.0f];
+        CCLabelTTF *chooseGame = [[CCLabelTTF alloc] initWithString:@"Play" fontName:@"Badseed.ttf" fontSize:36.0f];
         CCMenuItemLabel *chooseGameLabel = [[CCMenuItemLabel alloc] initWithLabel:chooseGame target:self selector:@selector(chooseGame)];
         
-        CCLabelTTF *options = [[CCLabelTTF alloc] initWithString:@"Tutorial" fontName:@"Splatz.ttf" fontSize:36.0f];
+        CCLabelTTF *options = [[CCLabelTTF alloc] initWithString:@"Tutorial" fontName:@"Badseed.ttf" fontSize:36.0f];
         CCMenuItemLabel *optionsLabel = [[CCMenuItemLabel alloc] initWithLabel:options target:self selector:@selector(options)];
         [optionsLabel setAnchorPoint: ccp(0.5f, 0.5f)];
         [optionsLabel setPosition: ccp(0, -50)];

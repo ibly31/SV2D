@@ -120,9 +120,15 @@
     
     [zombies[index].zombieSprite stopAllActions];
     [zombies[index].zombieSprite setOpacity: 0];
+    zombies[index].alive = NO;
+    
+    int damageToUndo = zombies[index].damage;
+    [[(GameScene *)parent_ player] recentZombieDamage: damageToUndo];
+    
+    [(NSNumber *)zombies[index].zombieShape->data release];
+    zombies[index].zombieShape->data = nil;
     [smgr removeAndFreeShape: zombies[index].zombieShape];
     zombies[index].zombieShape = NULL;
-    zombies[index].alive = NO;
     [self removeChild:zombies[index].zombieSprite cleanup:NO];
     
     int numZomb = 0;
@@ -163,9 +169,7 @@
 
 - (void)addNewZombieAt:(CGPoint)newZomb withType:(int)type{
     int numberAlive = [self numberZombiesAlive];
-    if(numberAlive < MAXZOMBIES){
-        printf("\nNumber of Zombies Alive: %i", numberAlive);
-        
+    if(numberAlive < MAXZOMBIES){        
         if(numberAlive <= MAXZOMBIES){
             int x = [self nextOpenZombieSlot];
             [self addChild: zombies[x].zombieSprite];
@@ -216,6 +220,9 @@
                     break;
             }
             
+            NSNumber *indNum = [[NSNumber alloc] initWithInt: x];
+            zombies[x].zombieShape->data = indNum;
+            printf("\nStart!");
             
             [self zombieSetPosition:newZomb index:x];
             [self zombieSetRotation:0.0f index:x];
@@ -251,31 +258,40 @@
 }
 
 - (void)zombieTakeDamage:(int)damage index:(int)index{
-    float rot = (CCRANDOM_0_1() * (2 * M_PI));
-    CGPoint splatPos = CGPointMake(zombies[index].position.x + 8 * cosf(rot), zombies[index].position.y + 8 * sinf(rot));
-    ccColor3B color;
-    if(zombies[index].zombieType == 0){
-        color = ccc3(136, 70, 20);
-    }else if(zombies[index].zombieType == 1){
-        color = ccORANGE;
-    }else if(zombies[index].zombieType == 2){
-        color = ccYELLOW;
-    }else if(zombies[index].zombieType == 3){
-        color = ccRED;
-    }else if(zombies[index].zombieType == 4){
-        color = ccBLUE;
-    }else if(zombies[index].zombieType == 5){
-        color = ccRED;
-    }else if(zombies[index].zombieType == 6){
-        color = ccWHITE;
+    if(zombies[index].alive == YES){
+        float rot = (CCRANDOM_0_1() * (2 * M_PI));
+        CGPoint splatPos = CGPointMake(zombies[index].position.x + 8 * cosf(rot), zombies[index].position.y + 8 * sinf(rot));
+        ccColor3B color;
+        if(zombies[index].zombieType == 0){
+            color = ccc3(136, 70, 20);
+        }else if(zombies[index].zombieType == 1){
+            color = ccORANGE;
+        }else if(zombies[index].zombieType == 2){
+            color = ccYELLOW;
+        }else if(zombies[index].zombieType == 3){
+            color = ccRED;
+        }else if(zombies[index].zombieType == 4){
+            color = ccBLUE;
+        }else if(zombies[index].zombieType == 5){
+            color = ccRED;
+        }else if(zombies[index].zombieType == 6){
+            color = ccWHITE;
+        }
+        
+        [(GameScene *)parent_ addNewBloodSplatterAt:splatPos withRotation: 90.0f - CC_RADIANS_TO_DEGREES(rot) withColor:color];
+        
+        zombies[index].health -= damage;
+        if(zombies[index].health <= 0){
+            [self destroyZombie: index];
+        }
     }
-    
-    [(GameScene *)parent_ addNewBloodSplatterAt:splatPos withRotation: 90.0f - CC_RADIANS_TO_DEGREES(rot) withColor:color];
-    
-    zombies[index].health -= damage;
-    if(zombies[index].health <= 0){
-        [self destroyZombie: index];
+}
+
+- (int)getZombieDamage:(int)index{
+    if(zombies[index].alive){
+        return zombies[index].damage;
     }
+    return 0;
 }
 
 - (void)setPlayerPosition:(CGPoint)pp{
