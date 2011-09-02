@@ -35,7 +35,7 @@
         ammunitions[4] = 20;
         ammunitions[5] = 40;
         ammunitions[6] = 400;
-        
+                
         currentWeapon = 0;
         NSString *weaponTitle = [[NSArray arrayWithObjects:@"Assault Rifle", @"Shotgun", @"SMG", @"Flamethrower", @"Rocket Launcher", @"Sniper Rifle", @"Minigun", nil] objectAtIndex: currentWeapon];
         

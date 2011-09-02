@@ -276,6 +276,11 @@
     
 }
 
+- (void)onEnterTransitionDidFinish{
+    [super onEnterTransitionDidFinish];
+    [zombieBatch unfreezeZombies];
+}
+
 - (void)spawnLoop{
     BOOL spawnedAZombie = NO;
     

@@ -111,6 +111,7 @@
 #import "CCRenderTexture.h"
 #import "CCMotionStreak.h"
 #import "CCConfiguration.h"
+#import "CCUIViewWrapper.h"
 
 //
 // cocos2d macros

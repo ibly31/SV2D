@@ -9,6 +9,7 @@
 #import "MainMenuScene.h"
 #import "ChooseGameScene.h"
 #import "TutorialScene.h"
+#import "OptionsScene.h"
 
 @implementation MainMenuScene
 @synthesize titleLabel;
@@ -36,15 +37,22 @@
         CCLabelTTF *chooseGame = [[CCLabelTTF alloc] initWithString:@"Play" fontName:@"Badseed.ttf" fontSize:36.0f];
         CCMenuItemLabel *chooseGameLabel = [[CCMenuItemLabel alloc] initWithLabel:chooseGame target:self selector:@selector(chooseGame)];
         
-        CCLabelTTF *options = [[CCLabelTTF alloc] initWithString:@"Tutorial" fontName:@"Badseed.ttf" fontSize:36.0f];
-        CCMenuItemLabel *optionsLabel = [[CCMenuItemLabel alloc] initWithLabel:options target:self selector:@selector(options)];
-        [optionsLabel setAnchorPoint: ccp(0.5f, 0.5f)];
-        [optionsLabel setPosition: ccp(0, -50)];
+        CCLabelTTF *tutorial = [[CCLabelTTF alloc] initWithString:@"Tutorial" fontName:@"Badseed.ttf" fontSize:36.0f];
+        CCMenuItemLabel *tutorialLabel = [[CCMenuItemLabel alloc] initWithLabel:tutorial target:self selector:@selector(tutorial)];
+        [tutorialLabel setPosition: ccp(0, -50)];
         
-        self.menu = [CCMenu menuWithItems:chooseGameLabel, optionsLabel, nil];
+        CCLabelTTF *options = [[CCLabelTTF alloc] initWithString:@"Options" fontName:@"Badseed.ttf" fontSize:36.0f];
+        CCMenuItemLabel *optionsLabel = [[CCMenuItemLabel alloc] initWithLabel:options target:self selector:@selector(options)];
+        [optionsLabel setPosition: ccp(0, -100)];
+        
+        self.menu = [CCMenu menuWithItems:chooseGameLabel, tutorialLabel, optionsLabel, nil];
         [self addChild: menu];
         [chooseGame release];
         [chooseGameLabel release];
+        [tutorial release];
+        [tutorialLabel release];
+        [options release];
+        [optionsLabel release];
         
         self.seb = [[SoundEffectButton alloc] initialize];
         [seb setPosition: ccp(460.0f, 20.0f)];
@@ -58,9 +66,14 @@
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:cgs]];
 }
 
-- (void)options{
+- (void)tutorial{
     CCScene *ts = [TutorialScene scene];
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:ts]];
+}
+
+- (void)options{
+    CCScene *os = [OptionsScene scene];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene: os]];
 }
      
 @end

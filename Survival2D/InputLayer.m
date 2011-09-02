@@ -10,6 +10,7 @@
 #import "GameScene.h"
 #import "Player.h"
 #import "PauseMenuScene.h"
+#import "AppDelegate.h"
 
 @implementation InputLayer
 
@@ -17,8 +18,9 @@
     self = [super init];
     if(self){
         self.isTouchEnabled = YES;
-        leftAnalogStickLocation = ccp(84.0f, 84.0f);
-        rightAnalogStickLocation = ccp(396.0f, 84.0f);
+        AppDelegate *del = [[UIApplication sharedApplication] delegate];
+        leftAnalogStickLocation = ccp((float)[del analogStickPixelOffsetX], (float)[del analogStickPixelOffsetY]);
+        rightAnalogStickLocation = ccp(480.0f - (float)[del analogStickPixelOffsetX], (float)[del analogStickPixelOffsetY]);
         
         vel = ccp(0,0);
         [self schedule: @selector(setLoop)];
@@ -56,8 +58,9 @@
 			[player setRotation: angle];
             
             if(![player shooting]){
+                AppDelegate *del = [[UIApplication sharedApplication] delegate];
                 [player setShooting: YES];
-                [player schedule:@selector(startShooting) interval:1.0f];
+                [player schedule:@selector(startShooting) interval:[del shootTime]];
             }
 		}else{
             [player unschedule: @selector(startShooting)];
@@ -75,6 +78,7 @@
         if(CGRectContainsPoint(CGRectMake(256,296,64,24), location)){
             [[(GameScene *)parent_ player] switchWeapons];
         }else if(CGRectContainsPoint(CGRectMake(160,296,64,24), location)){
+            [[(GameScene*)parent_ zombieBatch] freezeZombies];
             CCScene *pms = [PauseMenuScene scene];
             [[CCDirector sharedDirector] pushScene: pms];
         }else{

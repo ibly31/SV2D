@@ -222,7 +222,6 @@
             
             NSNumber *indNum = [[NSNumber alloc] initWithInt: x];
             zombies[x].zombieShape->data = indNum;
-            printf("\nStart!");
             
             [self zombieSetPosition:newZomb index:x];
             [self zombieSetRotation:0.0f index:x];

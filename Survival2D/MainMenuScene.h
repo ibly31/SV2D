@@ -16,7 +16,6 @@
     CCMenu *menu;
     
     SoundEffectButton *seb;
-    
 }
 
 + (id)scene;
@@ -26,6 +25,7 @@
 @property (nonatomic, retain) SoundEffectButton *seb;
 
 - (void)chooseGame;
+- (void)tutorial;
 - (void)options;
 
 @end

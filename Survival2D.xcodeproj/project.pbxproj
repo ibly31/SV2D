@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		77075CB113835997004C9A15 /* ZombieBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 77075CB013835997004C9A15 /* ZombieBatch.m */; };
+		7709AA10140DED3400476B96 /* OptionsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7709AA0F140DED3400476B96 /* OptionsScene.m */; };
 		773BBA4E13D123B300C14F4D /* FlameReload.caf in Resources */ = {isa = PBXBuildFile; fileRef = 773BBA4513D123B300C14F4D /* FlameReload.caf */; };
 		773BBA4F13D123B300C14F4D /* FlameStart.caf in Resources */ = {isa = PBXBuildFile; fileRef = 773BBA4613D123B300C14F4D /* FlameStart.caf */; };
 		773BBA5013D123B300C14F4D /* Reload.caf in Resources */ = {isa = PBXBuildFile; fileRef = 773BBA4713D123B300C14F4D /* Reload.caf */; };
@@ -148,6 +149,7 @@
 		7760AABC1380BFF900D5B52D /* WeaponList.m in Sources */ = {isa = PBXBuildFile; fileRef = 7760AABB1380BFF900D5B52D /* WeaponList.m */; };
 		7760AABF1380C0ED00D5B52D /* InputLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7760AABE1380C0EC00D5B52D /* InputLayer.m */; };
 		7760AAE31380C39C00D5B52D /* WeaponList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7760AAE21380C39C00D5B52D /* WeaponList.plist */; };
+		7761334814108E4A007E2B34 /* CCUIViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7761334714108E4A007E2B34 /* CCUIViewWrapper.m */; };
 		7764230313F0DEF2003C5A37 /* Badseed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7764230213F0DEF2003C5A37 /* Badseed.ttf */; };
 		776E416513AF06D2002D64F1 /* PowerupBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 776E416313AF06D2002D64F1 /* PowerupBack.png */; };
 		776E416613AF06D2002D64F1 /* PowerupBack-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 776E416413AF06D2002D64F1 /* PowerupBack-hd.png */; };
@@ -211,6 +213,8 @@
 /* Begin PBXFileReference section */
 		77075CAF13835997004C9A15 /* ZombieBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZombieBatch.h; sourceTree = "<group>"; };
 		77075CB013835997004C9A15 /* ZombieBatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZombieBatch.m; sourceTree = "<group>"; };
+		7709AA0E140DED3400476B96 /* OptionsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsScene.h; sourceTree = "<group>"; };
+		7709AA0F140DED3400476B96 /* OptionsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsScene.m; sourceTree = "<group>"; };
 		773BBA4513D123B300C14F4D /* FlameReload.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FlameReload.caf; path = Resources/Sound/FlameReload.caf; sourceTree = SOURCE_ROOT; };
 		773BBA4613D123B300C14F4D /* FlameStart.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FlameStart.caf; path = Resources/Sound/FlameStart.caf; sourceTree = SOURCE_ROOT; };
 		773BBA4713D123B300C14F4D /* Reload.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Reload.caf; path = Resources/Sound/Reload.caf; sourceTree = SOURCE_ROOT; };
@@ -492,6 +496,8 @@
 		7760AABD1380C0EC00D5B52D /* InputLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputLayer.h; sourceTree = "<group>"; };
 		7760AABE1380C0EC00D5B52D /* InputLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputLayer.m; sourceTree = "<group>"; };
 		7760AAE21380C39C00D5B52D /* WeaponList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = WeaponList.plist; path = Resources/Data/WeaponList.plist; sourceTree = SOURCE_ROOT; };
+		7761334614108E49007E2B34 /* CCUIViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUIViewWrapper.h; sourceTree = "<group>"; };
+		7761334714108E4A007E2B34 /* CCUIViewWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCUIViewWrapper.m; sourceTree = "<group>"; };
 		7764230213F0DEF2003C5A37 /* Badseed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Badseed.ttf; sourceTree = "<group>"; };
 		776E416313AF06D2002D64F1 /* PowerupBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PowerupBack.png; sourceTree = "<group>"; };
 		776E416413AF06D2002D64F1 /* PowerupBack-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PowerupBack-hd.png"; path = "Resources/Textures/Retina/GUI/PowerupBack-hd.png"; sourceTree = SOURCE_ROOT; };
@@ -841,6 +847,8 @@
 				7760A9A81380BB5F00D5B52D /* utlist.h */,
 				7760A9A91380BB5F00D5B52D /* ZipUtils.h */,
 				7760A9AA1380BB5F00D5B52D /* ZipUtils.m */,
+				7761334614108E49007E2B34 /* CCUIViewWrapper.h */,
+				7761334714108E4A007E2B34 /* CCUIViewWrapper.m */,
 			);
 			name = cocos2d;
 			sourceTree = "<group>";
@@ -1031,6 +1039,8 @@
 				7760AA571380BC1C00D5B52D /* GameScene.m */,
 				77EDE28713C94D2D000C5124 /* TutorialScene.h */,
 				77EDE28813C94D2D000C5124 /* TutorialScene.m */,
+				7709AA0E140DED3400476B96 /* OptionsScene.h */,
+				7709AA0F140DED3400476B96 /* OptionsScene.m */,
 				77EE1D59139EFC1F00DA6D67 /* ChooseGameScene.h */,
 				77EE1D5A139EFC1F00DA6D67 /* ChooseGameScene.m */,
 				77F0CC20139C84A10029CD6E /* MainMenuScene.h */,
@@ -1405,6 +1415,8 @@
 				77EDE28913C94D2D000C5124 /* TutorialScene.m in Sources */,
 				77C2A5EA13DE6F2400907E16 /* SoundEffectButton.m in Sources */,
 				77AD4E1513F462A900D14C31 /* PauseMenuScene.m in Sources */,
+				7709AA10140DED3400476B96 /* OptionsScene.m in Sources */,
+				7761334814108E4A007E2B34 /* CCUIViewWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

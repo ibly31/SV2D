@@ -14,11 +14,20 @@
 	UIWindow			*window;
 	RootViewController	*viewController;
     BOOL soundEffects;
+    float shootTime;
+    int analogStickPixelOffsetX;
+    int analogStickPixelOffsetY;
 }
 
 @property (nonatomic, retain) UIWindow *window;
 
 - (BOOL)soundEffects;
+- (float)shootTime;
+- (int)analogStickPixelOffsetX;
+- (int)analogStickPixelOffsetY;
 - (void)setSoundEffects:(BOOL)se;
+- (void)setShootTime:(float)st;
+- (void)setAnalogStickPixelOffsetX:(int)aspo;
+- (void)setAnalogStickPixelOffsetY:(int)aspo;
 
 @end

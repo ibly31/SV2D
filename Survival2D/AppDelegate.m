@@ -14,7 +14,6 @@
 #import "RootViewController.h"
 
 @implementation AppDelegate
-
 @synthesize window;
 
 - (void) removeStartupFlicker
@@ -46,46 +45,40 @@
     if([[NSUserDefaults standardUserDefaults] objectForKey:@"SoundEffects"] == nil){
         [self setSoundEffects: YES];
     }
-    
     soundEffects = [[[NSUserDefaults standardUserDefaults] objectForKey:@"SoundEffects"] boolValue];
-	
-	// Try to use CADisplayLink director
-	// if it fails (SDK < 3.1) use the default director
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"ShootTime"] == nil){
+        [self setShootTime: 1.0f];
+    }
+    shootTime = [[[NSUserDefaults standardUserDefaults] objectForKey:@"ShootTime"] floatValue];
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"ASPOX"] == nil){
+        [self setAnalogStickPixelOffsetX: 84];
+    }
+    analogStickPixelOffsetX = [[[NSUserDefaults standardUserDefaults] objectForKey:@"ASPOX"] intValue];
+    
+    if([[NSUserDefaults standardUserDefaults] objectForKey:@"ASPOY"] == nil){
+        [self setAnalogStickPixelOffsetY: 84];
+    }
+    analogStickPixelOffsetY = [[[NSUserDefaults standardUserDefaults] objectForKey:@"ASPOY"] intValue];
+  
 	if( ! [CCDirector setDirectorType:kCCDirectorTypeDisplayLink] )
 		[CCDirector setDirectorType:kCCDirectorTypeDefault];
 	
 	
 	CCDirector *director = [CCDirector sharedDirector];
 	
-	// Init the View Controller
 	viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
 	viewController.wantsFullScreenLayout = YES;
-	
-	//
-	// Create the EAGLView manually
-	//  1. Create a RGB565 format. Alternative: RGBA8
-	//	2. depth format of 0 bit. Use 16 or 24 bit for 3d effects, like CCPageTurnTransition
-	//
-	//
+
 	EAGLView *glView = [EAGLView viewWithFrame:[window bounds] pixelFormat:kEAGLColorFormatRGB565 depthFormat:0];
 	
-	// attach the openglView to the director
 	[director setOpenGLView:glView];
     [glView setMultipleTouchEnabled: YES];
 	
-	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director enableRetinaDisplay:YES] )
+	if(![director enableRetinaDisplay:YES])
 		CCLOG(@"Retina Display Not supported");
 	
-	//
-	// VERY IMPORTANT:
-	// If the rotation is going to be controlled by a UIViewController
-	// then the device orientation should be "Portrait".
-	//
-	// IMPORTANT:
-	// By default, this template only supports Landscape orientations.
-	// Edit the RootViewController.m file to edit the supported orientations.
-	//
 #if GAME_AUTOROTATION == kGameAutorotationUIViewController
 	[director setDeviceOrientation:kCCDeviceOrientationPortrait];
 #else
@@ -95,33 +88,33 @@
 	[director setAnimationInterval: 1/60];
 	[director setDisplayFPS:YES];
 	
+    [viewController setView:glView];
 	
-	// make the OpenGLView a child of the view controller
-	[viewController setView:glView];
-	
-	// make the View Controller a child of the main window
-	[window addSubview: viewController.view];
-	
+	[window addSubview: viewController.view];	
 	[window makeKeyAndVisible];
 	
-	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
-	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
-	// You can change anytime.
 	[CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGBA8888];
 
-	// Removes the startup flicker
 	[self removeStartupFlicker];
 	
     CCScene *mms = [MainMenuScene scene];
 	[[CCDirector sharedDirector] runWithScene: mms];
-    
-    /*GameScene *gs = [[GameScene alloc] init];
-	[[CCDirector sharedDirector] runWithScene: gs];
-    [gs release];*/
 }
 
 - (BOOL)soundEffects{
     return soundEffects;
+}
+
+- (float)shootTime{
+    return shootTime;
+}
+
+- (int)analogStickPixelOffsetX{
+    return analogStickPixelOffsetX;
+}
+
+- (int)analogStickPixelOffsetY{
+    return analogStickPixelOffsetY;
 }
 
 - (void)setSoundEffects:(BOOL)se{
@@ -129,6 +122,27 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     soundEffects = se;
     NSLog(@"Sound Effects: %@", se ? @"YES" : @"NO");
+}
+
+- (void)setShootTime:(float)st{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:st] forKey:@"ShootTime"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    shootTime = st;
+    NSLog(@"Shoot Time: %f", st);
+}
+
+- (void)setAnalogStickPixelOffsetX:(int)aspo{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:aspo] forKey:@"ASPOX"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    analogStickPixelOffsetX = aspo;
+    NSLog(@"Analog Stick Pixel Offset X: %i", aspo);
+}
+
+- (void)setAnalogStickPixelOffsetY:(int)aspo{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:aspo] forKey:@"ASPOY"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    analogStickPixelOffsetY = aspo;
+    NSLog(@"Analog Stick Pixel Offset Y: %i", aspo);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
