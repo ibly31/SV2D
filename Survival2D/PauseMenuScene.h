@@ -11,14 +11,16 @@
 @interface PauseMenuScene : CCLayer {
     CCLabelTTF *pause;
     
-    CCSprite *toGame;
-    CCSprite *toMainMenu;
+    CCMenu *menu;
 }
 
-@property (nonatomic, retain) CCLabelTTF *pause;
-@property (nonatomic, retain) CCSprite *toGame;
-@property (nonatomic, retain) CCSprite *toMainMenu;
-
 + (id)scene;
+
+@property (nonatomic, retain) CCLabelTTF *pause;
+@property (nonatomic, retain) CCMenu *menu;
+
+- (void)returnToGame;
+- (void)options;
+- (void)exitGame;
 
 @end

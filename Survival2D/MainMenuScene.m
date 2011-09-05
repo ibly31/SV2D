@@ -63,17 +63,17 @@
 
 - (void)chooseGame{
     CCScene *cgs = [ChooseGameScene scene];
-    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:cgs]];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:cgs]];
 }
 
 - (void)tutorial{
     CCScene *ts = [TutorialScene scene];
-    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:ts]];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:ts]];
 }
 
 - (void)options{
     CCScene *os = [OptionsScene scene];
-    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene: os]];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene: os]];
 }
      
 @end

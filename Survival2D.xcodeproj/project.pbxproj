@@ -208,6 +208,7 @@
 		77EFA37913AD7BB700537A3B /* Map_ParkingLot-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77EFA37713AD7BB700537A3B /* Map_ParkingLot-hd.png */; };
 		77EFA37C13AD7DCC00537A3B /* PowerupBatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 77EFA37B13AD7DCC00537A3B /* PowerupBatch.m */; };
 		77F0CC22139C84A20029CD6E /* MainMenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F0CC21139C84A10029CD6E /* MainMenuScene.m */; };
+		77F4CE8614157A550082B132 /* AnalogLocator.m in Sources */ = {isa = PBXBuildFile; fileRef = 77F4CE8514157A550082B132 /* AnalogLocator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -574,6 +575,8 @@
 		77EFA37B13AD7DCC00537A3B /* PowerupBatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerupBatch.m; sourceTree = "<group>"; };
 		77F0CC20139C84A10029CD6E /* MainMenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScene.h; sourceTree = "<group>"; };
 		77F0CC21139C84A10029CD6E /* MainMenuScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuScene.m; sourceTree = "<group>"; };
+		77F4CE8414157A550082B132 /* AnalogLocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnalogLocator.h; sourceTree = "<group>"; };
+		77F4CE8514157A550082B132 /* AnalogLocator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnalogLocator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -982,6 +985,8 @@
 				776E416913AF071C002D64F1 /* PowerupHUD.m */,
 				77C2A5E813DE6F2400907E16 /* SoundEffectButton.h */,
 				77C2A5E913DE6F2400907E16 /* SoundEffectButton.m */,
+				77F4CE8414157A550082B132 /* AnalogLocator.h */,
+				77F4CE8514157A550082B132 /* AnalogLocator.m */,
 			);
 			name = "Game Classes";
 			sourceTree = "<group>";
@@ -1417,6 +1422,7 @@
 				77AD4E1513F462A900D14C31 /* PauseMenuScene.m in Sources */,
 				7709AA10140DED3400476B96 /* OptionsScene.m in Sources */,
 				7761334814108E4A007E2B34 /* CCUIViewWrapper.m in Sources */,
+				77F4CE8614157A550082B132 /* AnalogLocator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

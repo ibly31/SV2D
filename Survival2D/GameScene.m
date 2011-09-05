@@ -104,12 +104,14 @@
         self.guiBatch = [[CCSpriteBatchNode alloc] initWithFile:@"GuiSheet.png" capacity:10];
         [self addChild: guiBatch z:9];
         
+        AppDelegate *del = [[UIApplication sharedApplication] delegate];
+        
         self.leftAnalogStick = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(0, 0, 128, 128)];
-        [leftAnalogStick setPosition: ccp(84.0f, 84.0f)];
+        [leftAnalogStick setPosition: ccp((float)[del analogStickPixelOffsetX], (float)[del analogStickPixelOffsetY])];
         [guiBatch addChild: leftAnalogStick];
         
         self.rightAnalogStick = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(0, 0, 128, 128)];
-        [rightAnalogStick setPosition: ccp(396.0f, 84.0f)];
+        [rightAnalogStick setPosition: ccp(480.0f - (float)[del analogStickPixelOffsetX], (float)[del analogStickPixelOffsetY])];
         [guiBatch addChild: rightAnalogStick];
         
         self.ammoLabel = [[[CCLabelAtlas alloc] initWithString:@"0/0" charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
@@ -349,11 +351,13 @@
     [self.camera setCenterX:centerOn.x - 240.0f centerY:centerOn.y - 160.0f centerZ:0];
     [self.camera setEyeX:centerOn.x - 240.0f eyeY:centerOn.y - 160.0f eyeZ:1.0f];
     
+    AppDelegate *del = [[UIApplication sharedApplication] delegate];
+    
     [ammoLabel setPosition: ccpAdd(centerOn, ccp(-240.0f, 160.0f))];
     [healthLabel setPosition: ccpAdd(centerOn, ccp(240.0f, 160.0f))];
     [reloadingSprite setPosition: ccpAdd(centerOn, ccp(-240.0f, 160.0f))];
-    [rightAnalogStick setPosition: ccpAdd(centerOn, ccp(166.0f, -86.0f))];
-    [leftAnalogStick setPosition: ccpAdd(centerOn, ccp(-166.0f, -86.f))];
+    [rightAnalogStick setPosition: ccpAdd(centerOn, ccp(240.0f - (float)[del analogStickPixelOffsetX], -160.0f + (float)[del analogStickPixelOffsetY]))];
+    [leftAnalogStick setPosition: ccpAdd(centerOn, ccp(-240.0f + (float)[del analogStickPixelOffsetX], -160.0f + (float)[del analogStickPixelOffsetY]))];
     [damageIndicator setPosition: ccpAdd(centerOn, ccp(-240.0f, -160.0f))];
     [switchWeaponButton setPosition: ccpAdd(centerOn, ccp(48.0f, 160.0f))];
     [pauseButton setPosition: ccpAdd(centerOn, ccp(-48.0f, 160.0f))];

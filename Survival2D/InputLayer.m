@@ -18,10 +18,6 @@
     self = [super init];
     if(self){
         self.isTouchEnabled = YES;
-        AppDelegate *del = [[UIApplication sharedApplication] delegate];
-        leftAnalogStickLocation = ccp((float)[del analogStickPixelOffsetX], (float)[del analogStickPixelOffsetY]);
-        rightAnalogStickLocation = ccp(480.0f - (float)[del analogStickPixelOffsetX], (float)[del analogStickPixelOffsetY]);
-        
         vel = ccp(0,0);
         [self schedule: @selector(setLoop)];
     }
@@ -34,8 +30,10 @@
 }
 
 - (void)doTouch:(CGPoint)location{
-    
     Player *player = [(GameScene *)parent_ player];
+    AppDelegate *del = [[UIApplication sharedApplication] delegate];
+    leftAnalogStickLocation = ccp((float)[del analogStickPixelOffsetX], (float)[del analogStickPixelOffsetY]);
+    rightAnalogStickLocation = ccp(480.0f - (float)[del analogStickPixelOffsetX], (float)[del analogStickPixelOffsetY]);
     
 	float distance = ccpDistance(location, leftAnalogStickLocation);
 	if(distance < 96){

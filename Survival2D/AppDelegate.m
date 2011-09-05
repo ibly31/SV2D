@@ -62,7 +62,7 @@
     }
     analogStickPixelOffsetY = [[[NSUserDefaults standardUserDefaults] objectForKey:@"ASPOY"] intValue];
   
-	if( ! [CCDirector setDirectorType:kCCDirectorTypeDisplayLink] )
+	if(![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
 		[CCDirector setDirectorType:kCCDirectorTypeDefault];
 	
 	
@@ -167,13 +167,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	CCDirector *director = [CCDirector sharedDirector];
-	
 	[[director openGLView] removeFromSuperview];
-	
 	[viewController release];
-	
 	[window release];
-	
 	[director end];	
 }
 
