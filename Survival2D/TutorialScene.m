@@ -8,6 +8,7 @@
 
 #import "TutorialScene.h"
 #import "MainMenuScene.h"
+#import "AppDelegate.h"
 
 @implementation TutorialScene
 @synthesize player;
@@ -67,14 +68,14 @@
         [powerup setPosition: ccp(240.0f, 100.0f)];
         [powerup setOpacity: 0];
         [self addChild: powerup];
-        
+                
         self.leftAnalogStick = [[CCSprite alloc] initWithFile:@"GuiSheet.png" rect:CGRectMake(0, 0, 128, 128)];
-        [leftAnalogStick setPosition: ccp(74.0f, 74.0f)];
+        [leftAnalogStick setPosition: ccp(84.0f, 84.0f)];
         [leftAnalogStick setOpacity: 0];
         [self addChild: leftAnalogStick];
         
         self.rightAnalogStick = [[CCSprite alloc] initWithFile:@"GuiSheet.png" rect:CGRectMake(0, 0, 128, 128)];
-        [rightAnalogStick setPosition: ccp(406.0f, 74.0f)];
+        [rightAnalogStick setPosition: ccp(396.0f, 84.0f)];
         [rightAnalogStick setOpacity: 0];
         [self addChild: rightAnalogStick];
         

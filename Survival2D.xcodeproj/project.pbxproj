@@ -28,7 +28,6 @@
 		7760A8A31380BB5D00D5B52D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7760A8A21380BB5D00D5B52D /* Foundation.framework */; };
 		7760A8A51380BB5D00D5B52D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7760A8A41380BB5D00D5B52D /* CoreGraphics.framework */; };
 		7760A8AB1380BB5D00D5B52D /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760A8AA1380BB5D00D5B52D /* fps_images.png */; };
-		7760A8B51380BB5D00D5B52D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 7760A8B41380BB5D00D5B52D /* Icon.png */; };
 		7760A8BE1380BB5E00D5B52D /* CCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 7760A8BD1380BB5E00D5B52D /* CCAction.m */; };
 		7760A8C11380BB5E00D5B52D /* CCActionCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = 7760A8C01380BB5E00D5B52D /* CCActionCamera.m */; };
 		7760A8C41380BB5E00D5B52D /* CCActionEase.m in Sources */ = {isa = PBXBuildFile; fileRef = 7760A8C31380BB5E00D5B52D /* CCActionEase.m */; };
@@ -151,6 +150,8 @@
 		7760AAE31380C39C00D5B52D /* WeaponList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7760AAE21380C39C00D5B52D /* WeaponList.plist */; };
 		7761334814108E4A007E2B34 /* CCUIViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7761334714108E4A007E2B34 /* CCUIViewWrapper.m */; };
 		7764230313F0DEF2003C5A37 /* Badseed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7764230213F0DEF2003C5A37 /* Badseed.ttf */; };
+		776B0B6114252794000479D3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 776B0B5F14252794000479D3 /* Icon.png */; };
+		776B0B6214252794000479D3 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 776B0B6014252794000479D3 /* Icon@2x.png */; };
 		776E416513AF06D2002D64F1 /* PowerupBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 776E416313AF06D2002D64F1 /* PowerupBack.png */; };
 		776E416613AF06D2002D64F1 /* PowerupBack-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 776E416413AF06D2002D64F1 /* PowerupBack-hd.png */; };
 		776E416A13AF071C002D64F1 /* PowerupHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 776E416913AF071C002D64F1 /* PowerupHUD.m */; };
@@ -237,7 +238,6 @@
 		7760A8A21380BB5D00D5B52D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7760A8A41380BB5D00D5B52D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		7760A8AA1380BB5D00D5B52D /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = Resources/fps_images.png; sourceTree = "<group>"; };
-		7760A8B41380BB5D00D5B52D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Resources/Icon.png; sourceTree = "<group>"; };
 		7760A8B81380BB5D00D5B52D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		7760A8BC1380BB5E00D5B52D /* CCAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CCAction.h; path = libs/cocos2d/CCAction.h; sourceTree = "<group>"; };
 		7760A8BD1380BB5E00D5B52D /* CCAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CCAction.m; path = libs/cocos2d/CCAction.m; sourceTree = "<group>"; };
@@ -500,6 +500,8 @@
 		7761334614108E49007E2B34 /* CCUIViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUIViewWrapper.h; sourceTree = "<group>"; };
 		7761334714108E4A007E2B34 /* CCUIViewWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCUIViewWrapper.m; sourceTree = "<group>"; };
 		7764230213F0DEF2003C5A37 /* Badseed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Badseed.ttf; sourceTree = "<group>"; };
+		776B0B5F14252794000479D3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = "Resources/Textures/Non-Retina/Icon.png"; sourceTree = SOURCE_ROOT; };
+		776B0B6014252794000479D3 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		776E416313AF06D2002D64F1 /* PowerupBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PowerupBack.png; sourceTree = "<group>"; };
 		776E416413AF06D2002D64F1 /* PowerupBack-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PowerupBack-hd.png"; path = "Resources/Textures/Retina/GUI/PowerupBack-hd.png"; sourceTree = SOURCE_ROOT; };
 		776E416813AF071C002D64F1 /* PowerupHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerupHUD.h; sourceTree = "<group>"; };
@@ -677,7 +679,6 @@
 				7760AAC21380C38400D5B52D /* Non-Retina */,
 				7760AACA1380C38400D5B52D /* Retina */,
 				7760A8AA1380BB5D00D5B52D /* fps_images.png */,
-				7760A8B41380BB5D00D5B52D /* Icon.png */,
 				7760A8B81380BB5D00D5B52D /* Info.plist */,
 			);
 			name = Resources;
@@ -994,6 +995,7 @@
 		7760AAC21380C38400D5B52D /* Non-Retina */ = {
 			isa = PBXGroup;
 			children = (
+				776B0B5F14252794000479D3 /* Icon.png */,
 				7794C63013A3018B00B9B8C0 /* Maps */,
 				77C12F5B139B1D95005BF8A3 /* Effects */,
 				77C12F64139B1D95005BF8A3 /* GUI */,
@@ -1008,6 +1010,7 @@
 		7760AACA1380C38400D5B52D /* Retina */ = {
 			isa = PBXGroup;
 			children = (
+				776B0B6014252794000479D3 /* Icon@2x.png */,
 				7794C63113A3019600B9B8C0 /* Maps */,
 				77C12F83139B1DA5005BF8A3 /* Effects */,
 				77C12F8C139B1DA5005BF8A3 /* GUI */,
@@ -1220,7 +1223,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7760A8AB1380BB5D00D5B52D /* fps_images.png in Resources */,
-				7760A8B51380BB5D00D5B52D /* Icon.png in Resources */,
 				7760AAE31380C39C00D5B52D /* WeaponList.plist in Resources */,
 				77C12F70139B1D95005BF8A3 /* Bloodsplatter.png in Resources */,
 				77C12F71139B1D95005BF8A3 /* Bullet.png in Resources */,
@@ -1269,6 +1271,8 @@
 				77A67B9213D91EF800D375EE /* GuiSheet.png in Resources */,
 				77A67B9313D91EF800D375EE /* GuiSheet-hd.png in Resources */,
 				7764230313F0DEF2003C5A37 /* Badseed.ttf in Resources */,
+				776B0B6114252794000479D3 /* Icon.png in Resources */,
+				776B0B6214252794000479D3 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

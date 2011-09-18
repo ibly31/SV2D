@@ -39,24 +39,33 @@
         [options setPosition: ccp(240, 310)];
         [self addChild:options];
         
+        self.shootTimeLabel = [[CCLabelTTF alloc] initWithString:@"Shoot Time: " fontName:@"Badseed" fontSize:18.0f];
+        [shootTimeLabel setPosition: ccp(310.0f, 240.0f)];
+        [shootTimeLabel setAnchorPoint: ccp(0.0f, 0.5f)];
+        [self addChild: shootTimeLabel];
+        
+        AppDelegate *del = [[UIApplication sharedApplication] delegate];
+        
         UISlider *uiSlider = [[[UISlider alloc] initWithFrame:CGRectMake(0, 0, 150, 23)] autorelease];
         [uiSlider setMinimumValue:0.0f];
         [uiSlider setMaximumValue:2.0f];
         [uiSlider addTarget:self action:@selector(sliderChange:) forControlEvents:UIControlEventValueChanged];
-        [uiSlider setValue:1.0f];
+        [uiSlider setValue: [del shootTime]];
+        [self sliderChange: uiSlider];
         
         self.slider = [[CCUIViewWrapper alloc] initForUIView: uiSlider];
-        [slider setContentSize: CGSizeMake(150, 23)];
-        [slider setPosition: ccp(110, -110)];
-        [slider setAnchorPoint: ccp(1.5f, 1.0f)]; // Don't bother fixing - confusing
+        if(![[CCDirector sharedDirector] enableRetinaDisplay:YES]){
+            [slider setContentSize: CGSizeMake(150, 23)];
+            [slider setPosition: ccp(110, -110)];
+        }else{
+            [slider setContentSize: CGSizeMake(150, 23)];
+            [slider setPosition: ccp(90, -330)];
+        }
+        
+        [slider setAnchorPoint: ccp(1.5f, 1.0f)]; // Don't bother fixing - confusing.
         [slider setRotation: 90];
         [slider setOpacity: 0];
         [self addChild: slider];
-        
-        self.shootTimeLabel = [[CCLabelTTF alloc] initWithString:@"Shoot Time: 1.0" fontName:@"Badseed" fontSize:18.0f];
-        [shootTimeLabel setPosition: ccp(310.0f, 240.0f)];
-        [shootTimeLabel setAnchorPoint: ccp(0.0f, 0.5f)];
-        [self addChild: shootTimeLabel];
         
         CCLabelTTF *sound = [[CCLabelTTF alloc] initWithString:@"Sound:" fontName:@"Badseed" fontSize:18.0f];
         [sound setPosition: ccp(24.0f, 240.0f)];
@@ -94,6 +103,11 @@
     }
     newText = [newText substringToIndex: cutLen];
     [shootTimeLabel setString: newText];
+    
+    AppDelegate *del = [[UIApplication sharedApplication] delegate];
+    float value = ((int)((float)sender.value * 10.0f)) / 10.0f;
+    if(value != [del shootTime])
+        [del setShootTime: value];
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

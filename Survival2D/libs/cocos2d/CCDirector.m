@@ -505,6 +505,7 @@ static CCDirector *_sharedDirector = nil;
 // updates the FPS every frame
 -(void) showFPS
 {
+    
 	frames_++;
 	accumDt_ += dt;
 	

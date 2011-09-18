@@ -67,6 +67,7 @@
 	
 	
 	CCDirector *director = [CCDirector sharedDirector];
+    [director setDisplayFPS: NO]; ///
 	
 	viewController = [[RootViewController alloc] initWithNibName:nil bundle:nil];
 	viewController.wantsFullScreenLayout = YES;

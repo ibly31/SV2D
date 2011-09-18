@@ -199,7 +199,13 @@
     switch(currentWave){
         case 1:
             toSpawns[DONUT] =  5;
-            toSpawns[PIZZA] =  2;
+            toSpawns[PIZZA] =  2;///
+            toSpawns[DONUT] =  20;
+            toSpawns[PIZZA] =  10;
+            toSpawns[FRIES] =  10;
+            toSpawns[BURGER] = 10;
+            toSpawns[BPIE] =   10;
+            toSpawns[RPIE] =   10;
             break;
         case 2:
             toSpawns[DONUT] =  10;

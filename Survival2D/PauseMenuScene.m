@@ -64,17 +64,28 @@
     return self;
 }
 
+/*- (void)onEnter{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}*/
+
+- (void)onEnterTransitionDidFinish{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
+}
+
 - (void)returnToGame{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     [[CCDirector sharedDirector] popSceneWithTransition:[CCTransitionFade class] duration:0.5f];
 }
 
 - (void)options{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     CCScene *os = [OptionsScene scene];
     [(OptionsScene *)[os getChildByTag: 31] setFlagForFromMenu: NO];
     [[CCDirector sharedDirector] pushScene: [CCTransitionFade transitionWithDuration:0.5f scene: os]];
 }
 
 - (void)exitGame{
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     [[CCDirector sharedDirector] popScene];
     CCScene *mms = [MainMenuScene scene];
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:mms]];
