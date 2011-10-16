@@ -122,6 +122,16 @@
     [zombies[index].zombieSprite setOpacity: 0];
     zombies[index].alive = NO;
     
+    BOOL laidPowerup = NO;
+    cpShape *zombieShape = zombies[index].zombieShape;
+    cpBody *shapeBody = zombieShape->body;
+    
+    CGPoint zombiePosition = ccp(shapeBody->p.x, shapeBody->p.y);
+    if(CCRANDOM_0_1() > 0.8f){
+        [[(GameScene *)parent_ powerupBatch] addNewPowerupAt: zombiePosition];
+        laidPowerup = YES;
+    }
+    
     int damageToUndo = zombies[index].damage;
     [[(GameScene *)parent_ player] recentZombieDamage: damageToUndo];
     
@@ -138,7 +148,13 @@
         }
     }
     if(numZomb == 0){
-        [(GameScene *)parent_ startNewWave];
+        if([(GameScene *)parent_ gameModeWave]){
+            [(GameScene *)parent_ startNewWave];
+            if(!laidPowerup){
+                [[(GameScene *)parent_ powerupBatch] addNewPowerupAt: zombiePosition];
+                laidPowerup = YES;
+            }
+        }
     }
 }
 

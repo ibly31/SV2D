@@ -61,9 +61,11 @@ enum FOODTYPES{
     
     SpaceManagerCocos2d *smgr;
     
+    BOOL gameModeWave;
+    
     float timeRunning;
     int currentWave;
-    
+        
     int toSpawns[7];
 }
 @property (nonatomic, retain) Player *player;
@@ -100,10 +102,14 @@ enum FOODTYPES{
 
 @property (nonatomic, retain) SpaceManagerCocos2d *smgr;
 
-- (id)initWithMap:(int)map;
+@property BOOL gameModeWave;
+
+- (id)initWithGameModeWave:(BOOL)gmw;
 
 - (void)startNewWave;
 - (void)spawnLoop;
+
+- (void)spawnZombieEndless;
 
 - (void)updateCameraToCenterOn:(CGPoint)centerOn;
 - (void)addNewBulletCasingsAt:(CGPoint)startPos endPos:(CGPoint)endPos startRot:(float)startRot;

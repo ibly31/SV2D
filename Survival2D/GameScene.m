@@ -47,29 +47,27 @@
 
 @synthesize smgr;
 
--(id)initWithMap:(int)map{
+@synthesize gameModeWave;
+
+-(id)initWithGameModeWave:(BOOL)gmw{
     self = [super init];
 	if(self){
-        
         self.smgr = [[SpaceManagerCocos2d alloc] init];
+        self.gameModeWave = gmw;
         
-        if(map == 0){
-            [smgr addRectAt:ccp(-32, 512) mass:STATIC_MASS width:64.0f height:1024.0f rotation:0];
-            [smgr addRectAt:ccp(1056, 512) mass:STATIC_MASS width:64.0f height:1024.0f rotation:0];
-            [smgr addRectAt:ccp(512, -32) mass:STATIC_MASS width:1024.0f height:64.0f rotation:0];
-            [smgr addRectAt:ccp(512, 1056) mass:STATIC_MASS width:1024.0f height:64.0f rotation:0];
-            
-            [smgr setGravity: cpv(0.0f, 0.0f)];
-            [smgr start: 1.0f/60.0f];
-            
-            [smgr addCircleAt:ccp(280,462) mass:STATIC_MASS radius:20];
-            [smgr addCircleAt:ccp(730, 462) mass:STATIC_MASS radius:20];
-            [smgr addRectAt:ccp(319,166) mass:STATIC_MASS width:184 height:134 rotation:0];
-            [smgr addRectAt:ccp(730,166) mass:STATIC_MASS width:184 height:134 rotation:0];
-            self.backgroundMap = [[CCSprite alloc] initWithFile: @"Map_ParkingLot.png"];
-        }else{
-            self.backgroundMap = [[CCSprite alloc] initWithFile: @"Map_ParkingLot.png"];
-        }
+        [smgr addRectAt:ccp(-32, 512) mass:STATIC_MASS width:64.0f height:1024.0f rotation:0];
+        [smgr addRectAt:ccp(1056, 512) mass:STATIC_MASS width:64.0f height:1024.0f rotation:0];
+        [smgr addRectAt:ccp(512, -32) mass:STATIC_MASS width:1024.0f height:64.0f rotation:0];
+        [smgr addRectAt:ccp(512, 1056) mass:STATIC_MASS width:1024.0f height:64.0f rotation:0];
+        
+        [smgr setGravity: cpv(0.0f, 0.0f)];
+        [smgr start: 1.0f/60.0f];
+        
+        [smgr addCircleAt:ccp(280,462) mass:STATIC_MASS radius:20];
+        [smgr addCircleAt:ccp(730, 462) mass:STATIC_MASS radius:20];
+        [smgr addRectAt:ccp(319,166) mass:STATIC_MASS width:184 height:134 rotation:0];
+        [smgr addRectAt:ccp(730,166) mass:STATIC_MASS width:184 height:134 rotation:0];
+        self.backgroundMap = [[CCSprite alloc] initWithFile: @"Map_ParkingLot.png"];
         
         [backgroundMap setPosition: ccp(512,512)];
         [self addChild: backgroundMap z:-1];
@@ -142,23 +140,27 @@
         [pauseButton setPosition: ccp(192.0f, 320.0f)];
         [guiBatch addChild: pauseButton];
         
-        currentWave = 0;
-        for(int x = 0; x < 7; x++){
-            toSpawns[x] = 0;
+        if(gameModeWave){
+            currentWave = 0;
+            for(int x = 0; x < 7; x++){
+                toSpawns[x] = 0;
+            }
+            
+            [self startNewWave];
+                    
+            self.waveIndicator = [[CCSprite alloc] initWithFile:@"GuiSheet.png" rect:CGRectMake(128, 128, 128, 40)];
+            [waveIndicator setOpacity: 0];
+            [waveIndicator setPosition:ccp(240.0f, 240.0f)];
+            [guiBatch addChild: waveIndicator];
+            
+            self.waveNumber = [[[CCLabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%i", currentWave] charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
+            [waveNumber setAnchorPoint: ccp(0.0f, 0.5f)];
+            [waveNumber setPosition: ccpAdd([waveIndicator position], ccp(15.0f, -3.0f))];
+            [waveNumber setOpacity: 0];
+            [self addChild: waveNumber z: 12];
+        }else{
+            [self schedule:@selector(spawnZombieEndless) interval:1.0f];
         }
-        
-        [self startNewWave];
-                
-        self.waveIndicator = [[CCSprite alloc] initWithFile:@"GuiSheet.png" rect:CGRectMake(128, 128, 128, 40)];
-        [waveIndicator setOpacity: 0];
-        [waveIndicator setPosition:ccp(240.0f, 240.0f)];
-        [guiBatch addChild: waveIndicator];
-        
-        self.waveNumber = [[[CCLabelAtlas alloc] initWithString:[NSString stringWithFormat:@"%i", currentWave] charMapFile:@"Font.png" itemWidth:16 itemHeight:24 startCharMap:','] retain];
-        [waveNumber setAnchorPoint: ccp(0.0f, 0.5f)];
-        [waveNumber setPosition: ccpAdd([waveIndicator position], ccp(15.0f, -3.0f))];
-        [waveNumber setOpacity: 0];
-        [self addChild: waveNumber z: 12];
         
         self.damageIndicator = [[CCLayerColor alloc] initWithColor: ccc4(155, 0, 0, 50)];
         [damageIndicator setOpacity: 0];
@@ -199,13 +201,7 @@
     switch(currentWave){
         case 1:
             toSpawns[DONUT] =  5;
-            toSpawns[PIZZA] =  2;///
-            toSpawns[DONUT] =  20;
-            toSpawns[PIZZA] =  10;
-            toSpawns[FRIES] =  10;
-            toSpawns[BURGER] = 10;
-            toSpawns[BPIE] =   10;
-            toSpawns[RPIE] =   10;
+            toSpawns[PIZZA] =  2;
             break;
         case 2:
             toSpawns[DONUT] =  10;
@@ -289,10 +285,31 @@
     [zombieBatch unfreezeZombies];
 }
 
+- (void)spawnZombieEndless{
+    [zombieBatch addNewZombieAt:ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024) withType:CCRANDOM_0_1() * 7.1];
+}
+
 - (void)spawnLoop{
     BOOL spawnedAZombie = NO;
+    CGPoint playerPosition = [[player playerSprite] position];
+    for(int x = 0; x < 7; x++){
+        if(toSpawns[x] != 0){
+            while(1){
+                CGPoint spawnPosition = ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024);
+                float absDiffX = fabsf(playerPosition.x - spawnPosition.x);
+                float absDiffY = fabsf(playerPosition.y - spawnPosition.y);
+                
+                if(absDiffX > 100 && absDiffY > 100){
+                    [zombieBatch addNewZombieAt:spawnPosition withType: toSpawns[x]];
+                     toSpawns[x]--;
+                    spawnedAZombie = YES;
+                    break;
+                }
+            }
+        }
+    }
     
-    int whichQuadrantNotToSpawnIn = 0;
+    /*int whichQuadrantNotToSpawnIn = 0;
     CGPoint playerPosition = [[self.player playerSprite] position];
     if(playerPosition.x <= 512 && playerPosition.y <= 512){
         whichQuadrantNotToSpawnIn = 2;
@@ -331,6 +348,8 @@
             spawnedAZombie = YES;
         }
     }
+     
+     */
     if(!spawnedAZombie)
         [self unschedule: @selector(spawnLoop)];
 }

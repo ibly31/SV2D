@@ -9,6 +9,7 @@
 #import "ChooseGameScene.h"
 #import "MainMenuScene.h"
 #import "GameScene.h"
+#import "AppDelegate.h"
 
 @implementation ChooseGameScene
 @synthesize titleLabel;
@@ -29,21 +30,21 @@
         backgroundColor = [[CCLayerColor alloc] initWithColor: ccc4(125, 125, 125, 255)];
         [self addChild: backgroundColor];
         
-        self.titleLabel = [[CCLabelTTF alloc] initWithString:@"Choose Map" fontName:@"Badseed.ttf" fontSize:50.0f];
+        self.titleLabel = [[CCLabelTTF alloc] initWithString:@"Choose Game Mode" fontName:@"Badseed.ttf" fontSize:50.0f];
         [titleLabel setAnchorPoint: ccp(0.5f, 1.0f)];
         [titleLabel setPosition: ccp(240, 310)];
         [self addChild:titleLabel];
         
-        CCSprite *parkingLot = [[CCSprite alloc] initWithFile:@"MapThumbs.png" rect:CGRectMake(0, 0, 128, 128)];
-        CCSprite *otherMap = [[CCSprite alloc] initWithFile:@"MapThumbs.png" rect:CGRectMake(128, 0, 128, 128)];
+        CCSprite *waveMode = [[CCSprite alloc] initWithFile:@"MapThumbs.png" rect:CGRectMake(0, 0, 128, 128)];
+        CCSprite *otherMode = [[CCSprite alloc] initWithFile:@"MapThumbs.png" rect:CGRectMake(128, 0, 128, 128)];
         
-        CCMenuItemSprite *parkingLotItem = [CCMenuItemSprite itemFromNormalSprite:parkingLot selectedSprite:nil target:self selector:@selector(parkingLot)];
-        CCMenuItemSprite *otherMapItem = [CCMenuItemSprite itemFromNormalSprite:otherMap selectedSprite:nil target:self selector:@selector(otherMap)];
+        CCMenuItemSprite *waveItem = [CCMenuItemSprite itemFromNormalSprite:waveMode selectedSprite:nil target:self selector:@selector(wave)];
+        CCMenuItemSprite *otherItem = [CCMenuItemSprite itemFromNormalSprite:otherMode selectedSprite:nil target:self selector:@selector(other)];
         
-        [parkingLotItem setPosition: ccp(-128, 0)];
-        [otherMapItem setPosition: ccp(128, 0)];
+        [waveItem setPosition: ccp(-128, 0)];
+        [otherItem setPosition: ccp(128, 0)];
         
-        self.menu = [CCMenu menuWithItems:parkingLotItem, otherMapItem, nil];
+        self.menu = [CCMenu menuWithItems:waveItem, otherItem, nil];
         [self addChild: menu];
         
         self.endArrow = [[CCSprite alloc] initWithFile:@"GuiSheet.png" rect:CGRectMake(128, 64, 64, 64)];
@@ -63,14 +64,20 @@
     }
 }
 
-- (void)parkingLot{
-    GameScene *gs = [[GameScene alloc] initWithMap: 0];
+- (void)wave{
+    AppDelegate *del = [[UIApplication sharedApplication] delegate];
+    [del setGameModeWave: YES];
+    
+    GameScene *gs = [[GameScene alloc] initWithGameModeWave: YES];
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:gs]];
     [gs release];
 }
 
-- (void)otherMap{
-    GameScene *gs = [[GameScene alloc] initWithMap: 0];
+- (void)other{
+    AppDelegate *del = [[UIApplication sharedApplication] delegate];
+    [del setGameModeWave: NO];
+    
+    GameScene *gs = [[GameScene alloc] initWithGameModeWave: NO];
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:gs]];
     [gs release];
 }

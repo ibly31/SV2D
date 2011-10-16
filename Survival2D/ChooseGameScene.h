@@ -19,8 +19,8 @@
 
 + (id)scene;
 
-- (void)parkingLot;
-- (void)otherMap;
+- (void)wave;
+- (void)other;
 
 @property (nonatomic, retain) CCLabelTTF *titleLabel;
 @property (nonatomic, retain) CCSprite *endArrow;

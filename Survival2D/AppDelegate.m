@@ -15,6 +15,7 @@
 
 @implementation AppDelegate
 @synthesize window;
+@synthesize gameModeWave;
 
 - (void) removeStartupFlicker
 {
@@ -64,7 +65,8 @@
   
 	if(![CCDirector setDirectorType:kCCDirectorTypeDisplayLink])
 		[CCDirector setDirectorType:kCCDirectorTypeDefault];
-	
+    
+    gameModeWave = YES;
 	
 	CCDirector *director = [CCDirector sharedDirector];
     [director setDisplayFPS: NO]; ///

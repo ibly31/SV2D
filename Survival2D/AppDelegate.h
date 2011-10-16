@@ -14,12 +14,14 @@
 	UIWindow			*window;
 	RootViewController	*viewController;
     BOOL soundEffects;
+    BOOL gameModeWave;
     float shootTime;
     int analogStickPixelOffsetX;
     int analogStickPixelOffsetY;
 }
 
 @property (nonatomic, retain) UIWindow *window;
+@property BOOL gameModeWave;
 
 - (BOOL)soundEffects;
 - (float)shootTime;

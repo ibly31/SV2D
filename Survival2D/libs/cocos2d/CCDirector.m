@@ -505,7 +505,7 @@ static CCDirector *_sharedDirector = nil;
 // updates the FPS every frame
 -(void) showFPS
 {
-    
+    /*
 	frames_++;
 	accumDt_ += dt;
 	
@@ -522,7 +522,7 @@ static CCDirector *_sharedDirector = nil;
 		[str release];
 	}
 
-	[FPSLabel_ draw];
+	[FPSLabel_ draw];*/
 }
 #else
 // display the FPS using a manually generated Texture (very slow)

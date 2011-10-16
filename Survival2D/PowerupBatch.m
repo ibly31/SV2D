@@ -60,9 +60,6 @@
     [smgr removeAndFreeShape: powerups[index].powerupShape];
     powerups[index].powerupShape = NULL;
     powerups[index].taken = NO;
-    
-    [self addNewPowerupAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
-    [self addNewPowerupAt: ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024)];
 }
 
 - (BOOL)playerCollision:(CollisionMoment)moment arbiter:(cpArbiter*)arb space:(cpSpace*)space{
