@@ -162,7 +162,8 @@
             [self schedule:@selector(spawnZombieEndless) interval:1.0f];
         }
         
-        self.damageIndicator = [[CCLayerColor alloc] initWithColor: ccc4(155, 0, 0, 50)];
+        self.damageIndicator = [[CCLayerColor alloc] initWithColor: ccc4(155, 0, 0, 0) width:480 height:320];;
+
         [damageIndicator setOpacity: 0];
         [damageIndicator setAnchorPoint: ccp(0.5f, 0.5f)];
         [self addChild: damageIndicator z:13];
@@ -200,79 +201,166 @@
     
     switch(currentWave){
         case 1:
-            toSpawns[DONUT] =  5;
-            toSpawns[PIZZA] =  2;
+            toSpawns[DONUT] =  2;
+            toSpawns[PIZZA] =  1;
             break;
         case 2:
-            toSpawns[DONUT] =  10;
-            toSpawns[PIZZA] =  4;
+            toSpawns[DONUT] =  4;
+            toSpawns[PIZZA] =  3;
             break;
         case 3:
-            toSpawns[DONUT] =  10;
-            toSpawns[PIZZA] =  4;
+            toSpawns[DONUT] =  5;
+            toSpawns[PIZZA] =  5;
             toSpawns[FRIES] =  2;
             break;
         case 4:
-            toSpawns[DONUT] =  15;
-            toSpawns[PIZZA] =  7;
-            toSpawns[FRIES] =  6;
+            toSpawns[DONUT] =  5;
+            toSpawns[PIZZA] =  5;
+            toSpawns[FRIES] =  5;
             break;
         case 5:
             toSpawns[BURGER] = 12;
             break;
         case 6:
-            toSpawns[DONUT] =  15;
-            toSpawns[PIZZA] =  10;
-            toSpawns[FRIES] =  10;
+            toSpawns[DONUT] =  5;
+            toSpawns[PIZZA] =  5;
+            toSpawns[FRIES] =  5;
+            toSpawns[BURGER] = 12;
             break;
         case 7:
-            toSpawns[DONUT] =  15;
-            toSpawns[PIZZA] =  10;
-            toSpawns[FRIES] =  5;
-            toSpawns[BURGER] = 7;
+            toSpawns[DONUT] =  3;
+            toSpawns[PIZZA] =  3;
+            toSpawns[FRIES] =  4;
+            toSpawns[BURGER] = 15;
             break;
         case 8:
-            toSpawns[DONUT] =  20;
+            toSpawns[DONUT] =  10;
             toSpawns[PIZZA] =  10;
             toSpawns[FRIES] =  10;
             toSpawns[BURGER] = 10;
             break;
         case 9:
-            toSpawns[DONUT] =  20;
+            toSpawns[DONUT] =  12;
             toSpawns[PIZZA] =  15;
-            toSpawns[FRIES] =  20;
+            toSpawns[FRIES] =  12;
             toSpawns[BURGER] = 12;
             break;
         case 10:
-            toSpawns[BPIE] =   25;
-            toSpawns[RPIE] =   25;
+            toSpawns[BPIE] =   10;
+            toSpawns[RPIE] =   10;
             break;
         case 11:
-            toSpawns[BURGER] = 20;
-            toSpawns[BPIE] =   10;
-            toSpawns[RPIE] =   10;
+            toSpawns[DONUT] =  2;
+            toSpawns[PIZZA] =  3;
+            toSpawns[FRIES] =  4;
+            toSpawns[BURGER] = 5;
+            toSpawns[BPIE] =   12;
+            toSpawns[RPIE] =   12;
             break;
         case 12:
-            toSpawns[DONUT] =  50;
-            toSpawns[PIZZA] =  25;
+            toSpawns[DONUT] =  7;
+            toSpawns[PIZZA] =  8;
+            toSpawns[FRIES] = 9;
+            toSpawns[BURGER] = 10;
+            toSpawns[BPIE] = 11;
+            toSpawns[RPIE] = 12;
             break;
         case 13:
-            toSpawns[FRIES] =  35;
-            toSpawns[BURGER] = 10;
+            toSpawns[DONUT] =  11;
+            toSpawns[PIZZA] =  11;
+            toSpawns[FRIES] = 11;
+            toSpawns[BURGER] = 11;
+            toSpawns[BPIE] = 11;
+            toSpawns[RPIE] = 11;
             break;
         case 14:
-            toSpawns[DONUT] =  20;
-            toSpawns[PIZZA] =  10;
-            toSpawns[FRIES] =  10;
-            toSpawns[BURGER] = 10;
-            toSpawns[BPIE] =   10;
-            toSpawns[RPIE] =   10;
+            toSpawns[CAKE] = 1;
             break;
         case 15:
-            toSpawns[CAKE] =   1;
+            toSpawns[DONUT] = 7;
+            toSpawns[PIZZA] = 8;
+            toSpawns[FRIES] = 9;
+            toSpawns[BURGER] = 10;
+            toSpawns[BPIE] = 11;
+            toSpawns[RPIE] = 12;
+            break;
+        case 16:
+            toSpawns[DONUT] = 6;
+            toSpawns[PIZZA] = 5;
+            toSpawns[FRIES] = 4;
+            toSpawns[BURGER] = 3;
+            toSpawns[BPIE] = 4;
+            toSpawns[RPIE] = 5;
+            toSpawns[CAKE] = 1;
+            break;
+        case 17:
+            toSpawns[DONUT] = 5;
+            toSpawns[PIZZA] = 5;
+            toSpawns[FRIES] = 5;
+            toSpawns[BURGER] = 5;
+            toSpawns[BPIE] = 5;
+            toSpawns[RPIE] = 5;
+            toSpawns[CAKE] = 2;
+            break;
+        case 18:
+            toSpawns[DONUT] = 10;
+            toSpawns[PIZZA] = 10;
+            toSpawns[FRIES] = 10;
+            toSpawns[BURGER] = 10;
+            toSpawns[BPIE] = 10;
+            toSpawns[RPIE] = 10;
+            toSpawns[CAKE] = 3;
+            break;
+        case 19: 
+            toSpawns[DONUT] = 4;
+            toSpawns[PIZZA] = 4;
+            toSpawns[FRIES] = 4;
+            toSpawns[BURGER] = 4;
+            toSpawns[BPIE] = 4;
+            toSpawns[RPIE] = 4;
+            toSpawns[CAKE] = 4;
+            break;
+        case 20:
+            toSpawns[DONUT] = 5;
+            toSpawns[PIZZA] = 5;
+            toSpawns[FRIES] = 5;
+            toSpawns[BURGER] = 5;
+            toSpawns[BPIE] = 5;
+            toSpawns[RPIE] = 5;
+            toSpawns[CAKE] = 5;
+            break;
+        case 21:
+            toSpawns[DONUT] = 6;
+            toSpawns[PIZZA] = 6;
+            toSpawns[FRIES] = 6;
+            toSpawns[BURGER] = 6;
+            toSpawns[BPIE] = 6;
+            toSpawns[RPIE] = 6;
+            toSpawns[CAKE] = 6;
+            break;
+        case 22:
+            toSpawns[DONUT] = 7;
+            toSpawns[PIZZA] = 7;
+            toSpawns[FRIES] = 7;
+            toSpawns[BURGER] = 7;
+            toSpawns[BPIE] = 7;
+            toSpawns[RPIE] = 7;
+            toSpawns[CAKE] = 7;
+            break;
+        case 23:
+            toSpawns[DONUT] = 8;
+            toSpawns[PIZZA] = 8;
+            toSpawns[FRIES] = 8;
+            toSpawns[BURGER] = 8;
+            toSpawns[BPIE] = 8;
+            toSpawns[RPIE] = 8;
+            toSpawns[CAKE] = 8;
+            break;
+        case 24:
+            toSpawns[CAKE] = 10;
             break;
         default:
-            NSLog(@"Default'd on startNewWave Switch");
+            toSpawns[CAKE] = currentWave - 14; // Every level after 25 is an added cake
             break;
     }
     
@@ -300,7 +388,7 @@
                 float absDiffY = fabsf(playerPosition.y - spawnPosition.y);
                 
                 if(absDiffX > 100 && absDiffY > 100){
-                    [zombieBatch addNewZombieAt:spawnPosition withType: toSpawns[x]];
+                    [zombieBatch addNewZombieAt:spawnPosition withType: x];
                      toSpawns[x]--;
                     spawnedAZombie = YES;
                     break;

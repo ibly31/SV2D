@@ -19,6 +19,8 @@
     
     AnalogLocator *analogLocator;
     
+    CCLabelTTF *howToUseLabel;
+    
     BOOL flagForFromMenu;
 }
 
@@ -29,6 +31,8 @@
 @property (nonatomic, retain) CCUIViewWrapper *slider;
 @property (nonatomic, retain) CCLabelTTF *shootTimeLabel;
 @property (nonatomic, retain) AnalogLocator *analogLocator;
+@property (nonatomic, retain) CCLabelTTF *howToUseLabel;
+
 @property BOOL flagForFromMenu;
 
 -(IBAction)sliderChange:(UISlider*)sender;

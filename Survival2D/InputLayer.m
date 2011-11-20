@@ -77,6 +77,12 @@
             [[(GameScene *)parent_ player] switchWeapons];
         }else if(CGRectContainsPoint(CGRectMake(160,296,64,24), location)){
             [[(GameScene*)parent_ zombieBatch] freezeZombies];
+            Player *player = [(GameScene *)parent_ player];
+
+            [player unschedule: @selector(startShooting)];
+            [player stopShooting];
+            vel = ccp(0,0);
+            [player setVelocity: vel];
             CCScene *pms = [PauseMenuScene scene];
             [[CCDirector sharedDirector] pushScene: pms];
         }else{

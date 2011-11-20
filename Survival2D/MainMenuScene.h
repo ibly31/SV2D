@@ -10,8 +10,7 @@
 #import "SoundEffectButton.h"
 
 @interface MainMenuScene : CCLayer {
-    CCLayerColor *backgroundColor;
-    CCLabelTTF *titleLabel;
+    CCSprite *background;
     
     CCMenu *menu;
     
@@ -20,7 +19,7 @@
 
 + (id)scene;
 
-@property (nonatomic, retain) CCLabelTTF *titleLabel;
+@property (nonatomic, retain) CCSprite *background;
 @property (nonatomic, retain) CCMenu *menu;
 @property (nonatomic, retain) SoundEffectButton *seb;
 

@@ -185,6 +185,8 @@
 		77C12FA2139B1DA5005BF8A3 /* Reloading-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F90139B1DA5005BF8A3 /* Reloading-hd.png */; };
 		77C12FA7139B1DA5005BF8A3 /* Weaponsheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C12F95139B1DA5005BF8A3 /* Weaponsheet-hd.png */; };
 		77C2A5EA13DE6F2400907E16 /* SoundEffectButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C2A5E913DE6F2400907E16 /* SoundEffectButton.m */; };
+		77C301D01478C93700D4F290 /* Title-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C301CF1478C93600D4F290 /* Title-hd.png */; };
+		77C301D21478C9EC00D4F290 /* Title.png in Resources */ = {isa = PBXBuildFile; fileRef = 77C301D11478C9EC00D4F290 /* Title.png */; };
 		77D17C6F13AD47B800B75B83 /* Foodsheet.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D17C6D13AD47B800B75B83 /* Foodsheet.png */; };
 		77D17C7013AD47B800B75B83 /* Foodsheet-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 77D17C6E13AD47B800B75B83 /* Foodsheet-hd.png */; };
 		77E13D63138203980033BD15 /* cpCCNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 77E13D55138203980033BD15 /* cpCCNode.m */; };
@@ -538,6 +540,8 @@
 		77C12F95139B1DA5005BF8A3 /* Weaponsheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Weaponsheet-hd.png"; sourceTree = "<group>"; };
 		77C2A5E813DE6F2400907E16 /* SoundEffectButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEffectButton.h; sourceTree = "<group>"; };
 		77C2A5E913DE6F2400907E16 /* SoundEffectButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEffectButton.m; sourceTree = "<group>"; };
+		77C301CF1478C93600D4F290 /* Title-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Title-hd.png"; sourceTree = "<group>"; };
+		77C301D11478C9EC00D4F290 /* Title.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Title.png; sourceTree = "<group>"; };
 		77D17C6D13AD47B800B75B83 /* Foodsheet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Foodsheet.png; sourceTree = "<group>"; };
 		77D17C6E13AD47B800B75B83 /* Foodsheet-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Foodsheet-hd.png"; path = "Resources/Textures/Retina/Foodsheet-hd.png"; sourceTree = SOURCE_ROOT; };
 		77E13D54138203980033BD15 /* cpCCNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cpCCNode.h; sourceTree = "<group>"; };
@@ -995,6 +999,7 @@
 		7760AAC21380C38400D5B52D /* Non-Retina */ = {
 			isa = PBXGroup;
 			children = (
+				77C301D11478C9EC00D4F290 /* Title.png */,
 				776B0B5F14252794000479D3 /* Icon.png */,
 				7794C63013A3018B00B9B8C0 /* Maps */,
 				77C12F5B139B1D95005BF8A3 /* Effects */,
@@ -1010,6 +1015,7 @@
 		7760AACA1380C38400D5B52D /* Retina */ = {
 			isa = PBXGroup;
 			children = (
+				77C301CF1478C93600D4F290 /* Title-hd.png */,
 				776B0B6014252794000479D3 /* Icon@2x.png */,
 				7794C63113A3019600B9B8C0 /* Maps */,
 				77C12F83139B1DA5005BF8A3 /* Effects */,
@@ -1273,6 +1279,8 @@
 				7764230313F0DEF2003C5A37 /* Badseed.ttf in Resources */,
 				776B0B6114252794000479D3 /* Icon.png in Resources */,
 				776B0B6214252794000479D3 /* Icon@2x.png in Resources */,
+				77C301D01478C93700D4F290 /* Title-hd.png in Resources */,
+				77C301D21478C9EC00D4F290 /* Title.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1447,8 +1455,9 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1462,8 +1471,9 @@
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};

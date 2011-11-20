@@ -18,6 +18,8 @@
 @synthesize powerup;
 @synthesize rightArrow;
 @synthesize endArrow;
+@synthesize pauseButton;
+@synthesize switchButton;
 @synthesize leftAnalogStick;
 @synthesize rightAnalogStick;
 @synthesize ammoLabel;
@@ -116,7 +118,19 @@
         [endArrow setAnchorPoint: ccp(0.5f, 0.0f)];
         [self addChild: endArrow];
         
-        NSString *string00 = @"Thanks for playing Food Zombies!\nWelcome to the tutorial.\nBy: Billy Connolly";
+        self.pauseButton = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(192, 0, 64, 24)];
+        [pauseButton setAnchorPoint: ccp(0.5f, 1.0f)];
+        [pauseButton setPosition: ccp(192.0f, 320.0f)];
+        [pauseButton setOpacity: 0];
+        [self addChild: pauseButton];
+        
+        self.switchButton = [[CCSprite alloc] initWithFile: @"GuiSheet.png" rect:CGRectMake(192, 24, 64, 24)];
+        [switchButton setAnchorPoint: ccp(0.5f, 1.0f)];
+        [switchButton setPosition: ccp(288.0f, 320.0f)];
+        [switchButton setOpacity: 0];
+        [self addChild: switchButton];
+        
+        NSString *string00 = @"Welcome to the Food Zombies\ntutorial. To advance, tap the right\nbutton. Bottom button exits.";
         NSString *string01 = @"Playing Food Zombies is simple.\nYour character is in the center\nof the screen. Keep him alive!";
         NSString *string02 = @"There are various unhealthy foods\nthat can harm you. Try to\navoid touching them.";
         NSString *string03 = @"If an enemy or enemies touches\nyou, you will lose health. Your\nhealth is displayed right here.";
@@ -136,9 +150,13 @@
         NSString *string17 = @"The Orange gives max ammo to\nthe weapon currently being\nheld.";
         NSString *string18 = @"The Banana gives a speed boost\nfor 10 seconds. This will\nmake you harder to kill.";
         NSString *string19 = @"The Grapes give unlimited ammo\nfor 10 seconds. It also makes your\nbullets hit harder.";
+        NSString *string20 = @"While using the grape powerup,\ntry using the flamethrower.\nYou'll be in for a surprise.";
+        NSString *string21 = @"If you want to pause the game\npress the pause button in the\nupper left of the screen.";
+        NSString *string22 = @"This is the switch weapon\nbutton. Tap it to cycle through\nthe available weapons.";
+        NSString *string23 = @"Thank you for watching the\ntutorial! To exit to the menu, tap\nthe bottom exit button.";
         
         slideTexts = [[NSArray alloc] initWithObjects:string00, string01, string02, string03, string04, string05, string06, string07, string08,
-                      string09, string10, string11, string12, string13, string14, string15, string16, string17, string18, string19, nil];
+                      string09, string10, string11, string12, string13, string14, string15, string16, string17, string18, string19, string20, string21, string22, string23, nil];
         
         [currentText setString: [slideTexts objectAtIndex: currentSlide]];
         
@@ -159,6 +177,11 @@
     ableToContinue = YES;
 }
 
+- (void)exitToMenu{
+    CCScene *mms = [MainMenuScene scene];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:mms]];
+}
+
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     if(ableToContinue){
         UITouch *touch = [touches anyObject];
@@ -166,8 +189,7 @@
         if(location.x > 304){
             [self offsetCurrentSlide: 1];
         }else if(location.x > 176.0f && location.y < 74.0f){
-            CCScene *mms = [MainMenuScene scene];
-            [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:mms]];
+            [self exitToMenu];
         }
     }
 }
@@ -176,72 +198,81 @@
     currentSlide += offset;
     if(currentSlide < 0){
         currentSlide = 0;
-    }else if(currentSlide > [slideTexts count] - 1){
-        currentSlide = [slideTexts count] - 1;
     }
-    [currentText setString: [slideTexts objectAtIndex: currentSlide]];
-    [currentText runAction: [CCSequence actions:[CCScaleTo actionWithDuration:0.1f scale:0.8f], [CCScaleTo actionWithDuration:0.1f scale:1.0f], nil]];
-
-    ableToContinue = NO;
-    [self schedule:@selector(resetAbleToContinue) interval:0.1f];
-    
-    switch(currentSlide){
-        case 1:
-            [player runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
-            [weapon runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
-            break;
-        case 2:
-            [enemy runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
-            CCAnimation *enemyAnimation = [CCAnimation animationWithFrames:nil delay:0.75f];
-            for(int x = 0; x < 7; x++){
-                CGRect frame = CGRectMake(x * 32, 0, 32, 32);
-                [enemyAnimation addFrame:[CCSpriteFrame frameWithTexture:[enemy texture] rect:frame]];
-            }
-            [enemy runAction: [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:enemyAnimation restoreOriginalFrame:NO]]];
-            break;
-        case 3:
-            [healthLabel runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
-            [healthLabel runAction: [CCSequence actions: [CCScaleTo actionWithDuration:0.25f scale:3.0f], [CCScaleTo actionWithDuration:0.25f scale:1.0f], nil]];
-            break;
-        case 4:
-            [leftAnalogStick runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
-            break;
-        case 7:
-            [self schedule:@selector(rotatePlayer) interval:0.01f];
-            [rightAnalogStick runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
-            [laser setOpacity: 255];
-            CCAnimation *laserAnimation = [CCAnimation animationWithFrames: nil delay: .05f];
-            for(int x = 0; x < 8; x++){
-                CGRect frame = CGRectMake(x, 0.0f, 1.0f, 64.0f);
-                [laserAnimation addFrame: [CCSpriteFrame frameWithTexture:[laser texture] rect: frame]];
-            }
-            [laser runAction: [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation: laserAnimation]]];
-            break;
-        case 11:
-            [ammoLabel runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
-            [ammoLabel runAction: [CCSequence actions: [CCScaleTo actionWithDuration:0.25f scale:3.0f], [CCScaleTo actionWithDuration:0.25f scale:1.0f], nil]];
-            break;
-        case 12:
-            [powerup runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
-            break;
-        case 14:
-            [[powerupHUD pupBack] runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
-            break;
-        case 15:
-            [powerupHUD slotPup:0 withChangedIndex:0 withPositionOnScreen:ccp(176.0f, 100.0f) withOpacity:255];
-            break;
-        case 16:
-            [powerupHUD slotPup:1 withChangedIndex:1 withPositionOnScreen:ccp(208.0f, 100.0f) withOpacity:255];
-            break;
-        case 17:
-            [powerupHUD slotPup:2 withChangedIndex:2 withPositionOnScreen:ccp(240.0f, 100.0f) withOpacity:255];
-            break;
-        case 18:
-            [powerupHUD slotPup:3 withChangedIndex:0 withPositionOnScreen:ccp(272.0f, 100.0f) withOpacity:255];
-            break;
-        case 19:
-            [powerupHUD slotPup:4 withChangedIndex:1 withPositionOnScreen:ccp(304.0f, 100.0f) withOpacity:255];
-            break;
+    if(currentSlide > [slideTexts count] - 1){
+        currentSlide = [slideTexts count] - 1;
+    }else{
+        [currentText setString: [slideTexts objectAtIndex: currentSlide]];
+        [currentText runAction: [CCSequence actions:[CCScaleTo actionWithDuration:0.1f scale:0.8f], [CCScaleTo actionWithDuration:0.1f scale:1.0f], nil]];
+        ableToContinue = NO;
+        [self schedule:@selector(resetAbleToContinue) interval:0.1f];
+        
+        switch(currentSlide){
+            case 1:
+                [player runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+                [weapon runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+                break;
+            case 2:
+                [enemy runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+                CCAnimation *enemyAnimation = [CCAnimation animationWithFrames:nil delay:0.75f];
+                for(int x = 0; x < 7; x++){
+                    CGRect frame = CGRectMake(x * 32, 0, 32, 32);
+                    [enemyAnimation addFrame:[CCSpriteFrame frameWithTexture:[enemy texture] rect:frame]];
+                }
+                [enemy runAction: [CCRepeatForever actionWithAction: [CCAnimate actionWithAnimation:enemyAnimation restoreOriginalFrame:NO]]];
+                break;
+            case 3:
+                [healthLabel runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+                [healthLabel runAction: [CCSequence actions: [CCScaleTo actionWithDuration:0.25f scale:3.0f], [CCScaleTo actionWithDuration:0.25f scale:1.0f], nil]];
+                break;
+            case 4:
+                [leftAnalogStick runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+                break;
+            case 7:
+                [self schedule:@selector(rotatePlayer) interval:0.01f];
+                [rightAnalogStick runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+                [laser setOpacity: 255];
+                CCAnimation *laserAnimation = [CCAnimation animationWithFrames: nil delay: .05f];
+                for(int x = 0; x < 8; x++){
+                    CGRect frame = CGRectMake(x, 0.0f, 1.0f, 64.0f);
+                    [laserAnimation addFrame: [CCSpriteFrame frameWithTexture:[laser texture] rect: frame]];
+                }
+                [laser runAction: [CCRepeatForever actionWithAction:[CCAnimate actionWithAnimation: laserAnimation]]];
+                break;
+            case 11:
+                [ammoLabel runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+                [ammoLabel runAction: [CCSequence actions: [CCScaleTo actionWithDuration:0.25f scale:3.0f], [CCScaleTo actionWithDuration:0.25f scale:1.0f], nil]];
+                break;
+            case 12:
+                [powerup runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+                break;
+            case 14:
+                [[powerupHUD pupBack] runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+                break;
+            case 15:
+                [powerupHUD slotPup:0 withChangedIndex:0 withPositionOnScreen:ccp(176.0f, 100.0f) withOpacity:255];
+                break;
+            case 16:
+                [powerupHUD slotPup:1 withChangedIndex:1 withPositionOnScreen:ccp(208.0f, 100.0f) withOpacity:255];
+                break;
+            case 17:
+                [powerupHUD slotPup:2 withChangedIndex:2 withPositionOnScreen:ccp(240.0f, 100.0f) withOpacity:255];
+                break;
+            case 18:
+                [powerupHUD slotPup:3 withChangedIndex:0 withPositionOnScreen:ccp(272.0f, 100.0f) withOpacity:255];
+                break;
+            case 19:
+                [powerupHUD slotPup:4 withChangedIndex:1 withPositionOnScreen:ccp(304.0f, 100.0f) withOpacity:255];
+                break;
+            case 21:
+                [pauseButton runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+                [pauseButton runAction: [CCSequence actions: [CCScaleTo actionWithDuration:0.25f scale:2.0f], [CCScaleTo actionWithDuration:0.25f scale:1.0f], nil]];
+                break;
+            case 22:
+                [switchButton runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+                [switchButton runAction: [CCSequence actions: [CCScaleTo actionWithDuration:0.25f scale:2.0f], [CCScaleTo actionWithDuration:0.25f scale:1.0f], nil]];
+                break;
+        }
     }
 }
 

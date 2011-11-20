@@ -22,6 +22,9 @@
     CCSprite *rightArrow;
     CCSprite *endArrow;
     
+    CCSprite *pauseButton;
+    CCSprite *switchButton;
+    
     CCSprite *leftAnalogStick;
     CCSprite *rightAnalogStick;
     
@@ -30,9 +33,7 @@
     
     PowerupHUD *powerupHUD;
     CCSprite *tutorialText;
-    
-    CCLayer *touchLayer;
-    
+        
     CCLabelTTF *currentText;
     
     NSArray *slideTexts;
@@ -56,6 +57,9 @@
 @property (nonatomic, retain) CCSprite *rightArrow;
 @property (nonatomic, retain) CCSprite *endArrow;
 
+@property (nonatomic, retain) CCSprite *pauseButton;
+@property (nonatomic, retain) CCSprite *switchButton;
+
 @property (nonatomic, retain) CCSprite *leftAnalogStick;
 @property (nonatomic, retain) CCSprite *rightAnalogStick;
 
@@ -70,5 +74,6 @@
 @property (nonatomic, retain) NSArray *slideTexts;
 
 - (void)offsetCurrentSlide:(int)offset;
+- (void)exitToMenu;
 
 @end

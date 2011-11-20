@@ -152,7 +152,7 @@
 		<key>ReloadTime</key>
 		<integer>5</integer>
 		<key>RPM</key>
-		<integer>2500</integer>
+		<integer>1850</integer>
 		<key>WeaponType</key>
 		<string>1</string>
 	</dict>

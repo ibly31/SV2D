@@ -27,7 +27,7 @@
     self = [super init];
     [self setIsTouchEnabled: YES];
     if(self){
-        backgroundColor = [[CCLayerColor alloc] initWithColor: ccc4(125, 125, 125, 255)];
+        backgroundColor = [[CCLayerColor alloc] initWithColor: ccc4(125, 125, 125, 255) width:480 height:320];
         [self addChild: backgroundColor];
         
         self.titleLabel = [[CCLabelTTF alloc] initWithString:@"Choose Game Mode" fontName:@"Badseed.ttf" fontSize:50.0f];

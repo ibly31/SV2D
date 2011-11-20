@@ -17,6 +17,7 @@
 @synthesize slider;
 @synthesize shootTimeLabel;
 @synthesize analogLocator;
+@synthesize howToUseLabel;
 @synthesize flagForFromMenu;
 
 +(id) scene{
@@ -31,7 +32,7 @@
     [self setIsTouchEnabled: YES];
     if(self){
         
-        CCLayerColor *backgroundColor = [[CCLayerColor alloc] initWithColor: ccc4(125, 125, 125, 255)];
+        CCLayerColor *backgroundColor = [[CCLayerColor alloc] initWithColor: ccc4(125, 125, 125, 255) width:480 height:320];
         [self addChild: backgroundColor];
         
         CCLabelTTF *options = [[CCLabelTTF alloc] initWithString:@"Options" fontName:@"Badseed" fontSize:50.0f];
@@ -39,7 +40,7 @@
         [options setPosition: ccp(240, 310)];
         [self addChild:options];
         
-        self.shootTimeLabel = [[CCLabelTTF alloc] initWithString:@"Shoot Time: " fontName:@"Badseed" fontSize:18.0f];
+        self.shootTimeLabel = [[CCLabelTTF alloc] initWithString:@"Shoot Delay: " fontName:@"Badseed" fontSize:18.0f];
         [shootTimeLabel setPosition: ccp(310.0f, 240.0f)];
         [shootTimeLabel setAnchorPoint: ccp(0.0f, 0.5f)];
         [self addChild: shootTimeLabel];
@@ -84,6 +85,10 @@
         self.analogLocator = [[AnalogLocator alloc] initWithWidth:220 height:200];
         [self addChild: analogLocator];
         
+        self.howToUseLabel = [[CCLabelTTF alloc] initWithString:@"The amount of time to delay after aiming but before shooting.\n\n\nDrag left stick to set the position on the screen. It mirrors on the right side in-game." dimensions:CGSizeMake(240, 160) alignment:UITextAlignmentCenter fontName:@"Badseed" fontSize:14.0f];
+        [howToUseLabel setPosition: ccp(340.0f, 110.0f)];
+        [self addChild: howToUseLabel];
+                
         flagForFromMenu = YES;
         
     }
@@ -96,10 +101,10 @@
 }
 
 -(IBAction)sliderChange:(UISlider*)sender {
-    NSString *newText = [NSString stringWithFormat:@"Shoot Time: %f",(float)sender.value];
+    NSString *newText = [NSString stringWithFormat:@"Shoot Delay: %f",(float)sender.value];
     int cutLen = [newText length];
-    if(cutLen > 15){
-        cutLen = 15;
+    if(cutLen > 16){
+        cutLen = 16;
     }
     newText = [newText substringToIndex: cutLen];
     [shootTimeLabel setString: newText];

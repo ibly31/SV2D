@@ -127,8 +127,8 @@
     cpBody *shapeBody = zombieShape->body;
     
     CGPoint zombiePosition = ccp(shapeBody->p.x, shapeBody->p.y);
-    if(CCRANDOM_0_1() > 0.8f){
-        [[(GameScene *)parent_ powerupBatch] addNewPowerupAt: zombiePosition];
+    if(CCRANDOM_0_1() > 0.87f){                                                 // 13% chance of powerup spawn
+        [[(GameScene *)parent_ powerupBatch] addNewPowerupAt: zombiePosition];  
         laidPowerup = YES;
     }
     
@@ -147,7 +147,7 @@
             numZomb++;
         }
     }
-    if(numZomb == 0){
+    if(numZomb == 0 && CCRANDOM_0_1() > 0.5f){                                  // If last zombie, 50% chance all the time
         if([(GameScene *)parent_ gameModeWave]){
             [(GameScene *)parent_ startNewWave];
             if(!laidPowerup){

@@ -12,7 +12,7 @@
 #import "OptionsScene.h"
 
 @implementation MainMenuScene
-@synthesize titleLabel;
+@synthesize background;
 @synthesize menu;
 @synthesize seb;
 
@@ -26,24 +26,22 @@
 - (id)init{
     self = [super init];
     if(self){
-        backgroundColor = [[CCLayerColor alloc] initWithColor: ccc4(125, 125, 125, 255)];
-        [self addChild: backgroundColor];
-                
-        self.titleLabel = [[CCLabelTTF alloc] initWithString:@"Food Zombies" fontName:@"Badseed.ttf" fontSize: 50.0f];
-        [titleLabel setAnchorPoint: ccp(0.5f, 1.0f)];
-        [titleLabel setPosition: ccp(240.0f, 310.0f)];
-        [self addChild: titleLabel];
         
-        CCLabelTTF *chooseGame = [[CCLabelTTF alloc] initWithString:@"Play" fontName:@"Badseed.ttf" fontSize:36.0f];
+        self.background = [[CCSprite alloc] initWithFile:@"Title.png"];
+        [background setAnchorPoint: ccp(0.0f, 0.0f)];
+        [self addChild: background];
+        
+        CCLabelTTF *chooseGame = [[CCLabelTTF alloc] initWithString:@"Play" fontName:@"Badseed.ttf" fontSize:24.0f];
         CCMenuItemLabel *chooseGameLabel = [[CCMenuItemLabel alloc] initWithLabel:chooseGame target:self selector:@selector(chooseGame)];
+        [chooseGameLabel setPosition: ccp(10, 35)];
         
-        CCLabelTTF *tutorial = [[CCLabelTTF alloc] initWithString:@"Tutorial" fontName:@"Badseed.ttf" fontSize:36.0f];
+        CCLabelTTF *tutorial = [[CCLabelTTF alloc] initWithString:@"Tutorial" fontName:@"Badseed.ttf" fontSize:24.0f];
         CCMenuItemLabel *tutorialLabel = [[CCMenuItemLabel alloc] initWithLabel:tutorial target:self selector:@selector(tutorial)];
-        [tutorialLabel setPosition: ccp(0, -50)];
+        [tutorialLabel setPosition: ccp(10, -38)];
         
-        CCLabelTTF *options = [[CCLabelTTF alloc] initWithString:@"Options" fontName:@"Badseed.ttf" fontSize:36.0f];
+        CCLabelTTF *options = [[CCLabelTTF alloc] initWithString:@"Options" fontName:@"Badseed.ttf" fontSize:24.0f];
         CCMenuItemLabel *optionsLabel = [[CCMenuItemLabel alloc] initWithLabel:options target:self selector:@selector(options)];
-        [optionsLabel setPosition: ccp(0, -100)];
+        [optionsLabel setPosition: ccp(10, -113)];
         
         self.menu = [CCMenu menuWithItems:chooseGameLabel, tutorialLabel, optionsLabel, nil];
         [self addChild: menu];
