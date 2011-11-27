@@ -139,7 +139,9 @@
     zombies[index].zombieShape->data = nil;
     [smgr removeAndFreeShape: zombies[index].zombieShape];
     zombies[index].zombieShape = NULL;
-    [self removeChild:zombies[index].zombieSprite cleanup:NO];
+    [self removeChild:zombies[index].zombieSprite cleanup:YES];
+    
+    [(GameScene *)parent_ incrementZombiesKilled];
     
     int numZomb = 0;
     for(int x = 0; x < MAXZOMBIES; x++){
@@ -147,10 +149,11 @@
             numZomb++;
         }
     }
-    if(numZomb == 0 && CCRANDOM_0_1() > 0.5f){                                  // If last zombie, 50% chance all the time
+
+    if(numZomb == 0){                                  // If last zombie, 50% chance all the time
         if([(GameScene *)parent_ gameModeWave]){
             [(GameScene *)parent_ startNewWave];
-            if(!laidPowerup){
+            if(!laidPowerup && CCRANDOM_0_1() > 0.5f){
                 [[(GameScene *)parent_ powerupBatch] addNewPowerupAt: zombiePosition];
                 laidPowerup = YES;
             }
@@ -200,7 +203,7 @@
                 case 0:
                     zombies[x].speed = 45.0f;
                     zombies[x].health = 100;
-                    zombies[x].damage = 2;
+                    zombies[x].damage = 100;
                     break;
                 case 1:
                     zombies[x].speed = 60.0f;
@@ -232,7 +235,7 @@
                     zombies[x].damage = 250;
                     break;
                 default:
-                    NSLog(@"Default'd on Zombie Spawn");
+                    //NSLog(@"Default'd on Zombie Spawn");
                     break;
             }
             
@@ -254,7 +257,8 @@
     }
     
     if(whichZombie == -1){
-        NSLog(@"NO ZOMBIE CONNECTION.");return -1;
+        //NSLog(@"NO ZOMBIE CONNECTION.");
+        return -1;
     }else{
         return whichZombie;
     }

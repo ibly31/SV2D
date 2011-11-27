@@ -129,7 +129,7 @@
         [switchButton setPosition: ccp(288.0f, 320.0f)];
         [switchButton setOpacity: 0];
         [self addChild: switchButton];
-        
+                
         NSString *string00 = @"Welcome to the Food Zombies\ntutorial. To advance, tap the right\nbutton. Bottom button exits.";
         NSString *string01 = @"Playing Food Zombies is simple.\nYour character is in the center\nof the screen. Keep him alive!";
         NSString *string02 = @"There are various unhealthy foods\nthat can harm you. Try to\navoid touching them.";
@@ -156,7 +156,8 @@
         NSString *string23 = @"Thank you for watching the\ntutorial! To exit to the menu, tap\nthe bottom exit button.";
         
         slideTexts = [[NSArray alloc] initWithObjects:string00, string01, string02, string03, string04, string05, string06, string07, string08,
-                      string09, string10, string11, string12, string13, string14, string15, string16, string17, string18, string19, string20, string21, string22, string23, nil];
+                      string09, string10, string11, string12, string13, string14, string15, string16, string17, string18, string19, string20,
+                      string21, string22, string23, nil];
         
         [currentText setString: [slideTexts objectAtIndex: currentSlide]];
         

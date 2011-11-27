@@ -124,28 +124,24 @@
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:se] forKey:@"SoundEffects"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     soundEffects = se;
-    NSLog(@"Sound Effects: %@", se ? @"YES" : @"NO");
 }
 
 - (void)setShootTime:(float)st{
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithFloat:st] forKey:@"ShootTime"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     shootTime = st;
-    NSLog(@"Shoot Time: %f", st);
 }
 
 - (void)setAnalogStickPixelOffsetX:(int)aspo{
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:aspo] forKey:@"ASPOX"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     analogStickPixelOffsetX = aspo;
-    NSLog(@"Analog Stick Pixel Offset X: %i", aspo);
 }
 
 - (void)setAnalogStickPixelOffsetY:(int)aspo{
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:aspo] forKey:@"ASPOY"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     analogStickPixelOffsetY = aspo;
-    NSLog(@"Analog Stick Pixel Offset Y: %i", aspo);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

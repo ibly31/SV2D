@@ -10,9 +10,11 @@
 #import "GameScene.h"
 #import "Player.h"
 #import "PauseMenuScene.h"
+#import "MainMenuScene.h"
 #import "AppDelegate.h"
 
 @implementation InputLayer
+@synthesize vel;
 
 - (id)init{
     self = [super init];
@@ -73,22 +75,31 @@
 		UITouch *touch = [touchArray objectAtIndex: x];
 		CGPoint location = [[CCDirector sharedDirector] convertToGL: [touch locationInView: touch.view]];
                 
-        if(CGRectContainsPoint(CGRectMake(256,296,64,24), location)){
-            [[(GameScene *)parent_ player] switchWeapons];
-        }else if(CGRectContainsPoint(CGRectMake(160,296,64,24), location)){
-            [[(GameScene*)parent_ zombieBatch] freezeZombies];
-            Player *player = [(GameScene *)parent_ player];
+        if(![(GameScene *)parent_ dead]){
+            if(CGRectContainsPoint(CGRectMake(256,296,64,24), location)){
+                [[(GameScene *)parent_ player] switchWeapons];
+            }else if(CGRectContainsPoint(CGRectMake(160,296,64,24), location)){
+                [[(GameScene*)parent_ zombieBatch] freezeZombies];
+                Player *player = [(GameScene *)parent_ player];
 
-            [player unschedule: @selector(startShooting)];
-            [player stopShooting];
-            vel = ccp(0,0);
-            [player setVelocity: vel];
-            CCScene *pms = [PauseMenuScene scene];
-            [[CCDirector sharedDirector] pushScene: pms];
+                [player unschedule: @selector(startShooting)];
+                [player stopShooting];
+                vel = ccp(0,0);
+                [player setVelocity: vel];
+                CCScene *pms = [PauseMenuScene scene];
+                [[CCDirector sharedDirector] pushScene: pms];
+            }else{
+                [self doTouch: location];
+            }
         }else{
-            [self doTouch: location];
+            [self schedule: @selector(goBackToMainMenu) interval: 0.5f];
         }
 	}
+}
+
+- (void)goBackToMainMenu{
+    CCScene *mms = [MainMenuScene scene];
+    [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:0.5f scene:mms]];
 }
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -96,7 +107,8 @@
 	for(int x = 0; x < [touchArray count]; x++){
 		UITouch *touch = [touchArray objectAtIndex: x];
 		CGPoint location = [[CCDirector sharedDirector] convertToGL: [touch locationInView: touch.view]];
-		[self doTouch: location];
+		if(![(GameScene *)parent_ dead])
+            [self doTouch: location];
 	}
 }
 

@@ -124,7 +124,8 @@
     }
     
     if(whichBullet == -1){
-        NSLog(@"NO BULLET CONNECTION");return NO;
+        //NSLog(@"NO BULLET CONNECTION");
+        return NO;
     }else{
         bulletDamage = bullets[whichBullet].damage;
     }
@@ -134,7 +135,7 @@
         if(whichZombie != -1){
             [[(GameScene *)parent_ zombieBatch] zombieTakeDamage:bulletDamage index:whichZombie];
         }else{
-            NSLog(@"NO ZOMBIE CONNECTION in BULLETCOLLISION");
+            //NSLog(@"NO ZOMBIE CONNECTION in BULLETCOLLISION");
         }
         
         if(bullets[whichBullet].penetration != -1){

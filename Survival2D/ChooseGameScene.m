@@ -14,6 +14,7 @@
 @implementation ChooseGameScene
 @synthesize titleLabel;
 @synthesize endArrow;
+@synthesize loadingLabel;
 @synthesize menu;
 
 +(id) scene{
@@ -41,8 +42,13 @@
         CCMenuItemSprite *waveItem = [CCMenuItemSprite itemFromNormalSprite:waveMode selectedSprite:nil target:self selector:@selector(wave)];
         CCMenuItemSprite *otherItem = [CCMenuItemSprite itemFromNormalSprite:otherMode selectedSprite:nil target:self selector:@selector(other)];
         
-        [waveItem setPosition: ccp(-128, 0)];
-        [otherItem setPosition: ccp(128, 0)];
+        [waveItem setPosition: ccp(-140, 15)];
+        [otherItem setPosition: ccp(140, 15)];
+        
+        self.loadingLabel = [[CCLabelTTF alloc] initWithString:@"Loading...Please wait." dimensions:CGSizeMake(152, 64) alignment:UITextAlignmentCenter fontName:@"Badseed" fontSize:24.0f];
+        [loadingLabel setPosition: ccp(240.0f, 160.0f)];
+        [loadingLabel setVisible: NO];
+        [self addChild: loadingLabel];
         
         self.menu = [CCMenu menuWithItems:waveItem, otherItem, nil];
         [self addChild: menu];
@@ -65,21 +71,20 @@
 }
 
 - (void)wave{
+    [loadingLabel setVisible: YES];
     AppDelegate *del = [[UIApplication sharedApplication] delegate];
     [del setGameModeWave: YES];
-    
-    GameScene *gs = [[GameScene alloc] initWithGameModeWave: YES];
+    GameScene *gs = [[GameScene alloc] initWithGameModeWave: [del gameModeWave]];
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:gs]];
     [gs release];
 }
 
 - (void)other{
+    [loadingLabel setVisible: YES];
     AppDelegate *del = [[UIApplication sharedApplication] delegate];
     [del setGameModeWave: NO];
-    
-    GameScene *gs = [[GameScene alloc] initWithGameModeWave: NO];
+    GameScene *gs = [[GameScene alloc] initWithGameModeWave: [del gameModeWave]];
     [[CCDirector sharedDirector] replaceScene: [CCTransitionFade transitionWithDuration:1.0f scene:gs]];
-    [gs release];
-}
+    [gs release];}
 
 @end

@@ -13,6 +13,8 @@
     CCLayerColor *backgroundColor;
     
     CCSprite *endArrow;
+    
+    CCLabelTTF *loadingLabel;
         
     CCMenu *menu;
 }
@@ -24,6 +26,7 @@
 
 @property (nonatomic, retain) CCLabelTTF *titleLabel;
 @property (nonatomic, retain) CCSprite *endArrow;
+@property (nonatomic, retain) CCLabelTTF *loadingLabel;
 @property (nonatomic, retain) CCMenu *menu;
 
 @end

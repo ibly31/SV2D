@@ -39,6 +39,9 @@
 @synthesize waveIndicator;
 @synthesize waveNumber;
 
+@synthesize numberZombiesKilled;
+@synthesize deathBackground;
+
 @synthesize casings;
 @synthesize bloodSplatters;
 @synthesize rocketTrails;
@@ -48,6 +51,7 @@
 @synthesize smgr;
 
 @synthesize gameModeWave;
+@synthesize dead;
 
 -(id)initWithGameModeWave:(BOOL)gmw{
     self = [super init];
@@ -168,8 +172,24 @@
         [damageIndicator setAnchorPoint: ccp(0.5f, 0.5f)];
         [self addChild: damageIndicator z:13];
         
+        self.deathBackground = [[CCSprite alloc] initWithFile:@"GuiSheet.png" rect:CGRectMake(0, 170, 300, 150)];
+        [deathBackground setPosition: ccp(240.0f, 160.0f)];
+        [deathBackground setVisible: NO];
+        [deathBackground setOpacity: 0];
+        [self addChild: deathBackground z:14];
+        
+        self.numberZombiesKilled = [[CCLabelTTF alloc] initWithString:@"" fontName:@"Badseed" fontSize:24.0f];
+        [numberZombiesKilled setPosition: ccp(240.0f, 160.0f)];
+        [numberZombiesKilled setVisible: NO];
+        [numberZombiesKilled setOpacity: 0];
+        [numberZombiesKilled setColor: ccc3(255, 0, 0)];
+        [self addChild: numberZombiesKilled z:15];
+        
         self.inputLayer = [[InputLayer alloc] init];
-        [self addChild: inputLayer z:14];
+        [self addChild: inputLayer z:16];
+        
+        zombiesKilled = 999;
+        dead = NO;
         
         if([(AppDelegate *)[[UIApplication sharedApplication] delegate] soundEffects]){
             [[SimpleAudioEngine sharedEngine] preloadEffect:@"Shot.caf"];
@@ -182,8 +202,7 @@
             [[SimpleAudioEngine sharedEngine] preloadEffect:@"Rocket.caf"];
             [[SimpleAudioEngine sharedEngine] preloadEffect:@"Splat.caf"];
         }
-
-        timeRunning = 0.0f;
+        
     }
 	return self;
 }
@@ -374,7 +393,7 @@
 }
 
 - (void)spawnZombieEndless{
-    [zombieBatch addNewZombieAt:ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024) withType:CCRANDOM_0_1() * 7.1];
+    [zombieBatch addNewZombieAt:ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024) withType:CCRANDOM_0_1() * 6.1f];
 }
 
 - (void)spawnLoop{
@@ -396,50 +415,32 @@
             }
         }
     }
-    
-    /*int whichQuadrantNotToSpawnIn = 0;
-    CGPoint playerPosition = [[self.player playerSprite] position];
-    if(playerPosition.x <= 512 && playerPosition.y <= 512){
-        whichQuadrantNotToSpawnIn = 2;
-    }else if(playerPosition.x <= 512 && playerPosition.y > 512){
-        whichQuadrantNotToSpawnIn = 1;
-    }else if(playerPosition.x > 512 && playerPosition.y <= 512){
-        whichQuadrantNotToSpawnIn = 3;
-    }else{
-        whichQuadrantNotToSpawnIn = 0;
-    }
-        
-    for(int x = 0; x < 7; x++){
-        if(toSpawns[x] != 0){
-            
-            CGPoint finalPosition;
-            while(true){
-                CGPoint tryTest = ccp(CCRANDOM_0_1() * 1024, CCRANDOM_0_1() * 1024);
-                
-                if(tryTest.x <= 512 && tryTest.y <= 512 && whichQuadrantNotToSpawnIn != 2){
-                    finalPosition = tryTest;
-                    break;
-                }else if(tryTest.x <= 512 && tryTest.y > 512 && whichQuadrantNotToSpawnIn != 1){
-                    finalPosition = tryTest;
-                    break;
-                }else if(tryTest.x > 512 && tryTest.y <= 512 && whichQuadrantNotToSpawnIn != 3){
-                    finalPosition = tryTest;
-                    break;
-                }else if(whichQuadrantNotToSpawnIn != 0){
-                    finalPosition = tryTest;
-                    break;
-                }
-            }
-            
-            [zombieBatch addNewZombieAt:finalPosition withType:x];
-            toSpawns[x]--;
-            spawnedAZombie = YES;
-        }
-    }
-     
-     */
     if(!spawnedAZombie)
         [self unschedule: @selector(spawnLoop)];
+}
+
+- (void)playerDeath{
+    dead = YES;
+    [deathBackground setVisible: YES];
+    [deathBackground runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+    [numberZombiesKilled setVisible: YES];
+    [numberZombiesKilled runAction: [CCFadeTo actionWithDuration:0.5f opacity:255]];
+    [numberZombiesKilled setString: [NSString stringWithFormat: @"Zombies Killed: %i", zombiesKilled]];
+    [self unscheduleAllSelectors];
+    [player unscheduleAllSelectors];
+    [[player laser] stopAllActions];
+    [rocketBatch unscheduleAllSelectors];
+    [bulletBatch unscheduleAllSelectors];       // Clean up all running updaters.
+    [zombieBatch unscheduleAllSelectors];
+    [powerupBatch unscheduleAllSelectors];
+    
+    [smgr stop];
+    [inputLayer setVel: ccp(0.0f, 0.0f)];
+    [player setVelocity: ccp(0.0f, 0.0f)];
+}
+
+- (void)incrementZombiesKilled{
+    zombiesKilled++;
 }
 
 - (void)startExplosionAt:(CGPoint)start{
@@ -476,6 +477,8 @@
     [pauseButton setPosition: ccpAdd(centerOn, ccp(-48.0f, 160.0f))];
     [waveIndicator setPosition: ccpAdd(centerOn, ccp(0.0f, 80.0f))];
     [waveNumber setPosition: ccpAdd([waveIndicator position], ccp(15.0f, -3.0f))];
+    [numberZombiesKilled setPosition: ccpAdd(centerOn, ccp(0.0f, 0.0f))];
+    [deathBackground setPosition: centerOn];
     [powerupHUD setPosition: ccpAdd(centerOn, ccp(-232.0f, 32.0f))];
 }
 
@@ -529,50 +532,32 @@ float distance(CGPoint point1,CGPoint point2){
     [bloodSplatters removeChildAtIndex:0 cleanup:YES];
 }
 
-- (void)flashDamageIndicator:(int)health{
+- (void)flashDamageIndicator{
     CCFadeTo *fadeTo = [CCFadeTo actionWithDuration:0.1f opacity:255];
     CCFadeTo *fadeFrom = [CCFadeTo actionWithDuration:0.1f opacity:0];
     [damageIndicator runAction: [CCSequence actions:fadeTo, fadeFrom, nil]];
 }
 
 - (void)dealloc{
-    [self removeChild:player cleanup:NO];
-    [self removeChild:inputLayer cleanup:NO];
-    [self removeChild:zombieBatch cleanup:NO];
-    [self removeChild:bulletBatch cleanup:NO];
-    [self removeChild:rocketBatch cleanup:NO];
-    [self removeChild:backgroundMap cleanup:NO];
-    [self removeChild:leftAnalogStick cleanup:NO];
-    [self removeChild:rightAnalogStick cleanup:NO];
-    [self removeChild:damageIndicator cleanup:NO];
-    [self removeChild:ammoLabel cleanup:NO];
-    [self removeChild:healthLabel cleanup:NO];
-    [self removeChild:reloadingSprite cleanup:NO];
-    [self removeChild:switchWeaponButton cleanup:NO];
-    [self removeChild:casings cleanup:NO];
-    [self removeChild:bloodSplatters cleanup:NO];
-    [self removeChild:rocketTrails cleanup:NO];
-    
-    [player release];
-    [inputLayer release];
-    [zombieBatch release];
-    [bulletBatch release];
-    [rocketBatch release];
-    [backgroundMap release];
-    [leftAnalogStick release];
-    [rightAnalogStick release];
-    [damageIndicator release];
-    [ammoLabel release];
-    [healthLabel release];
-    [reloadingSprite release];
-    [switchWeaponButton release];
-    [casings release];
-    [bloodSplatters release];
-    [rocketTrails release];
+    [self removeChild:player cleanup:YES];
+    [self removeChild:inputLayer cleanup:YES];
+    [self removeChild:zombieBatch cleanup:YES];
+    [self removeChild:bulletBatch cleanup:YES];
+    [self removeChild:rocketBatch cleanup:YES];
+    [self removeChild:backgroundMap cleanup:YES];
+    [self removeChild:leftAnalogStick cleanup:YES];
+    [self removeChild:rightAnalogStick cleanup:YES];
+    [self removeChild:damageIndicator cleanup:YES];
+    [self removeChild:ammoLabel cleanup:YES];
+    [self removeChild:healthLabel cleanup:YES];
+    [self removeChild:reloadingSprite cleanup:YES];
+    [self removeChild:switchWeaponButton cleanup:YES];
+    [self removeChild:casings cleanup:YES];
+    [self removeChild:bloodSplatters cleanup:YES];
+    [self removeChild:rocketTrails cleanup:YES];
     
     if(explosionToRemove != nil && [[self children] containsObject: explosionToRemove]){
-        [self removeChild:explosionToRemove cleanup:NO];
-        [explosionToRemove release];
+        [self removeChild:explosionToRemove cleanup:YES];
     }
 
 	[super dealloc];

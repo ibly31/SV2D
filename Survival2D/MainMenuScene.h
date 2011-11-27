@@ -9,7 +9,7 @@
 #import "cocos2d.h"
 #import "SoundEffectButton.h"
 
-@interface MainMenuScene : CCLayer {
+@interface MainMenuScene : CCLayer <UIAlertViewDelegate> {
     CCSprite *background;
     
     CCMenu *menu;
@@ -22,6 +22,8 @@
 @property (nonatomic, retain) CCSprite *background;
 @property (nonatomic, retain) CCMenu *menu;
 @property (nonatomic, retain) SoundEffectButton *seb;
+
+- (void)checkFirstRun;
 
 - (void)chooseGame;
 - (void)tutorial;

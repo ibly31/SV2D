@@ -17,8 +17,11 @@
     CGPoint vel;
 }
 
-- (void)doTouch:(CGPoint)location;
+@property CGPoint vel;
 
+- (void)doTouch:(CGPoint)location;
 - (void)setLoop;
+
+- (void)goBackToMainMenu;
 
 @end

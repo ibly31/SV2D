@@ -145,7 +145,8 @@
     }
         
     if(whichRocket == -1){
-        NSLog(@"NO ROCKET CONNECTION");return NO;
+        //NSLog(@"NO ROCKET CONNECTION");
+        return NO;
     }else{
         rocketDamage = rockets[whichRocket].damage;
     }
@@ -154,7 +155,7 @@
     if(whichZombie != -1){
         [[(GameScene *)parent_ zombieBatch] zombieTakeDamage:100 index:whichZombie];
     }else{
-        NSLog(@" ");
+        //NSLog(@" ");
     }
     
     [[(GameScene *)parent_ zombieBatch] explosionAt:cpArbiterGetPoint(arb, 0) withRadius:100 withDamage:rocketDamage];

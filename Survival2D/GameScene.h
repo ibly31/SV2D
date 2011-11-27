@@ -48,6 +48,10 @@ enum FOODTYPES{
     CCSprite *waveIndicator;
     CCLabelAtlas *waveNumber;
     
+    //CCSprite *deathText;
+    CCLabelTTF *numberZombiesKilled;
+    CCSprite *deathBackground;
+    
     CCSpriteBatchNode *casings;
     int currentCasingNumber;
     
@@ -63,8 +67,10 @@ enum FOODTYPES{
     
     BOOL gameModeWave;
     
-    float timeRunning;
     int currentWave;
+    
+    int zombiesKilled;
+    BOOL dead;
         
     int toSpawns[7];
 }
@@ -94,6 +100,9 @@ enum FOODTYPES{
 @property (nonatomic, retain) CCSprite *waveIndicator;
 @property (nonatomic, retain) CCLabelAtlas *waveNumber;
 
+@property (nonatomic, retain) CCLabelTTF *numberZombiesKilled;
+@property (nonatomic, retain) CCSprite *deathBackground;
+
 @property (nonatomic, retain) CCSpriteBatchNode *casings;
 @property (nonatomic, retain) CCSpriteBatchNode *bloodSplatters;
 @property (nonatomic, retain) CCSpriteBatchNode *rocketTrails;
@@ -103,6 +112,7 @@ enum FOODTYPES{
 @property (nonatomic, retain) SpaceManagerCocos2d *smgr;
 
 @property BOOL gameModeWave;
+@property BOOL dead;
 
 - (id)initWithGameModeWave:(BOOL)gmw;
 
@@ -110,6 +120,9 @@ enum FOODTYPES{
 - (void)spawnLoop;
 
 - (void)spawnZombieEndless;
+
+- (void)playerDeath;
+- (void)incrementZombiesKilled;
 
 - (void)updateCameraToCenterOn:(CGPoint)centerOn;
 - (void)addNewBulletCasingsAt:(CGPoint)startPos endPos:(CGPoint)endPos startRot:(float)startRot;
@@ -120,6 +133,6 @@ enum FOODTYPES{
 - (void)startExplosionAt:(CGPoint)start;
 - (void)endExplosion;
 
-- (void)flashDamageIndicator:(int)health;
+- (void)flashDamageIndicator;
 
 @end

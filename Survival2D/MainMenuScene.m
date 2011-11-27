@@ -26,7 +26,6 @@
 - (id)init{
     self = [super init];
     if(self){
-        
         self.background = [[CCSprite alloc] initWithFile:@"Title.png"];
         [background setAnchorPoint: ccp(0.0f, 0.0f)];
         [self addChild: background];
@@ -55,8 +54,27 @@
         self.seb = [[SoundEffectButton alloc] initialize];
         [seb setPosition: ccp(460.0f, 20.0f)];
         [self addChild: seb];
+        
+        [self schedule:@selector(checkFirstRun) interval:0.25f];
     }
     return self;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(buttonIndex == 1){
+        [self tutorial];
+    }
+}
+
+- (void)checkFirstRun{
+    if(![[NSUserDefaults standardUserDefaults] boolForKey:@"firstRun"]){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstRun"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"First Time" message:@"It appears that this is your first time playing Food Zombies. It is highly recommended that you read the tutorial that teaches you how to play. Tap 'Okay' to go to the tutorial now." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Okay", nil];
+        [alert show];
+        [alert release];
+    }
+    [self unschedule: @selector(checkFirstRun)];
 }
 
 - (void)chooseGame{

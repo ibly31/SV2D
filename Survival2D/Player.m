@@ -470,13 +470,14 @@
     if(health > 0){
         health -= damage;
         if(health > 0){
-            [(GameScene *)parent_ flashDamageIndicator:health];
+            [(GameScene *)parent_ flashDamageIndicator];
         }else{
-            
+            [(GameScene *)parent_ playerDeath];
         }
     }
     if(health < 0){
         health = 0;
+        [(GameScene *)parent_ flashDamageIndicator];
     }
     [self updateHealth];
 }
